@@ -4,12 +4,19 @@ import { Hero } from './components/Hero';
 import { CredibilitySection } from './components/CredibilitySection';
 import { MetricStats } from './components/MetricStats';
 import { AboutMe } from './components/AboutMe';
-import { ValueAddSection } from './components/ValueAddSection';
+import { ServicesSection } from './components/ServicesSection';
 import { WhyHireMe } from './components/WhyHireMe';
+import { HowIWorkSection } from './components/HowIWorkSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ProjectsSection } from './components/ProjectsSection';
+import { BrandDesignSection } from './components/BrandDesignSection';
+import { SocialMediaSection } from './components/SocialMediaSection';
+import { AiAutomationSection } from './components/AiAutomationSection';
+import { VideoGallerySection } from './components/VideoGallerySection';
+import { ExperienceSection } from './components/ExperienceSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ResumeSection } from './components/ResumeSection';
+import { ContactSection } from './components/ContactSection';
 import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
 import { HireMeModal } from './components/HireMeModal';
@@ -54,52 +61,87 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main id="main-content">
-        {/* 1. Hero Section (Electric Navy with Cyan Highlight & Lead Capture Card) */}
+        {/* 1. Hero Section (Conversion-focused hero with Portrait & Primary CTAs) */}
         <Hero
           onOpenHireMe={() => handleOpenHireMe()}
           onOpenCv={handleOpenCv}
           onDownloadCv={handleDownloadCv}
         />
 
-        {/* 2. Credibility Section: Built Across Technology, Creativity & Digital Growth */}
+        {/* 2. Tool & Trust Strip immediately below Hero: "TOOLS & PLATFORMS I WORK WITH" */}
         <CredibilitySection />
 
-        {/* 3. Premium Navy-Blue Metrics Section (Editable via Admin Dashboard, verified only) */}
+        {/* 3. Key Growth & Performance Metrics Strip */}
         <MetricStats />
 
-        {/* 4. About Me Section: "Who I Am" with Profile Image & 9 Highlight Domains */}
+        {/* 4. About Me: "Who I Am" (Digital Marketer, Meta Ads Specialist & AI Solutions) */}
         <AboutMe
           onOpenCv={handleOpenCv}
           onOpenHireMe={() => handleOpenHireMe()}
         />
 
-        {/* 5. How I Can Add Value to Your Organization (6 Premium Cards with Exact Capabilities) */}
-        <ValueAddSection
-          onSelectService={(serviceName) => handleOpenHireMe(serviceName)}
+        {/* 5. What I Do: "Digital Solutions Built Around Growth" (6 Service Cards) */}
+        <ServicesSection
+          onOpenHireMe={(serviceName) => handleOpenHireMe(serviceName)}
         />
 
-        {/* 6. Why Hire Me / The Value I Bring (4 Value Pillars) */}
+        {/* 6. Why Hire Me?: "More Than a Marketer. A Digital Problem Solver." */}
         <WhyHireMe />
 
-        {/* 7. Tools & Technical Competencies */}
+        {/* 7. HOW I WORK: 6-Stage Methodology (Discover, Strategize, Build, Launch, Optimize, Scale) */}
+        <HowIWorkSection
+          onOpenHireMe={() => handleOpenHireMe()}
+        />
+
+        {/* 8. My Digital Marketing Expertise (Skill Domains) */}
         <SkillsSection />
 
-        {/* 8. Featured Projects & Case Studies */}
+        {/* 9. SELECTED WORK: Real projects, campaigns, designs and digital solutions */}
         <ProjectsSection
           onOpenCaseStudy={handleOpenCaseStudy}
           onOpenHireMe={() => handleOpenHireMe()}
         />
 
-        {/* 9. Client Reviews & Social Proof */}
+        {/* 10. BRAND DESIGN: Strategic brand identities, logos, flyers, marketing assets */}
+        <BrandDesignSection
+          onOpenHireMe={() => handleOpenHireMe('Brand Identity & Graphic Design')}
+        />
+
+        {/* 11. SOCIAL MEDIA WORK: Content designs, reels, TikTok, campaign creatives */}
+        <SocialMediaSection
+          onOpenHireMe={() => handleOpenHireMe('Social Media Growth & Content')}
+        />
+
+        {/* 12. AI & AUTOMATION: Practical business technology and workflow pipelines */}
+        <AiAutomationSection
+          onOpenHireMe={() => handleOpenHireMe('AI Business Solutions & Automation')}
+        />
+
+        {/* 13. VIDEO & CONTENT: Short-form videos, reels, promotional videos with CapCut focus */}
+        <VideoGallerySection
+          onOpenHireMe={() => handleOpenHireMe('Direct-Response Video Creatives')}
+        />
+
+        {/* 14. Professional Experience & Growth Milestones */}
+        <ExperienceSection
+          onOpenHireMe={() => handleOpenHireMe()}
+        />
+
+        {/* 15. Client Proof & Testimonials */}
         <TestimonialsSection />
 
-        {/* 10. Resume / CV Section with Document Preview */}
+        {/* 16. MY CV: "Interested in Working With Me?" with DOWNLOAD CV ↓ and VIEW CV ONLINE */}
         <ResumeSection
           onOpenCv={handleOpenCv}
           onDownloadCv={handleDownloadCv}
         />
 
-        {/* 11. Final Callout Banner with Arrow CTA */}
+        {/* 17. LET'S WORK TOGETHER: Contact channels and fast inquiry form */}
+        <ContactSection
+          onOpenHireMe={() => handleOpenHireMe()}
+        />
+
+        {/* 18. Final High-Conversion Action Banner */}
         <CtaBanner
           onOpenHireMe={() => handleOpenHireMe()}
         />
@@ -109,14 +151,7 @@ export default function App() {
       <Footer />
 
       {/* Interactive Modals */}
-      <HireMeModal
-        isOpen={isHireMeOpen}
-        onClose={() => {
-          closeHireMe();
-          setSelectedService('');
-        }}
-        preselectedService={selectedService || hireMeInitialData.service}
-      />
+      <HireMeModal />
 
       <CvModal
         isOpen={isCvOpen}
@@ -133,7 +168,7 @@ export default function App() {
         }}
       />
 
-      {/* Comprehensive Admin Management Portal */}
+      {/* Admin Management Portal */}
       <AdminPortal />
     </div>
   );

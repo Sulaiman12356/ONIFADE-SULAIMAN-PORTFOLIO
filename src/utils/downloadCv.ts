@@ -19,9 +19,9 @@ ${RESUME_DATA.summary}
 --------------------------------------------------------------------------------
 EDUCATION
 --------------------------------------------------------------------------------
-Degree: B.Sc. Computer Science (300 Level)
+Degree: B.Sc. Computer Science (400 Level)
 Institution: Olabisi Onabanjo University (OOU)
-Timeline: 2022 - Present
+Timeline: 2024 - Present
 Core Areas: Data Structures, Database Systems (SQL), Software Engineering, Web Technologies
 
 --------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ PROFESSIONAL EXPERIENCE
    - Automated client reporting workflows and dashboard metrics, increasing operational efficiency.
 
 2. Digital Marketing & Design Consultant | Freelance & Agency Collaborations
-   Period: 2021 - Present
+   Period: 2024 - Present
    Key Responsibilities & Achievements:
    - Partnered with 20+ clients across e-commerce, fintech, and retail to lower Customer Acquisition Cost (CAC) by up to 41%.
    - Built Power BI and Excel interactive dashboards for multi-store retail intelligence and inventory tracking.
@@ -64,7 +64,6 @@ CERTIFICATIONS
 --------------------------------------------------------------------------------
 • Meta Certified Digital Marketing Associate
 • Advanced Canva Design & Visual Identity Specialist
-• Data Analysis & Visualization in Power BI & Excel
 • AI Workflow Automation & Prompt Engineering Fundamentals
 
 ================================================================================

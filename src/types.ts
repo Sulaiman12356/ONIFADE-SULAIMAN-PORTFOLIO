@@ -1,7 +1,60 @@
+export type ProjectCategory =
+  | 'ALL'
+  | 'META ADS'
+  | 'LANDING PAGES'
+  | 'BRANDING'
+  | 'SOCIAL MEDIA'
+  | 'AI & AUTOMATION'
+  | 'WEB DEVELOPMENT'
+  | 'VIDEO'
+  | 'Marketing'
+  | 'Design'
+  | string;
+
+export interface MetaAdsDetails {
+  campaignObjective: string;
+  industry: string;
+  targetAudience: string;
+  campaignStrategy: string;
+  creativeStrategy: string;
+  adSetup: string;
+  funnelDetails: string;
+  trackingSetup: string;
+  optimizationStrategy: string;
+  metrics?: {
+    reach?: string;
+    impressions?: string;
+    ctr?: string;
+    cpc?: string;
+    leads?: string;
+    cpl?: string;
+    conversions?: string;
+    roas?: string;
+  };
+  isVerifiedResults: boolean;
+  verifiedBadgeText?: string;
+  workCompletedNotes?: string;
+}
+
+export interface LandingPageDetails {
+  desktopScreenshot: string;
+  mobileScreenshot: string;
+  businessObjective: string;
+  designStrategy: string;
+  conversionStrategy: string;
+  ctaText: string;
+  leadCapture: string;
+  metaAdsIntegration: string;
+  tracking: string;
+  mobileOptimization: string;
+  aiWorkflowUsed: string;
+  liveUrl?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
-  category: 'Marketing' | 'Design' | 'Data' | 'Branding';
+  category: ProjectCategory;
   subtitle: string;
   client: string;
   role: string;
@@ -16,6 +69,53 @@ export interface Project {
   deliverables: string[];
   featured?: boolean;
   order?: number;
+  shortDescription?: string;
+  outcome?: string;
+  isVerifiedResults?: boolean;
+  verifiedResults?: boolean;
+  hasVerifiedMetrics?: boolean;
+  workCompleted?: string;
+  workCompletedDescription?: string;
+  metaAdsDetails?: any;
+  landingPageDetails?: any;
+  liveUrl?: string;
+}
+
+export interface BrandDesignItem {
+  id: string;
+  title: string;
+  category: 'Logos' | 'Flyers' | 'Social media graphics' | 'Brand identities' | 'Marketing materials' | 'Campaign designs' | 'Presentations' | string;
+  imageUrl: string;
+  description?: string;
+  client?: string;
+  tools?: string[];
+  year?: string;
+}
+
+export interface SocialMediaWorkItem {
+  id: string;
+  title: string;
+  platform: 'Instagram' | 'Facebook' | 'TikTok' | string;
+  category: 'Instagram' | 'Facebook' | 'TikTok' | 'Branding' | 'Campaigns' | 'Content' | string;
+  imageUrl: string;
+  videoUrl?: string;
+  description?: string;
+  caption?: string;
+  metrics?: string;
+  postType?: 'Post' | 'Reel' | 'Story' | 'Carousel' | 'Ad Creative' | 'Calendar';
+}
+
+export interface VideoContentItem {
+  id: string;
+  title: string;
+  category: 'Short-form videos' | 'Reels' | 'TikTok videos' | 'Promotional videos' | 'Social media videos' | 'Marketing content' | string;
+  platform: 'TikTok' | 'Instagram' | 'Facebook' | 'YouTube Shorts' | 'Meta Ads' | string;
+  videoUrl: string;
+  thumbnail: string;
+  description: string;
+  projectUrl?: string;
+  primaryTool: string;
+  duration?: string;
 }
 
 export interface Service {
@@ -130,6 +230,14 @@ export interface HireMeRequest {
   status: HireRequestStatus;
   dateSubmitted: string;
   notes?: string;
+  roleTitle?: string;
+  serviceNeeded?: string;
+  clientName?: string;
+  clientEmail?: string;
+  timeline?: string;
+  projectDescription?: string;
+  preferredContact?: string;
+  whatsappNumber?: string;
 }
 
 export interface ContactMessage {
@@ -147,8 +255,12 @@ export interface SocialLinks {
   github: string;
   instagram: string;
   whatsapp: string;
-  twitter: string;
-  portfolio: string;
+  tiktok: string;
+  facebook: string;
+  twitter?: string;
+  portfolio?: string;
+  email?: string;
+  phone?: string;
 }
 
 export interface CredibilityMetricItem {

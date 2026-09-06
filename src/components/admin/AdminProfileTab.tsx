@@ -253,6 +253,38 @@ export const AdminProfileTab: React.FC = () => {
           </div>
 
           <div>
+            <label className="block font-bold text-slate-700 mb-1">Facebook Page / Profile</label>
+            <input
+              type="url"
+              value={formData.socialLinks.facebook || ''}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  socialLinks: { ...formData.socialLinks, facebook: e.target.value },
+                })
+              }
+              placeholder="https://facebook.com/mrclarity"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+            />
+          </div>
+
+          <div>
+            <label className="block font-bold text-slate-700 mb-1">TikTok Profile</label>
+            <input
+              type="url"
+              value={formData.socialLinks.tiktok || ''}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  socialLinks: { ...formData.socialLinks, tiktok: e.target.value },
+                })
+              }
+              placeholder="https://tiktok.com/@mrclarity"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+            />
+          </div>
+
+          <div>
             <label className="block font-bold text-slate-700 mb-1">Custom Portfolio URL</label>
             <input
               type="url"

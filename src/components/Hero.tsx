@@ -1,6 +1,23 @@
-import React, { useState } from 'react';
-import { ArrowRight, Download, CheckCircle2, ShieldCheck, Zap, Target, BarChart3, Users, Send, Sparkles, MessageCircle } from 'lucide-react';
+import React from 'react';
+import { 
+  ArrowRight, 
+  ArrowDown, 
+  Target, 
+  TrendingUp, 
+  Cpu, 
+  Sparkles, 
+  Palette, 
+  Layout, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Code2, 
+  Zap,
+  Layers,
+  Award
+} from 'lucide-react';
+import { usePortfolio } from '../context/PortfolioContext';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import portraitImg from '../assets/images/portrait.jpg';
 
 interface HeroProps {
   onOpenHireMe: () => void;
@@ -9,321 +26,302 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv }) => {
-  const [quickForm, setQuickForm] = useState({
-    name: '',
-    email: '',
-    whatsapp: '',
-    service: 'Digital Marketing & Paid Ads',
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const { profile } = usePortfolio();
+  const portraitSrc = profile.profilePhoto || portraitImg;
 
-  const handleQuickSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const text = encodeURIComponent(
-      `Hello Mr. Clarity! My name is ${quickForm.name || 'Client'}. I'm interested in ${quickForm.service}. WhatsApp: ${quickForm.whatsapp}, Email: ${quickForm.email}. Let's work together!`
-    );
-    window.open(`https://wa.me/2348061234567?text=${text}`, '_blank');
-    setSubmitted(true);
-  };
+  const availableWorkTypes = [
+    'Full-Time',
+    'Freelance',
+    'Contract',
+    'Remote',
+    'Consulting',
+    'Collaboration',
+  ];
 
   return (
     <section
       id="home"
-      className="relative pt-28 sm:pt-32 pb-20 md:pb-28 overflow-hidden bg-[#08183A] text-white"
+      className="relative pt-12 pb-20 sm:pt-16 sm:pb-28 bg-[#F8FAFC] border-b border-[#E2E8F0] overflow-hidden"
     >
-      {/* Background ambient lighting matching canvadesigntraining.vercel.app */}
-      <div className="absolute top-10 left-1/4 w-[500px] h-[500px] bg-[#0B5ED7]/20 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-40 right-10 w-[450px] h-[450px] bg-[#00D2FF]/15 rounded-full blur-3xl pointer-events-none -z-10" />
-      
-      {/* Subtle background tech grid lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none opacity-40" />
+      {/* Background Ambience: Light blue glow and subtle geometric lines */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#EFF6FF] rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#0B5ED7]/8 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#062B63]/5 rounded-full blur-2xl pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          {/* LEFT COLUMN: Main Pitch & Core Value */}
+          {/* ========================================================
+              LEFT COLUMN: Positioning, Exact Headlines & Conversion CTAs
+              ======================================================== */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
-            {/* Top pill badge matching template */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-[#00D2FF]/40 text-xs font-bold tracking-wider text-[#00D2FF] uppercase shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#00D2FF] animate-pulse"></span>
-                <span>VERIFIED PRO • 3+ YEARS • DIGITAL GROWTH &amp; AI</span>
-              </div>
-
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-[11px] font-bold text-emerald-300">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>Available for Opportunities</span>
-              </div>
+            {/* Small Badge: HELLO, I'M MR. CLARITY */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#0B5ED7]/25 text-xs font-black tracking-wider text-[#0B5ED7] uppercase shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#0B5ED7]" />
+              <span>HELLO, I'M MR. CLARITY</span>
             </div>
 
-            {/* Hero Headline with Cyan Highlight matching template */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
-              Elevate Your Brand &amp; Scale Revenue With{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D2FF] via-[#38BDF8] to-[#60A5FA]">
-                Mr. Clarity
+            {/* MAIN HEADLINE:
+                I HELP BUSINESSES
+                GROW WITH DIGITAL
+                MARKETING & AI.
+            */}
+            <h1 className="text-4xl sm:text-5xl lg:text-[3.65rem] font-black tracking-tight text-[#062B63] leading-[1.08] uppercase">
+              I HELP BUSINESSES<br />
+              GROW WITH DIGITAL<br />
+              <span className="text-[#0B5ED7] underline decoration-[#0B5ED7]/30 decoration-4 underline-offset-8">
+                MARKETING &amp; AI.
               </span>
             </h1>
 
-            {/* Sub-headline / Identity */}
-            <div className="text-sm sm:text-base font-semibold text-slate-300 flex flex-wrap items-center gap-2">
-              <span className="text-white font-bold">Onifade Sulaiman</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-[#00D2FF]">Digital Marketer</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-[#00D2FF]">Graphics Designer</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-[#00D2FF]">Data Analyst</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-[#00D2FF]">AI Innovator</span>
+            {/* Alternative Supporting Headline */}
+            <h2 className="text-xl sm:text-2xl font-black text-[#062B63] tracking-tight leading-snug">
+              Digital Marketing, AI &amp; Creative Solutions That Turn Attention Into Action.
+            </h2>
+
+            {/* Professional Title */}
+            <div className="p-3 rounded-xl bg-white border border-[#E2E8F0] shadow-2xs inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-black text-[#0B5ED7] uppercase tracking-wide">
+              <span>Digital Marketer</span>
+              <span className="text-slate-300 font-normal">|</span>
+              <span>Meta Ads Specialist</span>
+              <span className="text-slate-300 font-normal">|</span>
+              <span>Brand Designer</span>
+              <span className="text-slate-300 font-normal">|</span>
+              <span>AI Digital Solutions</span>
             </div>
 
-            {/* Core Value Statement */}
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl">
-              I combine technology, creative design, and data analytics to help ambitious businesses communicate with clarity, scale digital marketing ROI, and make smarter commercial decisions.
+            {/* Supporting Paragraph */}
+            <p className="text-base sm:text-lg text-[#64748B] leading-relaxed font-normal max-w-2xl">
+              &ldquo;I help businesses, organizations and personal brands attract attention, generate leads, build stronger digital identities and improve their online presence through strategic marketing, creative design, AI and technology.&rdquo;
             </p>
 
-            {/* 4 Feature Pills matching the 4 template bullets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#00D2FF]/40 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-[#0B5ED7]/30 flex items-center justify-center text-[#00D2FF] flex-shrink-0">
-                  <Zap className="w-4 h-4" />
-                </div>
-                <div className="text-xs">
-                  <div className="font-bold text-white">$500K+ Ad Spend Managed</div>
-                  <div className="text-slate-300 text-[11px]">Meta &amp; TikTok Ads Expert</div>
-                </div>
+            {/* Availability Indicator & Work Types */}
+            <div className="p-4 rounded-2xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
+              {/* Availability Indicator: ● AVAILABLE FOR WORK */}
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+                </span>
+                <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-700">
+                  AVAILABLE FOR WORK
+                </span>
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#00D2FF]/40 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-[#0B5ED7]/30 flex items-center justify-center text-[#00D2FF] flex-shrink-0">
-                  <Target className="w-4 h-4" />
-                </div>
-                <div className="text-xs">
-                  <div className="font-bold text-white">4.8x Average ROAS</div>
-                  <div className="text-slate-300 text-[11px]">High-Converting Ad Campaigns</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#00D2FF]/40 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-[#0B5ED7]/30 flex items-center justify-center text-[#00D2FF] flex-shrink-0">
-                  <BarChart3 className="w-4 h-4" />
-                </div>
-                <div className="text-xs">
-                  <div className="font-bold text-white">Power BI &amp; SQL Dashboards</div>
-                  <div className="text-slate-300 text-[11px]">Automated Business Insights</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#00D2FF]/40 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-[#0B5ED7]/30 flex items-center justify-center text-[#00D2FF] flex-shrink-0">
-                  <Users className="w-4 h-4" />
-                </div>
-                <div className="text-xs">
-                  <div className="font-bold text-white">500+ Trained &amp; 50+ Projects</div>
-                  <div className="text-slate-300 text-[11px]">Founder, Clarity Digital Academy</div>
-                </div>
+              {/* Available for list: Full-Time, Freelance, Contract, Remote, Consulting, Collaboration */}
+              <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-[#E2E8F0]">
+                <span className="text-xs font-bold text-[#64748B] mr-1">Available for:</span>
+                {availableWorkTypes.map((type) => (
+                  <span
+                    key={type}
+                    className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[#062B63] hover:border-[#0B5ED7] hover:bg-[#EFF6FF] transition-colors"
+                  >
+                    {type}
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Template Punchy Bar with Yellow Highlight */}
-            <div className="p-3.5 rounded-xl bg-[#0B2554] border border-white/15 text-xs sm:text-sm text-slate-200">
-              <span className="font-bold tracking-wide">
-                PROVEN STRATEGIES THAT CAN{' '}
-                <span className="text-[#FFB800] font-black uppercase underline decoration-[#FFB800]/50 decoration-2 underline-offset-4">
-                  TRANSFORM YOUR BUSINESS
-                </span>{' '}
-                FOREVER.
-              </span>
-            </div>
-
-            {/* Quick Action CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            {/* Three CTAs:
+                Primary CTA: HIRE ME →
+                Secondary CTA: VIEW MY WORK →
+                Third CTA: DOWNLOAD CV ↓
+            */}
+            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+              {/* Primary CTA */}
               <button
-                id="hero-hire-me-btn"
+                id="hero-primary-hire-me-btn"
                 onClick={onOpenHireMe}
-                className="bg-gradient-to-r from-[#0B5ED7] to-[#2563EB] hover:from-[#2563EB] hover:to-[#00D2FF] text-white px-8 py-4 rounded-xl font-bold flex items-center shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all active:scale-[0.98] text-base"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-white bg-[#062B63] hover:bg-[#0B5ED7] shadow-lg shadow-[#062B63]/20 hover:shadow-xl transition-all active:scale-[0.98] text-sm sm:text-base tracking-wide cursor-pointer"
               >
-                <span>Hire Me Now</span>
-                <span className="ml-2">→</span>
+                <span>HIRE ME</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
 
-              <button
-                id="hero-download-cv-btn"
-                onClick={onDownloadCv}
-                className="bg-white/10 hover:bg-white/20 border border-white/25 text-white px-7 py-4 rounded-xl font-bold flex items-center transition-all active:scale-[0.98] text-base"
-              >
-                <span>Download CV</span>
-                <Download className="w-4 h-4 ml-2 text-[#00D2FF]" />
-              </button>
-
+              {/* Secondary CTA */}
               <a
-                id="hero-view-work-link"
+                id="hero-secondary-view-work-btn"
                 href="#projects"
-                className="text-[#00D2FF] hover:text-white font-bold underline underline-offset-8 transition-colors text-sm py-2 px-2"
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-black text-[#062B63] bg-white hover:bg-[#EFF6FF] border-2 border-[#062B63] shadow-xs hover:border-[#0B5ED7] hover:text-[#0B5ED7] transition-all active:scale-[0.98] text-sm sm:text-base tracking-wide cursor-pointer"
               >
-                View Case Studies →
+                <span>VIEW MY WORK</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
+
+              {/* Third CTA */}
+              <button
+                id="hero-third-download-cv-btn"
+                onClick={onDownloadCv}
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-black text-[#0B5ED7] bg-[#EFF6FF] hover:bg-blue-100 border border-[#0B5ED7]/30 shadow-xs transition-all active:scale-[0.98] text-sm sm:text-base tracking-wide cursor-pointer"
+              >
+                <span>DOWNLOAD CV</span>
+                <ArrowDown className="w-4 h-4" />
+              </button>
             </div>
 
-            {/* Work Arrangements Strip */}
-            <div className="pt-3 flex flex-wrap gap-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest border-t border-white/10">
-              <span>Full-time</span>
-              <span>•</span>
-              <span>Part-time</span>
-              <span>•</span>
-              <span>Freelance</span>
-              <span>•</span>
-              <span>Remote Worldwide</span>
+            {/* Immediate Proof Bar */}
+            <div className="pt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-bold text-[#64748B]">
+              <div className="flex items-center gap-1.5 text-[#062B63]">
+                <ShieldCheck className="w-4 h-4 text-[#0B5ED7]" />
+                <span>$500K+ Ad Spend Managed</span>
+              </div>
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5 text-[#062B63]">
+                <TrendingUp className="w-4 h-4 text-[#0B5ED7]" />
+                <span>4.8x Campaign ROAS</span>
+              </div>
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5 text-[#062B63]">
+                <Award className="w-4 h-4 text-[#0B5ED7]" />
+                <span>500+ Students Mentored</span>
+              </div>
             </div>
 
           </div>
 
-          {/* RIGHT COLUMN: Conversion Form Card + Portrait Mockup matching template */}
-          <div className="lg:col-span-5 flex flex-col items-center">
-            
-            {/* Template Lead Capture Card: "SECURE YOUR CONSULTATION" */}
-            <div className="w-full bg-white text-[#0B1F3A] rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-white/90 relative overflow-hidden">
-              {/* Header inside the form */}
-              <div className="mb-5 text-center">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#08183A] text-[#00D2FF] text-[11px] font-black tracking-widest uppercase mb-2">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>SECURE YOUR CONSULTATION</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#062B63] tracking-tight">
-                  Work Directly With Mr. Clarity
-                </h3>
-                <p className="text-xs text-[#64748B] mt-1 font-medium">
-                  Enter your details for immediate response via WhatsApp &amp; Email.
-                </p>
+          {/* ========================================================
+              RIGHT SIDE: Professional Portrait with Premium Visual Composition
+              • White background
+              • Navy blue shape
+              • Light blue glow
+              • Subtle graphical elements
+              • Digital marketing icons
+              • AI/technology elements
+              • Communicates: DIGITAL MARKETING + AI + DESIGN
+              ======================================================== */}
+          <div className="lg:col-span-5 flex items-center justify-center relative">
+            <div className="relative w-full max-w-md sm:max-w-lg">
+              
+              {/* 1. Light Blue Glow (Backdrop ambient diffusion) */}
+              <div 
+                className="absolute -inset-4 sm:-inset-6 bg-[#0B5ED7]/25 rounded-[3rem] blur-3xl -z-20 pointer-events-none" 
+                aria-hidden="true" 
+              />
+              <div 
+                className="absolute -top-10 -right-10 w-72 h-72 bg-[#EFF6FF] rounded-full blur-2xl -z-20 pointer-events-none" 
+                aria-hidden="true" 
+              />
+
+              {/* 2. Navy Blue Shape (Stylized geometric backdrop shape) */}
+              <div 
+                className="absolute inset-2 sm:inset-3 bg-[#062B63] rounded-3xl transform rotate-3 sm:rotate-4 shadow-2xl transition-transform duration-500 hover:rotate-2 -z-10" 
+                aria-hidden="true"
+              >
+                {/* Subtle graphical grid inside navy backdrop */}
+                <div className="w-full h-full opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] rounded-3xl" />
               </div>
 
-              {!submitted ? (
-                <form onSubmit={handleQuickSubmit} className="space-y-3.5 text-xs sm:text-sm">
-                  <div>
-                    <label className="block font-bold text-[#062B63] mb-1">
-                      Your Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={quickForm.name}
-                      onChange={(e) => setQuickForm({ ...quickForm, name: e.target.value })}
-                      placeholder="e.g. John Doe / Acme Inc."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EAF1] focus:border-[#0B5ED7] focus:ring-2 focus:ring-[#0B5ED7]/15 outline-none text-[#0B1F3A]"
-                    />
+              {/* 3. White Background Composition Container */}
+              <div className="relative bg-white rounded-3xl p-3.5 sm:p-4 shadow-2xl border-2 border-[#E2E8F0] overflow-visible">
+                
+                {/* Top Badge communicating: DIGITAL MARKETING + AI + DESIGN */}
+                <div className="mb-3 px-3.5 py-1.5 rounded-xl bg-[#062B63] text-white flex items-center justify-between shadow-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#0B5ED7] animate-pulse" />
+                    <span className="text-[11px] sm:text-xs font-black tracking-wider uppercase text-white">
+                      DIGITAL MARKETING + AI + DESIGN
+                    </span>
                   </div>
-
-                  <div>
-                    <label className="block font-bold text-[#062B63] mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={quickForm.email}
-                      onChange={(e) => setQuickForm({ ...quickForm, email: e.target.value })}
-                      placeholder="john@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EAF1] focus:border-[#0B5ED7] focus:ring-2 focus:ring-[#0B5ED7]/15 outline-none text-[#0B1F3A]"
-                    />
+                  <div className="flex items-center gap-1 text-[#EFF6FF]">
+                    <Target className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                    <Cpu className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                    <Palette className="w-3.5 h-3.5 text-[#0B5ED7]" />
                   </div>
-
-                  <div>
-                    <label className="block font-bold text-[#062B63] mb-1">
-                      WhatsApp Number (For Instant Chat) *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={quickForm.whatsapp}
-                      onChange={(e) => setQuickForm({ ...quickForm, whatsapp: e.target.value })}
-                      placeholder="+234 800 000 0000"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EAF1] focus:border-[#0B5ED7] focus:ring-2 focus:ring-[#0B5ED7]/15 outline-none text-[#0B1F3A]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-bold text-[#062B63] mb-1">
-                      Service / Role Needed *
-                    </label>
-                    <select
-                      value={quickForm.service}
-                      onChange={(e) => setQuickForm({ ...quickForm, service: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EAF1] focus:border-[#0B5ED7] focus:ring-2 focus:ring-[#0B5ED7]/15 outline-none text-[#0B1F3A] bg-white font-medium"
-                    >
-                      <option value="Digital Marketing & Paid Ads">Digital Marketing &amp; Meta/TikTok Ads</option>
-                      <option value="Canva & Brand Identity Design">Canva &amp; Brand Graphics Design</option>
-                      <option value="Data Analytics & Power BI">Data Analytics &amp; Power BI Dashboards</option>
-                      <option value="AI Workflow & Automations">AI Tools &amp; Workflow Automation</option>
-                      <option value="Full-time / Fractional Growth Lead">Full-time / Fractional Growth Lead</option>
-                      <option value="Canva Corporate Masterclass">Canva Corporate Masterclass / Training</option>
-                    </select>
-                  </div>
-
-                  {/* High-conversion CTA button */}
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#062B63] via-[#0B5ED7] to-[#2563EB] hover:from-[#0B5ED7] hover:to-[#00D2FF] text-white font-black text-sm tracking-wide uppercase shadow-lg shadow-blue-900/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2 mt-2"
-                  >
-                    <span>YES! I WANT TO WORK WITH SULAIMAN</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-
-                  <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-[#64748B]">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Your information is 100% confidential &amp; protected</span>
-                  </div>
-                </form>
-              ) : (
-                <div className="text-center py-8 space-y-3">
-                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-7 h-7" />
-                  </div>
-                  <h4 className="text-lg font-black text-[#062B63]">
-                    Inquiry Submitted!
-                  </h4>
-                  <p className="text-xs text-[#64748B] leading-relaxed">
-                    Opening WhatsApp to connect with Mr. Clarity directly. You can also view the full online CV or review featured projects below.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-[#062B63] transition-colors"
-                  >
-                    Submit Another Inquiry
-                  </button>
                 </div>
-              )}
 
-              {/* Portrait & Credentials Mini-Bar at bottom of card */}
-              <div className="mt-5 pt-4 border-t border-[#E5EAF1] flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                {/* Portrait Image Container */}
+                <div className="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[4/5] sm:aspect-[3/4] max-h-[500px] w-full border border-[#E2E8F0] group">
                   <img
-                    src={PERSONAL_INFO.portraitImage}
-                    alt="Onifade Sulaiman"
-                    className="w-11 h-11 rounded-full object-cover border-2 border-[#0B5ED7]"
+                    src={portraitSrc}
+                    alt="Onifade Sulaiman (Mr. Clarity) - Digital Marketer & AI Specialist"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    referrerPolicy="no-referrer"
+                    loading="eager"
                   />
-                  <div>
-                    <div className="text-xs font-bold text-[#062B63]">
-                      Onifade Sulaiman
+
+                  {/* Gradient Shadow Overlay for Text Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#062B63] via-[#062B63]/25 to-transparent opacity-85 group-hover:opacity-90 transition-opacity" />
+
+                  {/* Overlay Bottom Identity & Verified Mark */}
+                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-white">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 rounded-full bg-[#0B5ED7] text-[10px] font-black tracking-widest uppercase">
+                        VERIFIED EXPERT
+                      </span>
+                      <span className="text-[11px] text-slate-200 font-semibold">
+                        Founder, Clarity Digital Academy
+                      </span>
                     </div>
-                    <div className="text-[10px] font-semibold text-[#0B5ED7]">
-                      Mr. Clarity • OOU Computer Science
+                    <div className="text-xl sm:text-2xl font-black tracking-tight text-white">
+                      {profile.name || PERSONAL_INFO.name}
+                    </div>
+                    <div className="text-xs font-bold text-[#EFF6FF] flex items-center gap-1.5 mt-0.5">
+                      <span>({profile.brandName || PERSONAL_INFO.brandName})</span>
+                      <span>•</span>
+                      <span>Meta Ads &amp; AI Digital Solutions</span>
+                    </div>
+                  </div>
+
+                  {/* Subtle Graphical Elements: Tech Crosshairs in Corners */}
+                  <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-white/40 pointer-events-none" />
+                  <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-white/40 pointer-events-none" />
+                </div>
+
+                {/* Floating Elements Around the Composition */}
+                
+                {/* Floating Badge 1: Digital Marketing (Meta Ads & ROAS) */}
+                <div 
+                  id="hero-floating-badge-marketing"
+                  className="absolute -bottom-4 -left-3 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-xl border border-[#E2E8F0] flex items-center gap-3 z-20 hover:scale-105 transition-transform"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#0B5ED7]/25 flex items-center justify-center flex-shrink-0">
+                    <Target className="w-5 h-5 text-[#0B5ED7]" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-[#062B63] flex items-center gap-1">
+                      <span>Meta &amp; TikTok Ads</span>
+                      <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                    </div>
+                    <div className="text-[11px] font-bold text-[#64748B]">
+                      $500K+ Spend • 4.8x ROAS
                     </div>
                   </div>
                 </div>
 
-                <div className="text-right">
-                  <div className="text-[10px] uppercase font-bold text-[#64748B]">
-                    Rating
+                {/* Floating Badge 2: AI & Technology Elements */}
+                <div 
+                  id="hero-floating-badge-ai"
+                  className="absolute -top-4 -right-3 sm:-right-6 bg-[#062B63] text-white rounded-2xl p-3 sm:p-3.5 shadow-xl border border-white/20 flex items-center gap-3 z-20 hover:scale-105 transition-transform"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 text-[#EFF6FF]">
+                    <Cpu className="w-5 h-5 text-[#0B5ED7]" />
                   </div>
-                  <div className="text-xs font-black text-amber-500">
-                    ★ 4.9 / 5.0
+                  <div>
+                    <div className="text-xs font-black text-white flex items-center gap-1">
+                      <span>AI Digital Solutions</span>
+                      <Sparkles className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                    </div>
+                    <div className="text-[11px] font-semibold text-slate-300">
+                      Workflows, LLMs &amp; Funnels
+                    </div>
                   </div>
                 </div>
+
+                {/* Subtle Graphical Floating Pill: Brand & Creative Design */}
+                <div 
+                  id="hero-floating-badge-design"
+                  className="absolute top-1/2 -right-4 sm:-right-8 -translate-y-1/2 bg-white/95 backdrop-blur-md rounded-xl px-3 py-2 shadow-lg border border-[#E2E8F0] hidden sm:flex items-center gap-2 z-20"
+                >
+                  <Palette className="w-4 h-4 text-[#0B5ED7]" />
+                  <div className="text-[11px] font-black text-[#062B63] whitespace-nowrap">
+                    Brand Design &amp; Systems
+                  </div>
+                </div>
+
               </div>
 
             </div>
-
           </div>
 
         </div>

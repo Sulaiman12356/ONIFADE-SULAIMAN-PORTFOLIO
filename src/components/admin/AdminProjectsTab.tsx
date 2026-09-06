@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Edit2, CheckCircle2, Sparkles, FolderKanban, Link2 } from 'lucide-react';
+import { Plus, Trash2, Edit2, CheckCircle2, Sparkles, FolderKanban, Link2, ShieldCheck, AlertCircle } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { Project } from '../../types';
 
 export const AdminProjectsTab: React.FC = () => {
-  const { projects, setProjects } = usePortfolio();
+  const { projects, addProject, updateProject, deleteProject } = usePortfolio();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
 
   const [formData, setFormData] = useState<Partial<Project>>({
     title: '',
-    category: 'Marketing',
+    category: 'META ADS',
     subtitle: '',
     client: '',
     role: '',
@@ -19,6 +19,10 @@ export const AdminProjectsTab: React.FC = () => {
     summary: '',
     challenge: '',
     solution: '',
+    outcome: '',
+    verifiedResults: true,
+    hasVerifiedMetrics: true,
+    workCompletedDescription: '',
     results: [],
     tools: [],
     deliverables: [],
@@ -27,21 +31,31 @@ export const AdminProjectsTab: React.FC = () => {
   const [resultsInput, setResultsInput] = useState('');
   const [toolsInput, setToolsInput] = useState('');
 
+  const categories = [
+    'META ADS',
+    'LANDING PAGES',
+    'BRANDING',
+    'SOCIAL MEDIA',
+    'AI & AUTOMATION',
+    'WEB DEVELOPMENT',
+    'VIDEO',
+  ];
+
   const handleEdit = (p: Project) => {
     setEditingId(p.id);
     setFormData(p);
-    setResultsInput(p.results.join('\n'));
-    setToolsInput(p.tools.join(', '));
+    setResultsInput((p.results || []).join('\n'));
+    setToolsInput((p.tools || []).join(', '));
     setIsAdding(true);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this project?')) {
-      setProjects((prev) => prev.filter((p) => p.id !== id));
+      await deleteProject(id);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const resultsList = resultsInput
       .split('\n')
@@ -53,44 +67,41 @@ export const AdminProjectsTab: React.FC = () => {
       .filter(Boolean);
 
     if (editingId) {
-      setProjects((prev) =>
-        prev.map((p) =>
-          p.id === editingId
-            ? ({
-                ...p,
-                ...formData,
-                results: resultsList,
-                tools: toolsList,
-              } as Project)
-            : p
-        )
-      );
+      await updateProject(editingId, {
+        ...formData,
+        results: resultsList,
+        tools: toolsList,
+      });
     } else {
       const newProject: Project = {
         id: 'proj_' + Date.now(),
-        title: formData.title || 'New Case Study',
-        category: formData.category || 'Marketing',
+        title: formData.title || 'New Project',
+        category: formData.category || 'META ADS',
         subtitle: formData.subtitle || '',
         client: formData.client || 'Client Partner',
-        role: formData.role || 'Lead Strategist',
-        timeline: formData.timeline || '4 Weeks',
+        role: formData.role || 'Digital Marketer',
+        timeline: formData.timeline || 'Completed',
         thumbnail: formData.thumbnail || '/assets/images/project_ecommerce_1788655646475.jpg',
-        metricHighlight: formData.metricHighlight || 'High ROI Outcome',
+        metricHighlight: formData.metricHighlight || (formData.verifiedResults ? 'Verified Result' : 'Delivered Scope'),
         summary: formData.summary || '',
         challenge: formData.challenge || '',
         solution: formData.solution || '',
+        outcome: formData.outcome || '',
+        verifiedResults: formData.verifiedResults ?? true,
+        hasVerifiedMetrics: formData.hasVerifiedMetrics ?? true,
+        workCompletedDescription: formData.workCompletedDescription || '',
         results: resultsList,
         tools: toolsList,
-        deliverables: formData.deliverables || [],
+        deliverables: formData.deliverables || ['Strategic Audit', 'Campaign Assets', 'Execution Documentation'],
       };
-      setProjects((prev) => [newProject, ...prev]);
+      await addProject(newProject);
     }
 
     setIsAdding(false);
     setEditingId(null);
     setFormData({
       title: '',
-      category: 'Marketing',
+      category: 'META ADS',
       subtitle: '',
       client: '',
       role: '',
@@ -99,6 +110,10 @@ export const AdminProjectsTab: React.FC = () => {
       summary: '',
       challenge: '',
       solution: '',
+      outcome: '',
+      verifiedResults: true,
+      hasVerifiedMetrics: true,
+      workCompletedDescription: '',
       results: [],
       tools: [],
       deliverables: [],
@@ -109,13 +124,15 @@ export const AdminProjectsTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      
-      {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-[#062B63] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black">Case Studies &amp; Projects</h2>
-          <p className="text-xs text-slate-300 mt-1">
-            Showcase verified portfolio projects, challenges, solutions, tools used, and measurable results.
+          <h2 className="text-base font-black text-[#0B1F3A] flex items-center gap-2">
+            <FolderKanban className="w-5 h-5 text-[#00D2FF]" />
+            <span>Selected Work &amp; Portfolio Management</span>
+          </h2>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Manage projects across all 8 portfolio categories. Ensure verified results vs. work completed transparency.
           </p>
         </div>
 
@@ -125,7 +142,7 @@ export const AdminProjectsTab: React.FC = () => {
             setEditingId(null);
             setFormData({
               title: '',
-              category: 'Marketing',
+              category: 'META ADS',
               subtitle: '',
               client: '',
               role: '',
@@ -134,6 +151,10 @@ export const AdminProjectsTab: React.FC = () => {
               summary: '',
               challenge: '',
               solution: '',
+              outcome: '',
+              verifiedResults: true,
+              hasVerifiedMetrics: true,
+              workCompletedDescription: '',
               results: [],
               tools: [],
               deliverables: [],
@@ -141,7 +162,7 @@ export const AdminProjectsTab: React.FC = () => {
             setResultsInput('');
             setToolsInput('');
           }}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#00D2FF] text-[#08183A] font-bold text-xs hover:bg-[#38BDF8] transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#00D2FF] text-[#08183A] font-bold text-xs hover:bg-[#38BDF8] transition-colors cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>{isAdding ? 'Close Form' : 'Add New Project'}</span>
@@ -152,7 +173,7 @@ export const AdminProjectsTab: React.FC = () => {
       {isAdding && (
         <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
           <h3 className="text-sm font-black text-[#0B1F3A] uppercase tracking-wider">
-            {editingId ? 'Edit Project' : 'Create Case Study'}
+            {editingId ? 'Edit Project' : 'Create New Project'}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
@@ -163,33 +184,34 @@ export const AdminProjectsTab: React.FC = () => {
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                placeholder="e.g. E-commerce Ad Campaign"
+                placeholder="e.g. Lead Gen Campaign for Real Estate"
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">Category</label>
+              <label className="block font-bold text-slate-700 mb-1">Category *</label>
               <select
                 value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white font-bold"
               >
-                <option value="Marketing">Marketing</option>
-                <option value="Design">Design</option>
-                <option value="Data">Data</option>
-                <option value="Branding">Branding</option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">Metric Highlight *</label>
+              <label className="block font-bold text-slate-700 mb-1">Metric / Outcome Highlight *</label>
               <input
                 type="text"
                 required
                 value={formData.metricHighlight}
                 onChange={(e) => setFormData({ ...formData, metricHighlight: e.target.value })}
-                placeholder="e.g. 4.8x ROAS | +180% Revenue"
+                placeholder="e.g. 5.2x ROAS | 340 Qualified Leads"
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
               />
             </div>
@@ -202,18 +224,18 @@ export const AdminProjectsTab: React.FC = () => {
                 type="text"
                 value={formData.client}
                 onChange={(e) => setFormData({ ...formData, client: e.target.value })}
-                placeholder="e.g. Retail Fashion Brand"
+                placeholder="e.g. Havencrest Properties"
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">Your Role</label>
+              <label className="block font-bold text-slate-700 mb-1">My Role</label>
               <input
                 type="text"
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                placeholder="e.g. Lead Digital Strategist"
+                placeholder="e.g. Meta Ads & Funnel Strategist"
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
               />
             </div>
@@ -230,8 +252,32 @@ export const AdminProjectsTab: React.FC = () => {
             </div>
           </div>
 
+          {/* Verification Policy Notice */}
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+            <div className="flex items-center gap-2 font-bold text-slate-800">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Results Verification Policy</span>
+            </div>
+            <p className="text-[11px] text-slate-600">
+              <strong>DO NOT fabricate results.</strong> If a project has verified results from Ads Manager or analytics, check the box below. If it does not, leave unchecked to display documented deliverables and scope.
+            </p>
+            <label className="flex items-center gap-2 cursor-pointer pt-1">
+              <input
+                type="checkbox"
+                checked={Boolean(formData.verifiedResults)}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  verifiedResults: e.target.checked,
+                  hasVerifiedMetrics: e.target.checked,
+                })}
+                className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4"
+              />
+              <span className="font-bold text-emerald-700">Project Has Verified &amp; Proven Client Metrics</span>
+            </label>
+          </div>
+
           <div>
-            <label className="block font-bold text-slate-700 mb-1 text-xs">Executive Summary</label>
+            <label className="block font-bold text-slate-700 mb-1 text-xs">Short Description / Summary</label>
             <textarea
               rows={2}
               required
@@ -241,9 +287,33 @@ export const AdminProjectsTab: React.FC = () => {
             />
           </div>
 
+          <div>
+            <label className="block font-bold text-slate-700 mb-1 text-xs">Overall Outcome</label>
+            <input
+              type="text"
+              value={formData.outcome || ''}
+              onChange={(e) => setFormData({ ...formData, outcome: e.target.value })}
+              placeholder="e.g. Generated 340 high-intent leads with zero CRM lead drop-off."
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs"
+            />
+          </div>
+
+          {!formData.verifiedResults && (
+            <div>
+              <label className="block font-bold text-slate-700 mb-1 text-xs">Explain Work Completed (When results are not metric-based)</label>
+              <textarea
+                rows={2}
+                value={formData.workCompletedDescription || ''}
+                onChange={(e) => setFormData({ ...formData, workCompletedDescription: e.target.value })}
+                placeholder="Describe the strategy, design systems, or creative assets delivered for this client..."
+                className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs"
+              />
+            </div>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <label className="block font-bold text-slate-700 mb-1">The Challenge / Problem</label>
+              <label className="block font-bold text-slate-700 mb-1">The Challenge / Context</label>
               <textarea
                 rows={3}
                 value={formData.challenge}
@@ -253,7 +323,7 @@ export const AdminProjectsTab: React.FC = () => {
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">The Strategy &amp; Solution</label>
+              <label className="block font-bold text-slate-700 mb-1">Strategy &amp; Execution</label>
               <textarea
                 rows={3}
                 value={formData.solution}
@@ -264,23 +334,23 @@ export const AdminProjectsTab: React.FC = () => {
           </div>
 
           <div>
-            <label className="block font-bold text-slate-700 mb-1 text-xs">Key Measurable Results (One per line)</label>
+            <label className="block font-bold text-slate-700 mb-1 text-xs">Measurable Results or Deliverables (One per line)</label>
             <textarea
               rows={3}
               value={resultsInput}
               onChange={(e) => setResultsInput(e.target.value)}
-              placeholder="Generated over $38,000 in tracked sales from $8,000 ad budget&#10;Reduced average customer acquisition cost (CAC) by 41%&#10;Achieved a 3.4% click-through rate (CTR)"
+              placeholder="Delivered full 10-screen high-conversion Figma design&#10;Integrated Meta Pixel and Conversions API tracking&#10;Achieved 99/100 mobile speed index"
               className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs"
             />
           </div>
 
           <div>
-            <label className="block font-bold text-slate-700 mb-1 text-xs">Tools &amp; Platforms (Comma separated)</label>
+            <label className="block font-bold text-slate-700 mb-1 text-xs">Tools Used (Comma separated)</label>
             <input
               type="text"
               value={toolsInput}
               onChange={(e) => setToolsInput(e.target.value)}
-              placeholder="Meta Ads Manager, Facebook Pixel & CAPI, Canva Pro, Excel"
+              placeholder="Meta Ads Manager, Figma, Webflow, Canva Pro, CapCut"
               className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs"
             />
           </div>
@@ -297,52 +367,67 @@ export const AdminProjectsTab: React.FC = () => {
               type="submit"
               className="px-5 py-2 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold"
             >
-              Save Case Study
+              Save Project
             </button>
           </div>
         </form>
       )}
 
       {/* Projects List */}
-      <div className="space-y-4">
-        {projects.map((proj) => (
-          <div key={proj.id} className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-blue-50 text-[#0B5ED7]">
-                  {proj.category}
-                </span>
-                <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
-                  {proj.metricHighlight}
-                </span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {projects.map((p) => (
+          <div
+            key={p.id}
+            className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200">
+                    {p.category}
+                  </span>
+                  <h4 className="text-base font-bold text-[#0B1F3A] mt-1.5">{p.title}</h4>
+                  <p className="text-xs text-slate-500 line-clamp-2 mt-1">{p.summary}</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => handleEdit(p)}
+                    className="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-100"
+                    title="Edit project"
+                  >
+                    <Edit2 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(p.id)}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-slate-100"
+                    title="Delete project"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-              <h4 className="font-extrabold text-base text-[#0B1F3A]">{proj.title}</h4>
-              <p className="text-xs text-slate-500 line-clamp-1 max-w-xl">{proj.summary}</p>
-              <div className="text-[11px] text-slate-400">
-                Client: {proj.client} • Role: {proj.role} • Timeline: {proj.timeline}
+
+              <div className="pt-2 text-xs text-slate-600 space-y-1">
+                <div><strong>Client:</strong> {p.client}</div>
+                <div><strong>Role:</strong> {p.role}</div>
+                <div>
+                  <strong>Outcome / Metric:</strong>{' '}
+                  <span className={p.verifiedResults ? 'text-emerald-600 font-bold' : 'text-blue-600'}>
+                    {p.outcome || p.metricHighlight}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button
-                onClick={() => handleEdit(proj)}
-                className="p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-[#0B5ED7] hover:bg-slate-50 transition-colors text-xs font-semibold flex items-center gap-1.5"
-              >
-                <Edit2 className="w-3.5 h-3.5" />
-                <span>Edit</span>
-              </button>
-              <button
-                onClick={() => handleDelete(proj.id)}
-                className="p-2 rounded-xl border border-slate-200 text-rose-600 hover:bg-rose-50 transition-colors text-xs font-semibold flex items-center gap-1.5"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Delete</span>
-              </button>
+            <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+              <span>{p.tools ? p.tools.join(', ') : ''}</span>
+              <span className={p.verifiedResults ? 'text-emerald-600 font-bold' : 'text-slate-500'}>
+                {p.verifiedResults ? '✓ Verified' : 'Documented'}
+              </span>
             </div>
           </div>
         ))}
       </div>
-
     </div>
   );
 };
