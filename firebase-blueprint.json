@@ -1,0 +1,318 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role authentication information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "visitor"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    },
+    "Profile": {
+      "title": "Profile",
+      "description": "Professional profile identity and credibility details",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "brandName": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 150 },
+        "tagline": { "type": "string", "maxLength": 300 },
+        "bio": { "type": "string", "maxLength": 2000 },
+        "avatar": { "type": "string" },
+        "location": { "type": "string", "maxLength": 100 },
+        "availability": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "maxLength": 30 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "email"]
+    },
+    "Skill": {
+      "title": "Skill",
+      "description": "Professional technical or strategic skill",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 50 },
+        "level": { "type": "number" },
+        "description": { "type": "string", "maxLength": 300 },
+        "featured": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["name", "category"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Professional service offerings and solutions",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 120 },
+        "slug": { "type": "string", "maxLength": 80 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "summary": { "type": "string", "maxLength": 600 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "popular": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "slug"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Showcased portfolio project and case study",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "category": { "type": "string", "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "challenge": { "type": "string", "maxLength": 2000 },
+        "solution": { "type": "string", "maxLength": 2000 },
+        "results": { "type": "string", "maxLength": 2000 },
+        "featured": { "type": "boolean" },
+        "order": { "type": "number" },
+        "liveUrl": { "type": "string" },
+        "githubUrl": { "type": "string" },
+        "thumbnail": { "type": "string" }
+      },
+      "required": ["title", "slug", "category"]
+    },
+    "Experience": {
+      "title": "Experience",
+      "description": "Professional work history entry",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "maxLength": 120 },
+        "company": { "type": "string", "maxLength": 120 },
+        "location": { "type": "string", "maxLength": 100 },
+        "period": { "type": "string", "maxLength": 80 },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "endDate": { "type": "string", "maxLength": 50 },
+        "current": { "type": "boolean" },
+        "summary": { "type": "string", "maxLength": 1000 },
+        "order": { "type": "number" }
+      },
+      "required": ["role", "company", "period"]
+    },
+    "Education": {
+      "title": "Education",
+      "description": "Educational degree or academic achievement",
+      "type": "object",
+      "properties": {
+        "degree": { "type": "string", "maxLength": 150 },
+        "institution": { "type": "string", "maxLength": 150 },
+        "period": { "type": "string", "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 500 },
+        "order": { "type": "number" }
+      },
+      "required": ["degree", "institution", "period"]
+    },
+    "Certification": {
+      "title": "Certification",
+      "description": "Professional certification or credential",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "issuer": { "type": "string", "maxLength": 150 },
+        "year": { "type": "string", "maxLength": 20 },
+        "credentialUrl": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "issuer", "year"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Verified client feedback and testimonial",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 100 },
+        "position": { "type": "string", "maxLength": 100 },
+        "organization": { "type": "string", "maxLength": 100 },
+        "company": { "type": "string", "maxLength": 100 },
+        "quote": { "type": "string", "maxLength": 1500 },
+        "testimonial": { "type": "string", "maxLength": 1500 },
+        "rating": { "type": "number" },
+        "photoUrl": { "type": "string" },
+        "permissionStatus": { "type": "string", "enum": ["granted", "pending", "hidden"] },
+        "isFeatured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "dateAdded": { "type": "string" }
+      },
+      "required": ["name", "quote"]
+    },
+    "CV": {
+      "title": "CV",
+      "description": "Curriculum Vitae versions and active configuration",
+      "type": "object",
+      "properties": {
+        "version": { "type": "string", "maxLength": 20 },
+        "title": { "type": "string", "maxLength": 120 },
+        "filename": { "type": "string", "maxLength": 150 },
+        "fileUrl": { "type": "string" },
+        "fileSize": { "type": "string", "maxLength": 30 },
+        "summary": { "type": "string", "maxLength": 1000 },
+        "isActive": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "downloadCount": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["version", "title"]
+    },
+    "HireRequest": {
+      "title": "HireRequest",
+      "description": "Hire inquiry submitted by potential client or employer",
+      "type": "object",
+      "properties": {
+        "clientName": { "type": "string", "maxLength": 100 },
+        "clientEmail": { "type": "string", "format": "email" },
+        "company": { "type": "string", "maxLength": 120 },
+        "opportunityType": { "type": "string", "maxLength": 60 },
+        "roleTitle": { "type": "string", "maxLength": 100 },
+        "projectDescription": { "type": "string", "maxLength": 2000 },
+        "budgetRange": { "type": "string", "maxLength": 60 },
+        "timeline": { "type": "string", "maxLength": 60 },
+        "status": { "type": "string", "enum": ["New", "In review", "Contacted", "Interview", "Closed", "Rejected"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["clientName", "clientEmail", "projectDescription"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "General visitor inquiry or message",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "subject": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Portfolio website settings, flags and metric counts",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 250 },
+        "contactEmail": { "type": "string", "format": "email" },
+        "contactPhone": { "type": "string", "maxLength": 30 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["siteName"]
+    },
+    "SocialLinks": {
+      "title": "SocialLinks",
+      "description": "External social network profiles",
+      "type": "object",
+      "properties": {
+        "github": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "twitter": { "type": "string" },
+        "instagram": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "portfolio": { "type": "string" }
+      },
+      "required": []
+    },
+    "Media": {
+      "title": "Media",
+      "description": "Uploaded media assets and documents",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 150 },
+        "url": { "type": "string" },
+        "type": { "type": "string", "maxLength": 50 },
+        "size": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "url"]
+    },
+    "Analytics": {
+      "title": "Analytics",
+      "description": "Visitor interaction event logs and metric counts",
+      "type": "object",
+      "properties": {
+        "eventType": { "type": "string", "maxLength": 60 },
+        "path": { "type": "string", "maxLength": 150 },
+        "metadata": { "type": "string", "maxLength": 500 },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["eventType"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Authenticated user records and roles"
+    },
+    "/profile/{profileId}": {
+      "schema": { "$ref": "#/entities/Profile" },
+      "description": "Professional profile and credibility information"
+    },
+    "/skills/{skillId}": {
+      "schema": { "$ref": "#/entities/Skill" },
+      "description": "Technical and design skill capabilities"
+    },
+    "/services/{serviceId}": {
+      "schema": { "$ref": "#/entities/Service" },
+      "description": "Client solutions and service packages"
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Showcased projects and case studies"
+    },
+    "/experience/{experienceId}": {
+      "schema": { "$ref": "#/entities/Experience" },
+      "description": "Career positions and leadership experience"
+    },
+    "/education/{educationId}": {
+      "schema": { "$ref": "#/entities/Education" },
+      "description": "Academic degrees and formal education"
+    },
+    "/certifications/{certificationId}": {
+      "schema": { "$ref": "#/entities/Certification" },
+      "description": "Professional certifications and credentials"
+    },
+    "/testimonials/{testimonialId}": {
+      "schema": { "$ref": "#/entities/Testimonial" },
+      "description": "Verified client testimonials and ratings"
+    },
+    "/cv/{cvId}": {
+      "schema": { "$ref": "#/entities/CV" },
+      "description": "Curriculum Vitae records and versions"
+    },
+    "/hireRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/HireRequest" },
+      "description": "Visitor client inquiries and opportunity submissions"
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/Message" },
+      "description": "Direct contact inquiries from visitors"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "Website configuration and metric settings"
+    },
+    "/socialLinks/{linkId}": {
+      "schema": { "$ref": "#/entities/SocialLinks" },
+      "description": "Social media and network profiles"
+    },
+    "/media/{mediaId}": {
+      "schema": { "$ref": "#/entities/Media" },
+      "description": "Uploaded media items and documents"
+    },
+    "/analytics/{analyticsId}": {
+      "schema": { "$ref": "#/entities/Analytics" },
+      "description": "Visitor interactions and telemetry events"
+    }
+  }
+}

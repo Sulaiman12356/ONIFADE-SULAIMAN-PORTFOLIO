@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #0B1F3A;
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #0B5ED7;
+    color: #FFFFFF;
+  }
+}
+
+/* Custom utility classes matching color system */
+.bg-navy-primary {
+  background-color: #062B63;
+}
+.bg-navy-dark {
+  background-color: #0B1F3A;
+}
+.bg-royal-blue {
+  background-color: #0B5ED7;
+}
+.bg-accent-blue {
+  background-color: #2563EB;
+}
+.bg-light-blue {
+  background-color: #F5F9FF;
+}
+
+.text-navy-primary {
+  color: #062B63;
+}
+.text-navy-dark {
+  color: #0B1F3A;
+}
+.text-royal-blue {
+  color: #0B5ED7;
+}
+.text-accent-blue {
+  color: #2563EB;
+}
+.text-slate-muted {
+  color: #64748B;
+}
+
+.border-subtle {
+  border-color: #E5EAF1;
+}
+
