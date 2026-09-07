@@ -68,7 +68,7 @@ export const AdminCvManagerTab: React.FC = () => {
     <div className="space-y-6">
       
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-[#062B63] text-white">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white shadow-sm">
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[#00D2FF] text-[11px] font-bold uppercase tracking-wider mb-1">
             <Sparkles className="w-3 h-3" />
@@ -123,7 +123,7 @@ export const AdminCvManagerTab: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={downloadActiveCv}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-colors shadow-xs"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Test Download</span>

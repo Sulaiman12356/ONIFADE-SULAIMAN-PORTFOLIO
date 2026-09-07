@@ -45,7 +45,7 @@ export const AdminHireRequestsTab: React.FC = () => {
     <div className="space-y-6">
       
       {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-[#062B63] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <h2 className="text-xl sm:text-2xl font-black">Hire Me &amp; Opportunity Inquiries</h2>
           <p className="text-xs text-slate-300 mt-1">
@@ -201,7 +201,7 @@ export const AdminHireRequestsTab: React.FC = () => {
                       }}
                       className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
                         activeLead.status === st
-                          ? 'bg-[#062B63] text-white shadow-xs'
+                          ? 'bg-[#0B5ED7] text-white shadow-xs'
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                       }`}
                     >
@@ -288,7 +288,7 @@ export const AdminHireRequestsTab: React.FC = () => {
                   )},%0D%0A%0D%0AThank you for reaching out regarding your opportunity (${encodeURIComponent(
                     activeLead.opportunityType
                   )}). I have reviewed your requirements and would love to connect.`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-colors shadow-xs"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Reply via Email</span>

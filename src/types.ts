@@ -69,6 +69,7 @@ export interface Project {
   deliverables: string[];
   featured?: boolean;
   order?: number;
+  isPublished?: boolean;
   shortDescription?: string;
   outcome?: string;
   isVerifiedResults?: boolean;
@@ -81,6 +82,32 @@ export interface Project {
   liveUrl?: string;
 }
 
+export interface CaseStudyItem {
+  id: string;
+  title: string;
+  client: string;
+  category: string;
+  summary: string;
+  challenge: string;
+  strategy: string;
+  results: string;
+  metrics?: string;
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
+  thumbnail?: string;
+}
+
+export interface MediaItem {
+  id: string;
+  name: string;
+  url: string;
+  fileType: string;
+  size?: number;
+  uploadedAt: string;
+  category?: 'image' | 'video' | 'document' | 'other';
+}
+
 export interface BrandDesignItem {
   id: string;
   title: string;
@@ -90,6 +117,9 @@ export interface BrandDesignItem {
   client?: string;
   tools?: string[];
   year?: string;
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface SocialMediaWorkItem {
@@ -103,6 +133,9 @@ export interface SocialMediaWorkItem {
   caption?: string;
   metrics?: string;
   postType?: 'Post' | 'Reel' | 'Story' | 'Carousel' | 'Ad Creative' | 'Calendar';
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface VideoContentItem {
@@ -116,6 +149,9 @@ export interface VideoContentItem {
   projectUrl?: string;
   primaryTool: string;
   duration?: string;
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface Service {
@@ -128,6 +164,7 @@ export interface Service {
   outcome: string;
   category?: string;
   featured?: boolean;
+  isPublished?: boolean;
   order?: number;
 }
 
@@ -159,6 +196,8 @@ export interface SkillItem {
   yearsExperience: string;
   tools: string;
   featured: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface SkillCategory {
@@ -303,6 +342,9 @@ export interface ExperienceItem {
   description: string;
   achievements: string[];
   skills: string[];
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface EducationItem {
@@ -311,6 +353,9 @@ export interface EducationItem {
   institution: string;
   period: string;
   details: string;
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface CertificationItem {
@@ -319,6 +364,9 @@ export interface CertificationItem {
   issuer: string;
   date: string;
   credentialUrl?: string;
+  featured?: boolean;
+  isPublished?: boolean;
+  order?: number;
 }
 
 export interface WebsiteSettings {
@@ -335,7 +383,7 @@ export interface WebsiteSettings {
 export interface SEOSettings {
   metaTitle: string;
   metaDescription: string;
-  keywords: string;
+  keywords: string | string[];
   ogImage?: string;
 }
 

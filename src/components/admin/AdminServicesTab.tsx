@@ -1,10 +1,35 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Edit2, CheckCircle2, Sparkles, Target, Palette, BarChart3, PenTool, Cpu, Users } from 'lucide-react';
+import {
+  Plus,
+  Trash2,
+  Edit2,
+  CheckCircle2,
+  Sparkles,
+  Target,
+  Palette,
+  BarChart3,
+  PenTool,
+  Cpu,
+  Users,
+  ArrowUp,
+  ArrowDown,
+  Eye,
+  EyeOff,
+  Star,
+} from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { Service } from '../../types';
 
 export const AdminServicesTab: React.FC = () => {
-  const { services, setServices } = usePortfolio();
+  const {
+    services,
+    addService,
+    updateService,
+    deleteService,
+    togglePublishService,
+    toggleFeatureService,
+    reorderService,
+  } = usePortfolio();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -15,6 +40,8 @@ export const AdminServicesTab: React.FC = () => {
     deliverables: [],
     targetAudience: '',
     outcome: '',
+    featured: false,
+    isPublished: true,
   });
 
   const [deliverablesInput, setDeliverablesInput] = useState('');
@@ -22,17 +49,17 @@ export const AdminServicesTab: React.FC = () => {
   const handleEdit = (s: Service) => {
     setEditingId(s.id);
     setFormData(s);
-    setDeliverablesInput(s.deliverables.join('\n'));
+    setDeliverablesInput((s.deliverables || []).join('\n'));
     setIsAdding(true);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this service?')) {
-      setServices((prev) => prev.filter((s) => s.id !== id));
+      await deleteService(id);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const deliverablesList = deliverablesInput
       .split('\n')
@@ -40,13 +67,10 @@ export const AdminServicesTab: React.FC = () => {
       .filter(Boolean);
 
     if (editingId) {
-      setServices((prev) =>
-        prev.map((s) =>
-          s.id === editingId
-            ? ({ ...s, ...formData, deliverables: deliverablesList } as Service)
-            : s
-        )
-      );
+      await updateService(editingId, {
+        ...formData,
+        deliverables: deliverablesList,
+      });
     } else {
       const newService: Service = {
         id: 'svc_' + Date.now(),
@@ -56,8 +80,11 @@ export const AdminServicesTab: React.FC = () => {
         deliverables: deliverablesList,
         targetAudience: formData.targetAudience || '',
         outcome: formData.outcome || '',
+        featured: formData.featured ?? false,
+        isPublished: formData.isPublished ?? true,
+        order: services.length + 1,
       };
-      setServices((prev) => [...prev, newService]);
+      await addService(newService);
     }
 
     setIsAdding(false);
@@ -69,6 +96,8 @@ export const AdminServicesTab: React.FC = () => {
       deliverables: [],
       targetAudience: '',
       outcome: '',
+      featured: false,
+      isPublished: true,
     });
     setDeliverablesInput('');
   };
@@ -77,7 +106,7 @@ export const AdminServicesTab: React.FC = () => {
     <div className="space-y-6">
       
       {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-[#062B63] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <h2 className="text-xl sm:text-2xl font-black">Services &amp; Value Propositions</h2>
           <p className="text-xs text-slate-300 mt-1">
@@ -199,7 +228,7 @@ export const AdminServicesTab: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold"
+              className="px-5 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-xs"
             >
               Save Service
             </button>
@@ -209,17 +238,78 @@ export const AdminServicesTab: React.FC = () => {
 
       {/* Services Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {services.map((svc) => (
-          <div key={svc.id} className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+        {services.map((svc, index) => (
+          <div
+            key={svc.id}
+            className={`p-5 rounded-2xl bg-white border transition-all flex flex-col justify-between ${
+              svc.isPublished === false ? 'opacity-60 border-dashed border-slate-300' : 'border-slate-200 hover:border-slate-300 shadow-xs'
+            }`}
+          >
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0B5ED7] flex items-center justify-center font-black">
+              <div className="flex items-start justify-between mb-2 gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0B5ED7] flex items-center justify-center font-black shrink-0">
                     <Target className="w-4 h-4" />
                   </div>
-                  <h4 className="font-extrabold text-sm text-[#0B1F3A]">{svc.title}</h4>
+                  <div>
+                    <h4 className="font-extrabold text-sm text-[#0B1F3A]">{svc.title}</h4>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      {svc.featured && (
+                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 flex items-center gap-1">
+                          <Star className="w-2.5 h-2.5 fill-amber-500 text-amber-500" />
+                          Featured
+                        </span>
+                      )}
+                      {svc.isPublished === false && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+                          Unpublished
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1">
+
+                <div className="flex items-center gap-1 shrink-0">
+                  {/* Reorder */}
+                  <button
+                    onClick={() => reorderService(svc.id, 'up')}
+                    disabled={index === 0}
+                    title="Move Up"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-30"
+                  >
+                    <ArrowUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => reorderService(svc.id, 'down')}
+                    disabled={index === services.length - 1}
+                    title="Move Down"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-30"
+                  >
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </button>
+
+                  {/* Feature */}
+                  <button
+                    onClick={() => toggleFeatureService(svc.id)}
+                    title={svc.featured ? 'Unfeature' : 'Feature Service'}
+                    className={`p-1.5 rounded-lg transition-colors ${
+                      svc.featured ? 'bg-amber-100 text-amber-700' : 'text-slate-400 hover:bg-slate-100'
+                    }`}
+                  >
+                    <Star className={`w-3.5 h-3.5 ${svc.featured ? 'fill-amber-500' : ''}`} />
+                  </button>
+
+                  {/* Publish */}
+                  <button
+                    onClick={() => togglePublishService(svc.id)}
+                    title={svc.isPublished === false ? 'Publish' : 'Unpublish'}
+                    className={`p-1.5 rounded-lg transition-colors ${
+                      svc.isPublished === false ? 'bg-slate-200 text-slate-600' : 'bg-emerald-50 text-emerald-600'
+                    }`}
+                  >
+                    {svc.isPublished === false ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                  </button>
+
                   <button
                     onClick={() => handleEdit(svc)}
                     className="p-1.5 text-slate-400 hover:text-[#0B5ED7] transition-colors"

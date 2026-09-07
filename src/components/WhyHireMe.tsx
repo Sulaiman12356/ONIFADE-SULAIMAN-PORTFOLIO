@@ -128,29 +128,29 @@ export const WhyHireMe: React.FC = () => {
           ))}
 
           {/* 6th Card: Direct Commercial Action Card */}
-          <div className="p-8 rounded-3xl bg-[#062B63] text-white flex flex-col justify-between shadow-xl relative overflow-hidden group">
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-[#0B5ED7] via-[#0B5ED7] to-[#1D4ED8] text-white flex flex-col justify-between shadow-2xl shadow-[#0B5ED7]/30 border border-white/20 relative overflow-hidden group">
             {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#0B5ED7]/30 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-48 h-48 bg-white/15 rounded-full blur-2xl pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-cyan-300 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-xs font-bold text-cyan-200 mb-6">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>LET'S BUILD TOGETHER</span>
               </div>
 
-              <h3 className="text-2xl font-black tracking-tight mb-3">
+              <h3 className="text-2xl font-black tracking-tight mb-3 text-white">
                 Ready to Grow Your Business?
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-blue-100 leading-relaxed mb-6">
                 Whether you need a high-converting Meta Ads campaign, an AI landing page, or a complete brand overhaul, let&apos;s engineer a tailored strategy for your brand.
               </p>
             </div>
 
-            <div className="relative z-10 pt-4 border-t border-white/15">
+            <div className="relative z-10 pt-4 border-t border-white/20">
               <a
                 href="#contact"
-                className="w-full py-3.5 px-5 rounded-xl bg-white hover:bg-slate-100 text-[#062B63] font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md group-hover:scale-[1.02]"
+                className="w-full py-3.5 px-5 rounded-xl bg-white hover:bg-slate-50 text-[#0B5ED7] font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md group-hover:scale-[1.02]"
               >
                 <span>Hire Mr. Clarity Now</span>
                 <ArrowRight className="w-4 h-4 text-[#0B5ED7]" />

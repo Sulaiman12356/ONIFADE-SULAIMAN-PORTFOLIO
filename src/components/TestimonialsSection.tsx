@@ -82,7 +82,7 @@ export const TestimonialsSection: React.FC = () => {
             <div>
               <button
                 onClick={handleOpenAdminTestimonials}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold shadow-md shadow-[#062B63]/15 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-md shadow-[#0B5ED7]/25 transition-all"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add First Verified Testimonial (Admin)</span>
@@ -132,7 +132,7 @@ export const TestimonialsSection: React.FC = () => {
                 </div>
 
                 <div className="pt-5 border-t border-[#E2E8F0] flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-[#062B63] text-white flex items-center justify-center font-bold text-sm flex-shrink-0 border-2 border-white shadow-xs">
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-[#0B5ED7] text-white flex items-center justify-center font-bold text-sm flex-shrink-0 border-2 border-white shadow-xs">
                     {item.photoUrl ? (
                       <img
                         src={item.photoUrl}

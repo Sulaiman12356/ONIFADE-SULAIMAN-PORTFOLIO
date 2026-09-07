@@ -213,10 +213,10 @@ export const ValueAddSection: React.FC<ValueAddSectionProps> = ({ onSelectServic
               <div className="pt-4 border-t border-[#E2E8F0]">
                 <button
                   onClick={() => onSelectService(card.title)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#062B63] text-[#062B63] hover:text-white border border-[#E2E8F0] hover:border-[#062B63] font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-xs"
+                  className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#0B5ED7] text-[#062B63] hover:text-white border border-[#E2E8F0] hover:border-[#0B5ED7] font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer group/btn"
                 >
                   <span>Engage This Capability</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#0B5ED7] group-hover/btn:text-white group-hover/btn:translate-x-0.5 transition-transform" />
                 </button>
               </div>
 

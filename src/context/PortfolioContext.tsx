@@ -46,6 +46,8 @@ import {
   BrandDesignItem,
   SocialMediaWorkItem,
   VideoContentItem,
+  CaseStudyItem,
+  MediaItem,
 } from '../types';
 import {
   PERSONAL_INFO,
@@ -55,6 +57,8 @@ import {
   SOCIAL_MEDIA_ITEMS as INITIAL_SOCIAL_MEDIA_ITEMS,
   VIDEO_ITEMS as INITIAL_VIDEO_ITEMS,
   RESUME_DATA,
+  DEFAULT_CASE_STUDIES,
+  DEFAULT_MEDIA_ITEMS,
 } from '../data/portfolioData';
 
 export interface PortfolioContextType {
@@ -138,6 +142,69 @@ export interface PortfolioContextType {
   isHireMeOpen: boolean;
   openHireMe: (initialType?: OpportunityType, preselectedService?: string) => void;
   closeHireMe: () => void;
+  caseStudies: CaseStudyItem[];
+  setCaseStudies: React.Dispatch<React.SetStateAction<CaseStudyItem[]>>;
+  addCaseStudy: (item: CaseStudyItem) => Promise<void>;
+  updateCaseStudy: (id: string, updates: Partial<CaseStudyItem>) => Promise<void>;
+  deleteCaseStudy: (id: string) => Promise<void>;
+  togglePublishCaseStudy: (id: string) => Promise<void>;
+  toggleFeatureCaseStudy: (id: string) => Promise<void>;
+  reorderCaseStudy: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishProject: (id: string) => Promise<void>;
+  toggleFeatureProject: (id: string) => Promise<void>;
+  reorderProject: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishService: (id: string) => Promise<void>;
+  toggleFeatureService: (id: string) => Promise<void>;
+  reorderService: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishSkill: (id: string) => Promise<void>;
+  toggleFeatureSkill: (id: string) => Promise<void>;
+  reorderSkill: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishBrandDesign: (id: string) => Promise<void>;
+  toggleFeatureBrandDesign: (id: string) => Promise<void>;
+  reorderBrandDesign: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishSocialMediaItem: (id: string) => Promise<void>;
+  toggleFeatureSocialMediaItem: (id: string) => Promise<void>;
+  reorderSocialMediaItem: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishVideoItem: (id: string) => Promise<void>;
+  toggleFeatureVideoItem: (id: string) => Promise<void>;
+  reorderVideoItem: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishExperience: (id: string) => Promise<void>;
+  toggleFeatureExperience: (id: string) => Promise<void>;
+  reorderExperience: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishEducation: (id: string) => Promise<void>;
+  toggleFeatureEducation: (id: string) => Promise<void>;
+  reorderEducation: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishCertification: (id: string) => Promise<void>;
+  toggleFeatureCertification: (id: string) => Promise<void>;
+  reorderCertification: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  togglePublishTestimonial: (id: string) => Promise<void>;
+  toggleFeatureTestimonial: (id: string) => Promise<void>;
+  reorderTestimonial: (id: string, direction: 'up' | 'down') => Promise<void>;
+
+  mediaList: MediaItem[];
+  setMediaList: React.Dispatch<React.SetStateAction<MediaItem[]>>;
+  deleteMediaItem: (id: string) => Promise<void>;
+  updateSocialLinks: (links: Partial<ProfileData['socialLinks']>) => Promise<void>;
+
+  analyticsSummary: {
+    websiteVisitors: number | null;
+    cvDownloads: number;
+    hireRequestsCount: number;
+    contactMessagesCount: number;
+    projectViews: number | null;
+    serviceViews: number | null;
+  };
+
   hireMeInitialData: { opportunityType?: OpportunityType; service?: string };
   resetAllToFactoryDefaults: () => void;
   resetToFactoryDefaults: () => void;
@@ -222,16 +289,16 @@ const DEFAULT_PROFILE: ProfileData = {
 };
 
 const DEFAULT_SKILLS: SkillItem[] = [
-  { id: '1', skill: 'Meta & Instagram Ads', category: 'Marketing', level: 95, yearsExperience: '3+', tools: 'Ads Manager, CAPI, Pixel', featured: true },
-  { id: '2', skill: 'TikTok Ads & Creative Strategy', category: 'Marketing', level: 92, yearsExperience: '2+', tools: 'TikTok Ads Manager, CapCut', featured: true },
-  { id: '3', skill: 'Canva Pro & Brand Systems', category: 'Design', level: 96, yearsExperience: '3+', tools: 'Canva Pro, Brand Kits', featured: true },
-  { id: '4', skill: 'Adobe Illustrator & Photoshop', category: 'Design', level: 88, yearsExperience: '3+', tools: 'Illustrator, Photoshop', featured: true },
-  { id: '5', skill: 'Power BI Business Analytics', category: 'Data', level: 88, yearsExperience: '2+', tools: 'Power BI, DAX, Power Query', featured: true },
-  { id: '6', skill: 'SQL & Database Querying', category: 'Data', level: 85, yearsExperience: '2+', tools: 'PostgreSQL, MySQL', featured: true },
-  { id: '7', skill: 'Advanced Microsoft Excel', category: 'Data', level: 90, yearsExperience: '3+', tools: 'PivotTables, Lookups, DAX', featured: true },
-  { id: '8', skill: 'Python for Data Analysis', category: 'Data', level: 80, yearsExperience: '2+', tools: 'Pandas, NumPy, Matplotlib', featured: false },
-  { id: '9', skill: 'AI Tools & Prompt Systems', category: 'Automation', level: 88, yearsExperience: '2+', tools: 'Claude, GPT-4, Gemini, Notion', featured: true },
-  { id: '10', skill: 'Workflow Automation', category: 'Automation', level: 85, yearsExperience: '2+', tools: 'Zapier, Make.com', featured: false },
+  { id: '1', skill: 'Meta & Instagram Ads', category: 'Marketing', level: 96, yearsExperience: '3+', tools: 'Ads Manager, CAPI, Pixel, Advantage+', featured: true },
+  { id: '2', skill: 'TikTok Ads & Creative Strategy', category: 'Marketing', level: 93, yearsExperience: '2+', tools: 'TikTok Ads Manager, Spark Ads', featured: true },
+  { id: '3', skill: 'AI Landing Page Design & CRO', category: 'Conversion', level: 95, yearsExperience: '3+', tools: 'React, Tailwind, Figma, Direct-Response Copy', featured: true },
+  { id: '4', skill: 'Canva Pro & Brand Identity', category: 'Design', level: 98, yearsExperience: '3+', tools: 'Canva Pro, Brand Kits, Visual Systems', featured: true },
+  { id: '5', skill: 'Adobe Illustrator & Photoshop', category: 'Design', level: 88, yearsExperience: '3+', tools: 'Illustrator, Photoshop, Vector Art', featured: true },
+  { id: '6', skill: 'Social Media Management & Strategy', category: 'Marketing', level: 92, yearsExperience: '3+', tools: 'Instagram, Facebook, Content Calendars', featured: true },
+  { id: '7', skill: 'AI Workflow Automation', category: 'Automation', level: 91, yearsExperience: '2+', tools: 'Zapier, Make.com, Webhooks, CRM', featured: true },
+  { id: '8', skill: 'CapCut Direct-Response Video Ads', category: 'Content', level: 94, yearsExperience: '2+', tools: 'CapCut, Reels, Subtitles, Hooks', featured: true },
+  { id: '9', skill: 'AI Web & Software Development', category: 'Development', level: 88, yearsExperience: '2+', tools: 'React, TypeScript, Next.js, Firebase', featured: true },
+  { id: '10', skill: 'Lead Generation & Funnel Architecture', category: 'Marketing', level: 95, yearsExperience: '3+', tools: 'Funnel Optimization, WhatsApp CRM, Email', featured: true },
 ];
 
 const DEFAULT_EXPERIENCE: ExperienceItem[] = [
@@ -245,9 +312,9 @@ const DEFAULT_EXPERIENCE: ExperienceItem[] = [
     achievements: [
       'Trained 500+ students and business owners in Canva Pro, visual branding, and digital acquisition.',
       'Managed $500K+ in ad spend across Meta and TikTok with a 4.8x average return on ad spend (ROAS).',
-      'Engineered automated client reporting dashboards using Power BI and Zapier.',
+      'Engineered automated client reporting and lead alert workflows using AI webhooks and Zapier.',
     ],
-    skills: ['Meta Ads', 'Canva Pro', 'TikTok Ads', 'Power BI', 'Client Advisory'],
+    skills: ['Meta Ads', 'Canva', 'TikTok Ads', 'AI Automation', 'Client Advisory'],
   },
   {
     id: 'exp-2',
@@ -257,11 +324,11 @@ const DEFAULT_EXPERIENCE: ExperienceItem[] = [
     endDate: 'Present',
     description: 'Partnered with over 20 retail, fintech, and lifestyle brands across Nigeria, UK, and North America.',
     achievements: [
-      'Reduced average customer acquisition cost (CAC) by up to 41% through disruptive video creative hooks.',
-      'Built multi-store inventory and revenue tracking models in Microsoft Excel & SQL.',
+      'Reduced average customer acquisition cost (CAC) by up to 41% through disruptive video creative hooks and landing page CRO.',
+      'Designed high-converting landing pages integrated with Meta Pixel, WhatsApp, and Firebase.',
       'Produced cohesive brand books, logos, packaging designs, and investor presentation decks.',
     ],
-    skills: ['Direct-Response Copy', 'Adobe Illustrator', 'SQL', 'Excel', 'Brand Strategy'],
+    skills: ['Direct-Response Copy', 'Brand Design', 'Landing Pages', 'Meta Pixel', 'Brand Strategy'],
   },
 ];
 
@@ -285,8 +352,8 @@ const DEFAULT_CERTIFICATIONS: CertificationItem[] = [
   },
   {
     id: 'cert-2',
-    title: 'Data Analysis & Visualization with Power BI & Excel',
-    issuer: 'Microsoft Certified Professional Learning',
+    title: 'Meta Certified Lead Generation & Performance Marketing',
+    issuer: 'Meta Blueprint Learning',
     date: '2024',
   },
   {
@@ -320,8 +387,8 @@ const DEFAULT_CV_LIST: CVRecord[] = [
 ];
 
 const DEFAULT_SETTINGS: WebsiteSettings = {
-  websiteTitle: 'Onifade Sulaiman (Mr. Clarity) | Digital Marketer, Designer & Technology Enthusiast',
-  metaDescription: 'Explore the professional portfolio of Onifade Sulaiman (Mr. Clarity), a digital marketer, graphics designer, data enthusiast and technology innovator helping organizations solve problems through technology, creativity and digital growth.',
+  websiteTitle: 'Onifade Sulaiman (Mr. Clarity) | Digital Marketer, Meta Ads Specialist & AI Solutions',
+  metaDescription: 'Official portfolio of Onifade Sulaiman (Mr. Clarity) — Digital Marketer Nigeria, Meta Ads Specialist, AI Landing Page Designer, Brand Designer, and AI Automation Specialist helping brands acquire leads and scale revenue.',
   logoText: 'MR. CLARITY',
   theme: 'dark-navy',
   primaryColor: '#0B5ED7',
@@ -330,9 +397,9 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
 };
 
 const DEFAULT_SEO: SEOSettings = {
-  metaTitle: 'Onifade Sulaiman (Mr. Clarity) | Digital Marketer, Designer & Technology Enthusiast',
-  metaDescription: 'Explore the professional portfolio of Onifade Sulaiman (Mr. Clarity), a digital marketer, graphics designer, data enthusiast and technology innovator helping organizations solve problems through technology, creativity and digital growth.',
-  keywords: 'Onifade Sulaiman, Mr. Clarity, Digital Marketer Nigeria, Power BI Data Analyst, Canva Designer, Meta Ads Specialist, TikTok Ads Strategist, Technology Innovator, Firebase Backend',
+  metaTitle: 'Onifade Sulaiman (Mr. Clarity) | Digital Marketer, Meta Ads Specialist & AI Solutions',
+  metaDescription: 'Portfolio of Onifade Sulaiman (Mr. Clarity) — Digital Marketer Nigeria, Meta Ads Specialist, AI Landing Page Designer, Brand Designer, Social Media Manager, and AI Automation Specialist.',
+  keywords: 'Digital Marketer Nigeria, Meta Ads Specialist Nigeria, Facebook Ads Specialist, Instagram Ads Specialist, TikTok Ads Specialist, Digital Marketing Specialist, Landing Page Designer, AI Website Designer, AI Website Developer, Brand Designer Nigeria, Social Media Manager Nigeria, AI Automation Specialist, AI Software Developer, CapCut Video Editor, Digital Marketing Consultant, Meta Ads Manager, Lead Generation Specialist, Digital Marketing Strategist',
 };
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
@@ -365,6 +432,29 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return INITIAL_PROJECTS;
     }
     return stored;
+  });
+  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>(() => {
+    const stored = loadFromStorage<CaseStudyItem[]>('caseStudies', []);
+    return stored && stored.length > 0 ? stored : (DEFAULT_CASE_STUDIES as CaseStudyItem[]);
+  });
+  const [mediaList, setMediaList] = useState<MediaItem[]>(() => {
+    const stored = loadFromStorage<MediaItem[]>('mediaList', []);
+    return stored && stored.length > 0 ? stored : (DEFAULT_MEDIA_ITEMS as MediaItem[]);
+  });
+  const [analyticsSummary, setAnalyticsSummary] = useState<{
+    websiteVisitors: number | null;
+    cvDownloads: number;
+    hireRequestsCount: number;
+    contactMessagesCount: number;
+    projectViews: number | null;
+    serviceViews: number | null;
+  }>({
+    websiteVisitors: null,
+    cvDownloads: 0,
+    hireRequestsCount: 0,
+    contactMessagesCount: 0,
+    projectViews: null,
+    serviceViews: null,
   });
   const [brandDesigns, setBrandDesigns] = useState<BrandDesignItem[]>(() => {
     const stored = loadFromStorage<BrandDesignItem[]>('brandDesigns', []);
@@ -695,6 +785,125 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       );
     }
 
+    // 14. Brand Projects Collection
+    const unsubBrandProjects = onSnapshot(
+      collection(db, 'brandProjects'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: BrandDesignItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<BrandDesignItem, 'id'>) });
+          });
+          setBrandDesigns(items);
+          saveToStorage('brandDesigns', items);
+        }
+      },
+      (error) => {
+        console.warn('Brand projects sync notice:', error.message);
+      }
+    );
+
+    // 15. Social Projects Collection
+    const unsubSocialProjects = onSnapshot(
+      collection(db, 'socialProjects'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: SocialMediaWorkItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<SocialMediaWorkItem, 'id'>) });
+          });
+          setSocialMediaItems(items);
+          saveToStorage('socialMediaItems', items);
+        }
+      },
+      (error) => {
+        console.warn('Social projects sync notice:', error.message);
+      }
+    );
+
+    // 16. Videos Collection
+    const unsubVideos = onSnapshot(
+      collection(db, 'videos'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: VideoContentItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<VideoContentItem, 'id'>) });
+          });
+          setVideoItems(items);
+          saveToStorage('videoItems', items);
+        }
+      },
+      (error) => {
+        console.warn('Videos sync notice:', error.message);
+      }
+    );
+
+    // 17. Case Studies Collection
+    const unsubCaseStudies = onSnapshot(
+      collection(db, 'caseStudies'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: CaseStudyItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<CaseStudyItem, 'id'>) });
+          });
+          setCaseStudies(items);
+          saveToStorage('caseStudies', items);
+        }
+      },
+      (error) => {
+        console.warn('Case studies sync notice:', error.message);
+      }
+    );
+
+    // 18. Media Collection
+    const unsubMedia = onSnapshot(
+      collection(db, 'media'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: MediaItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<MediaItem, 'id'>) });
+          });
+          setMediaList(items);
+          saveToStorage('mediaList', items);
+        }
+      },
+      (error) => {
+        console.warn('Media sync notice:', error.message);
+      }
+    );
+
+    // 19. Analytics Telemetry Collection
+    const unsubAnalytics = onSnapshot(
+      collection(db, 'analytics'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          let visitors = 0;
+          let pViews = 0;
+          let sViews = 0;
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            if (data.type === 'page_view' || data.eventType === 'page_view' || data.type === 'visitor') visitors++;
+            if (data.type === 'project_view' || data.eventType === 'project_view') pViews++;
+            if (data.type === 'service_view' || data.eventType === 'service_view') sViews++;
+          });
+          setAnalyticsSummary({
+            websiteVisitors: visitors > 0 ? visitors : null,
+            cvDownloads: cvList.reduce((acc, c) => acc + (c.downloadCount || 0), 0),
+            hireRequestsCount: hireRequests.length,
+            contactMessagesCount: contactMessages.length,
+            projectViews: pViews > 0 ? pViews : null,
+            serviceViews: sViews > 0 ? sViews : null,
+          });
+        }
+      },
+      (error) => {
+        console.warn('Analytics sync notice:', error.message);
+      }
+    );
+
     return () => {
       unsubProfile();
       unsubSocial();
@@ -709,6 +918,12 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       unsubCv();
       unsubHireRequests();
       unsubMessages();
+      unsubBrandProjects();
+      unsubSocialProjects();
+      unsubVideos();
+      unsubCaseStudies();
+      unsubMedia();
+      unsubAnalytics();
     };
   }, [isAdminAuthenticated]);
 
@@ -800,6 +1015,31 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       // 10. CV
       for (const cv of DEFAULT_CV_LIST) {
         await setDoc(doc(db, 'cv', cv.id), cv, { merge: true });
+      }
+
+      // 11. Case Studies
+      for (const cs of DEFAULT_CASE_STUDIES) {
+        await setDoc(doc(db, 'caseStudies', cs.id), cs, { merge: true });
+      }
+
+      // 12. Brand Projects
+      for (const bp of INITIAL_BRAND_DESIGNS) {
+        await setDoc(doc(db, 'brandProjects', bp.id), bp, { merge: true });
+      }
+
+      // 13. Social Projects
+      for (const sp of INITIAL_SOCIAL_MEDIA_ITEMS) {
+        await setDoc(doc(db, 'socialProjects', sp.id), sp, { merge: true });
+      }
+
+      // 14. Videos
+      for (const vid of INITIAL_VIDEO_ITEMS) {
+        await setDoc(doc(db, 'videos', vid.id), vid, { merge: true });
+      }
+
+      // 15. Media
+      for (const m of DEFAULT_MEDIA_ITEMS) {
+        await setDoc(doc(db, 'media', m.id), m, { merge: true });
       }
 
       setSyncStatusMessage('Firebase Database Seeded Successfully!');
@@ -1587,6 +1827,440 @@ ${skills
     localStorage.removeItem(STORAGE_PREFIX + 'cvList');
     localStorage.removeItem(STORAGE_PREFIX + 'settings');
     localStorage.removeItem(STORAGE_PREFIX + 'seo');
+    localStorage.removeItem(STORAGE_PREFIX + 'caseStudies');
+    localStorage.removeItem(STORAGE_PREFIX + 'mediaList');
+  };
+
+  // Case Studies CRUD
+  const addCaseStudy = async (item: CaseStudyItem) => {
+    setCaseStudies((prev) => [item, ...prev]);
+    saveToStorage('caseStudies', [item, ...caseStudies]);
+    try {
+      await setDoc(doc(db, 'caseStudies', item.id), item);
+    } catch (err) {
+      console.warn('CaseStudy add Firestore notice:', err);
+    }
+  };
+
+  const updateCaseStudy = async (id: string, updates: Partial<CaseStudyItem>) => {
+    setCaseStudies((prev) => {
+      const updated = prev.map((item) => (item.id === id ? { ...item, ...updates } : item));
+      saveToStorage('caseStudies', updated);
+      return updated;
+    });
+    try {
+      await updateDoc(doc(db, 'caseStudies', id), updates);
+    } catch (err) {
+      console.warn('CaseStudy update Firestore notice:', err);
+    }
+  };
+
+  const deleteCaseStudy = async (id: string) => {
+    setCaseStudies((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      saveToStorage('caseStudies', updated);
+      return updated;
+    });
+    try {
+      await deleteDoc(doc(db, 'caseStudies', id));
+    } catch (err) {
+      console.warn('CaseStudy delete Firestore notice:', err);
+    }
+  };
+
+  const togglePublishCaseStudy = async (id: string) => {
+    const item = caseStudies.find((c) => c.id === id);
+    if (!item) return;
+    const isPublished = item.isPublished === false ? true : false;
+    await updateCaseStudy(id, { isPublished });
+  };
+
+  const toggleFeatureCaseStudy = async (id: string) => {
+    const item = caseStudies.find((c) => c.id === id);
+    if (!item) return;
+    const featured = !item.featured;
+    await updateCaseStudy(id, { featured });
+  };
+
+  const reorderCaseStudy = async (id: string, direction: 'up' | 'down') => {
+    const index = caseStudies.findIndex((c) => c.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= caseStudies.length) return;
+    const copy = [...caseStudies];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setCaseStudies(reindexed);
+    saveToStorage('caseStudies', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'caseStudies', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Projects Toggle / Reorder
+  const togglePublishProject = async (id: string) => {
+    const p = projects.find((item) => item.id === id);
+    if (!p) return;
+    const isPublished = p.isPublished === false ? true : false;
+    await updateProject(id, { isPublished });
+  };
+
+  const toggleFeatureProject = async (id: string) => {
+    const p = projects.find((item) => item.id === id);
+    if (!p) return;
+    await updateProject(id, { featured: !p.featured });
+  };
+
+  const reorderProject = async (id: string, direction: 'up' | 'down') => {
+    const index = projects.findIndex((p) => p.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= projects.length) return;
+    const copy = [...projects];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setProjects(reindexed);
+    saveToStorage('projects', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'projects', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Services Toggle / Reorder
+  const togglePublishService = async (id: string) => {
+    const s = services.find((item) => item.id === id);
+    if (!s) return;
+    await updateService(id, { isPublished: s.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureService = async (id: string) => {
+    const s = services.find((item) => item.id === id);
+    if (!s) return;
+    await updateService(id, { featured: !s.featured });
+  };
+
+  const reorderService = async (id: string, direction: 'up' | 'down') => {
+    const index = services.findIndex((s) => s.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= services.length) return;
+    const copy = [...services];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setServices(reindexed);
+    saveToStorage('services', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'services', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Skills Toggle / Reorder
+  const togglePublishSkill = async (id: string) => {
+    const sk = skills.find((item) => item.id === id);
+    if (!sk) return;
+    await updateSkill(id, { isPublished: sk.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureSkill = async (id: string) => {
+    const sk = skills.find((item) => item.id === id);
+    if (!sk) return;
+    await updateSkill(id, { featured: !sk.featured });
+  };
+
+  const reorderSkill = async (id: string, direction: 'up' | 'down') => {
+    const index = skills.findIndex((s) => s.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= skills.length) return;
+    const copy = [...skills];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setSkills(reindexed);
+    saveToStorage('skills', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'skills', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Brand Design Toggle / Reorder
+  const togglePublishBrandDesign = async (id: string) => {
+    const b = brandDesigns.find((item) => item.id === id);
+    if (!b) return;
+    await updateBrandDesign(id, { isPublished: b.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureBrandDesign = async (id: string) => {
+    const b = brandDesigns.find((item) => item.id === id);
+    if (!b) return;
+    await updateBrandDesign(id, { featured: !b.featured });
+  };
+
+  const reorderBrandDesign = async (id: string, direction: 'up' | 'down') => {
+    const index = brandDesigns.findIndex((b) => b.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= brandDesigns.length) return;
+    const copy = [...brandDesigns];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setBrandDesigns(reindexed);
+    saveToStorage('brandDesigns', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'brandDesigns', item.id), item, { merge: true });
+        await setDoc(doc(db, 'brandProjects', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Social Media Toggle / Reorder
+  const togglePublishSocialMediaItem = async (id: string) => {
+    const s = socialMediaItems.find((item) => item.id === id);
+    if (!s) return;
+    await updateSocialMediaItem(id, { isPublished: s.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureSocialMediaItem = async (id: string) => {
+    const s = socialMediaItems.find((item) => item.id === id);
+    if (!s) return;
+    await updateSocialMediaItem(id, { featured: !s.featured });
+  };
+
+  const reorderSocialMediaItem = async (id: string, direction: 'up' | 'down') => {
+    const index = socialMediaItems.findIndex((s) => s.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= socialMediaItems.length) return;
+    const copy = [...socialMediaItems];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setSocialMediaItems(reindexed);
+    saveToStorage('socialMediaItems', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'socialMediaItems', item.id), item, { merge: true });
+        await setDoc(doc(db, 'socialProjects', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Video Item Toggle / Reorder
+  const togglePublishVideoItem = async (id: string) => {
+    const v = videoItems.find((item) => item.id === id);
+    if (!v) return;
+    await updateVideoItem(id, { isPublished: v.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureVideoItem = async (id: string) => {
+    const v = videoItems.find((item) => item.id === id);
+    if (!v) return;
+    await updateVideoItem(id, { featured: !v.featured });
+  };
+
+  const reorderVideoItem = async (id: string, direction: 'up' | 'down') => {
+    const index = videoItems.findIndex((v) => v.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= videoItems.length) return;
+    const copy = [...videoItems];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setVideoItems(reindexed);
+    saveToStorage('videoItems', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'videoItems', item.id), item, { merge: true });
+        await setDoc(doc(db, 'videos', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Experience Toggle / Reorder
+  const togglePublishExperience = async (id: string) => {
+    const e = experience.find((item) => item.id === id);
+    if (!e) return;
+    await updateExperience(id, { isPublished: e.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureExperience = async (id: string) => {
+    const e = experience.find((item) => item.id === id);
+    if (!e) return;
+    await updateExperience(id, { featured: !e.featured });
+  };
+
+  const reorderExperience = async (id: string, direction: 'up' | 'down') => {
+    const index = experience.findIndex((e) => e.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= experience.length) return;
+    const copy = [...experience];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setExperience(reindexed);
+    saveToStorage('experience', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'experience', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Education Toggle / Reorder
+  const togglePublishEducation = async (id: string) => {
+    const ed = education.find((item) => item.id === id);
+    if (!ed) return;
+    await updateEducation(id, { isPublished: ed.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureEducation = async (id: string) => {
+    const ed = education.find((item) => item.id === id);
+    if (!ed) return;
+    await updateEducation(id, { featured: !ed.featured });
+  };
+
+  const reorderEducation = async (id: string, direction: 'up' | 'down') => {
+    const index = education.findIndex((e) => e.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= education.length) return;
+    const copy = [...education];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setEducation(reindexed);
+    saveToStorage('education', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'education', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Certifications Toggle / Reorder
+  const togglePublishCertification = async (id: string) => {
+    const cert = certifications.find((item) => item.id === id);
+    if (!cert) return;
+    await updateCertification(id, { isPublished: cert.isPublished === false ? true : false });
+  };
+
+  const toggleFeatureCertification = async (id: string) => {
+    const cert = certifications.find((item) => item.id === id);
+    if (!cert) return;
+    await updateCertification(id, { featured: !cert.featured });
+  };
+
+  const reorderCertification = async (id: string, direction: 'up' | 'down') => {
+    const index = certifications.findIndex((c) => c.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= certifications.length) return;
+    const copy = [...certifications];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    const reindexed = copy.map((item, idx) => ({ ...item, order: idx + 1 }));
+    setCertifications(reindexed);
+    saveToStorage('certifications', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'certifications', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Testimonials Toggle / Reorder
+  const togglePublishTestimonial = async (id: string) => {
+    const t = testimonials.find((item) => item.id === id);
+    if (!t) return;
+    const isPublished = t.isPublished === false ? true : false;
+    await updateTestimonial(id, { isPublished, published: isPublished });
+  };
+
+  const toggleFeatureTestimonial = async (id: string) => {
+    const t = testimonials.find((item) => item.id === id);
+    if (!t) return;
+    await updateTestimonial(id, { isFeatured: !t.isFeatured });
+  };
+
+  const reorderTestimonial = async (id: string, direction: 'up' | 'down') => {
+    const index = testimonials.findIndex((t) => t.id === id);
+    if (index === -1) return;
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= testimonials.length) return;
+    const copy = [...testimonials];
+    const [moved] = copy.splice(index, 1);
+    copy.splice(targetIndex, 0, moved);
+    setTestimonials(copy);
+    saveToStorage('testimonials', copy);
+    try {
+      for (const item of copy) {
+        await setDoc(doc(db, 'testimonials', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // Media Deletion
+  const deleteMediaItem = async (id: string) => {
+    setMediaList((prev) => {
+      const updated = prev.filter((m) => m.id !== id);
+      saveToStorage('mediaList', updated);
+      return updated;
+    });
+    try {
+      await deleteDoc(doc(db, 'media', id));
+    } catch (err) {
+      console.warn('Media delete notice:', err);
+    }
+  };
+
+  // Social Links update (Single source of truth for WhatsApp, etc.)
+  const updateSocialLinks = async (links: Partial<ProfileData['socialLinks']>) => {
+    const updated = { ...profile.socialLinks, ...links };
+    setProfile((prev) => ({ ...prev, socialLinks: updated }));
+    saveToStorage('profile', { ...profile, socialLinks: updated });
+    try {
+      await setDoc(doc(db, 'socialLinks', 'main'), updated, { merge: true });
+      await setDoc(doc(db, 'profile', 'main'), { socialLinks: updated }, { merge: true });
+    } catch (err) {
+      console.warn('Social links update notice:', err);
+    }
   };
 
   return (
@@ -1599,51 +2273,89 @@ ${skills
         updateService,
         addService,
         deleteService,
+        togglePublishService,
+        toggleFeatureService,
+        reorderService,
         projects,
         setProjects,
         updateProject,
         addProject,
         deleteProject,
+        togglePublishProject,
+        toggleFeatureProject,
+        reorderProject,
+        caseStudies,
+        setCaseStudies,
+        addCaseStudy,
+        updateCaseStudy,
+        deleteCaseStudy,
+        togglePublishCaseStudy,
+        toggleFeatureCaseStudy,
+        reorderCaseStudy,
         brandDesigns,
         setBrandDesigns,
         addBrandDesign,
         updateBrandDesign,
         deleteBrandDesign,
+        togglePublishBrandDesign,
+        toggleFeatureBrandDesign,
+        reorderBrandDesign,
         socialMediaItems,
         setSocialMediaItems,
         addSocialMediaItem,
         updateSocialMediaItem,
         deleteSocialMediaItem,
+        togglePublishSocialMediaItem,
+        toggleFeatureSocialMediaItem,
+        reorderSocialMediaItem,
         videoItems,
         setVideoItems,
         addVideoItem,
         updateVideoItem,
         deleteVideoItem,
+        togglePublishVideoItem,
+        toggleFeatureVideoItem,
+        reorderVideoItem,
         skills,
         setSkills,
         updateSkill,
         addSkill,
         deleteSkill,
+        togglePublishSkill,
+        toggleFeatureSkill,
+        reorderSkill,
         experience,
         setExperience,
         updateExperience,
         addExperience,
         deleteExperience,
+        togglePublishExperience,
+        toggleFeatureExperience,
+        reorderExperience,
         education,
         setEducation,
         updateEducation,
         addEducation,
         deleteEducation,
+        togglePublishEducation,
+        toggleFeatureEducation,
+        reorderEducation,
         certifications,
         setCertifications,
         updateCertification,
         addCertification,
         deleteCertification,
+        togglePublishCertification,
+        toggleFeatureCertification,
+        reorderCertification,
         testimonials,
         setTestimonials,
         addTestimonial,
         updateTestimonial,
         deleteTestimonial,
+        togglePublishTestimonial,
+        toggleFeatureTestimonial,
+        reorderTestimonial,
         cvList,
         activeCv,
         addCvVersion,
@@ -1659,6 +2371,11 @@ ${skills
         submitContactMessage,
         updateContactMessageStatus,
         deleteContactMessage,
+        mediaList,
+        setMediaList,
+        deleteMediaItem,
+        updateSocialLinks,
+        analyticsSummary,
         settings,
         updateSettings,
         seo,

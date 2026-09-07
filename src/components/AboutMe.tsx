@@ -174,7 +174,7 @@ export const AboutMe: React.FC<AboutMeProps> = ({ onOpenCv, onOpenHireMe }) => {
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <button
                 onClick={onOpenHireMe}
-                className="bg-[#062B63] hover:bg-[#0B5ED7] text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-md shadow-[#062B63]/15 transition-all text-sm active:scale-[0.98]"
+                className="bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-md shadow-[#0B5ED7]/25 transition-all text-sm active:scale-[0.98]"
               >
                 <span>Hire Mr. Clarity</span>
                 <ArrowRight className="w-4 h-4" />

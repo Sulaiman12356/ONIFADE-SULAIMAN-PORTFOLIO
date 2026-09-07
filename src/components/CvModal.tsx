@@ -53,7 +53,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
             <button
               onClick={downloadActiveCv}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#062B63] text-white text-xs font-bold hover:bg-[#0B5ED7] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#0B5ED7] text-white text-xs font-bold hover:bg-[#1D4ED8] transition-colors shadow-xs"
               title="Download Latest CV"
             >
               <Download className="w-3.5 h-3.5" />

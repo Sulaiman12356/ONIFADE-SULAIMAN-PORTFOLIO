@@ -99,7 +99,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
               <button
                 id="btn-download-latest-cv"
                 onClick={downloadActiveCv}
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-xl font-black text-white bg-[#062B63] hover:bg-[#0B5ED7] shadow-md shadow-[#062B63]/15 hover:shadow-lg transition-all text-sm active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-xl font-black text-white bg-[#0B5ED7] hover:bg-[#1D4ED8] shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all text-sm active:scale-[0.98] cursor-pointer"
               >
                 <span>DOWNLOAD CV ↓</span>
               </button>

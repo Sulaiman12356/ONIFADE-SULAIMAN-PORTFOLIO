@@ -135,33 +135,33 @@ export const MetricStats: React.FC = () => {
   const renderIcon = (type: EditableMetric['iconType']) => {
     switch (type) {
       case 'budget':
-        return <TrendingUp className="w-5 h-5 text-[#0B5ED7]" />;
+        return <TrendingUp className="w-5 h-5 text-cyan-200" />;
       case 'roas':
-        return <Target className="w-5 h-5 text-[#0B5ED7]" />;
+        return <Target className="w-5 h-5 text-cyan-200" />;
       case 'projects':
-        return <Briefcase className="w-5 h-5 text-[#0B5ED7]" />;
+        return <Briefcase className="w-5 h-5 text-cyan-200" />;
       case 'training':
-        return <GraduationCap className="w-5 h-5 text-[#0B5ED7]" />;
+        return <GraduationCap className="w-5 h-5 text-cyan-200" />;
       case 'clients':
-        return <Users className="w-5 h-5 text-[#0B5ED7]" />;
+        return <Users className="w-5 h-5 text-cyan-200" />;
       case 'experience':
       default:
-        return <Clock className="w-5 h-5 text-[#0B5ED7]" />;
+        return <Clock className="w-5 h-5 text-cyan-200" />;
     }
   };
 
   return (
     <section 
       id="credibility-metrics"
-      className="bg-[#062B63] text-white py-16 sm:py-20 relative overflow-hidden"
+      className="bg-gradient-to-r from-[#0B5ED7] via-[#094bb3] to-[#0B5ED7] text-white py-16 sm:py-20 relative overflow-hidden shadow-inner border-y border-white/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-6 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-6 border-b border-white/15">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#EFF6FF] border border-white/20 text-[11px] font-bold tracking-wider uppercase mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#0B5ED7]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-[#EFF6FF] border border-white/25 text-[11px] font-bold tracking-wider uppercase mb-2">
+              <ShieldCheck className="w-3.5 h-3.5 text-cyan-300" />
               <span>VERIFIED PERFORMANCE DATA</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">

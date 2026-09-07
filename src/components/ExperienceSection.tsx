@@ -159,7 +159,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenHire
         <div className="mt-14 text-center">
           <button
             onClick={onOpenHireMe}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#062B63] text-white hover:bg-[#0B5ED7] text-sm font-bold shadow-md shadow-[#062B63]/15 transition-all active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#0B5ED7] text-white hover:bg-[#1D4ED8] text-sm font-bold shadow-md shadow-[#0B5ED7]/25 transition-all active:scale-[0.98]"
           >
             <span>Discuss How I Can Add Value to Your Team</span>
             <ArrowRight className="w-4 h-4" />

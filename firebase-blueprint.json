@@ -75,12 +75,82 @@
         "solution": { "type": "string", "maxLength": 2000 },
         "results": { "type": "string", "maxLength": 2000 },
         "featured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
         "order": { "type": "number" },
         "liveUrl": { "type": "string" },
         "githubUrl": { "type": "string" },
         "thumbnail": { "type": "string" }
       },
       "required": ["title", "slug", "category"]
+    },
+    "CaseStudy": {
+      "title": "CaseStudy",
+      "description": "In-depth campaign or project breakdown with strategy and ROI metrics",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "client": { "type": "string", "maxLength": 120 },
+        "category": { "type": "string", "maxLength": 80 },
+        "summary": { "type": "string", "maxLength": 1000 },
+        "challenge": { "type": "string", "maxLength": 2000 },
+        "strategy": { "type": "string", "maxLength": 2000 },
+        "results": { "type": "string", "maxLength": 2000 },
+        "metrics": { "type": "string", "maxLength": 500 },
+        "featured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "client", "category"]
+    },
+    "BrandProject": {
+      "title": "BrandProject",
+      "description": "Brand visual identity, logo, and collateral piece",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "category": { "type": "string", "maxLength": 80 },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "client": { "type": "string", "maxLength": 100 },
+        "featured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "category", "imageUrl"]
+    },
+    "SocialProject": {
+      "title": "SocialProject",
+      "description": "Social media campaign and creative asset",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "platform": { "type": "string", "maxLength": 60 },
+        "category": { "type": "string", "maxLength": 60 },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "featured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "platform", "imageUrl"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "Direct response or short-form video creative",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 150 },
+        "platform": { "type": "string", "maxLength": 60 },
+        "category": { "type": "string", "maxLength": 60 },
+        "videoUrl": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "primaryTool": { "type": "string", "maxLength": 80 },
+        "featured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "platform", "videoUrl"]
     },
     "Experience": {
       "title": "Experience",
@@ -269,6 +339,22 @@
     "/projects/{projectId}": {
       "schema": { "$ref": "#/entities/Project" },
       "description": "Showcased projects and case studies"
+    },
+    "/caseStudies/{caseStudyId}": {
+      "schema": { "$ref": "#/entities/CaseStudy" },
+      "description": "Full-length marketing and technical case studies"
+    },
+    "/brandProjects/{brandProjectId}": {
+      "schema": { "$ref": "#/entities/BrandProject" },
+      "description": "Brand visual identity and graphic design assets"
+    },
+    "/socialProjects/{socialProjectId}": {
+      "schema": { "$ref": "#/entities/SocialProject" },
+      "description": "Social media creative and campaign assets"
+    },
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/entities/Video" },
+      "description": "Video creative assets and short-form edits"
     },
     "/experience/{experienceId}": {
       "schema": { "$ref": "#/entities/Experience" },

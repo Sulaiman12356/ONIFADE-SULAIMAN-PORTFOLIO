@@ -265,10 +265,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenHireMe }
               <div className="pt-4 border-t border-[#E2E8F0]">
                 <button
                   onClick={() => handleServiceSelect(service.title)}
-                  className="w-full py-3 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#062B63] text-[#062B63] hover:text-white border border-[#E2E8F0] hover:border-[#062B63] font-black text-xs flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer group-hover:bg-[#062B63] group-hover:text-white"
+                  className="w-full py-3 px-4 rounded-xl bg-[#EFF6FF] hover:bg-[#0B5ED7] text-[#0B5ED7] hover:text-white border border-[#0B5ED7]/20 hover:border-[#0B5ED7] font-black text-xs flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer group-hover:bg-[#0B5ED7] group-hover:text-white"
                 >
                   <span>Request {service.title}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#0B5ED7] group-hover:text-white" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#0B5ED7] group-hover:text-white group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>
 
@@ -323,7 +323,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenHireMe }
             
             <button
               onClick={() => onOpenHireMe('Custom Scope')}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-black transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-black transition-colors shadow-sm shadow-[#0B5ED7]/25"
             >
               <span>Discuss Custom Scope</span>
               <ArrowRight className="w-3.5 h-3.5" />

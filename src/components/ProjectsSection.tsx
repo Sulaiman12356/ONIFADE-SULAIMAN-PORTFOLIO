@@ -64,8 +64,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenCaseStud
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-[#062B63] text-white shadow-md shadow-[#062B63]/15'
-                    : 'bg-white text-[#64748B] hover:text-[#062B63] hover:bg-[#EFF6FF] border border-[#E2E8F0]'
+                    ? 'bg-[#0B5ED7] text-white shadow-md shadow-[#0B5ED7]/25'
+                    : 'bg-white text-[#64748B] hover:text-[#0B5ED7] hover:bg-[#EFF6FF] border border-[#E2E8F0]'
                 }`}
               >
                 {cat}
@@ -175,7 +175,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenCaseStud
                 <div className="px-6 pb-6 pt-2 border-t border-[#E2E8F0]">
                   <button
                     onClick={() => onOpenCaseStudy(project)}
-                    className="w-full inline-flex items-center justify-between px-4 py-3 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md cursor-pointer"
+                    className="w-full inline-flex items-center justify-between px-4 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-all shadow-sm group-hover:shadow-md cursor-pointer"
                   >
                     <span>View Case Study →</span>
                     <ArrowRight className="w-4 h-4" />
@@ -190,7 +190,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenCaseStud
         <div className="mt-16 text-center">
           <button
             onClick={onOpenHireMe}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#062B63] text-white hover:bg-[#0B5ED7] text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#0B5ED7] text-white hover:bg-[#1D4ED8] text-sm font-bold shadow-md hover:shadow-lg shadow-[#0B5ED7]/25 transition-all cursor-pointer"
           >
             <span>Have a Specific Campaign or Design in Mind? Let's Talk</span>
             <ArrowRight className="w-4 h-4" />

@@ -60,7 +60,7 @@ export const AdminTestimonialsTab: React.FC = () => {
     <div className="space-y-6">
       
       {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-[#062B63] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <h2 className="text-xl sm:text-2xl font-black">Verified Client Testimonials</h2>
           <p className="text-xs text-slate-300 mt-1">
@@ -205,7 +205,7 @@ export const AdminTestimonialsTab: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold"
+              className="px-5 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-xs"
             >
               Save Testimonial
             </button>

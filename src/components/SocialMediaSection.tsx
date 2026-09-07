@@ -79,10 +79,10 @@ export const SocialMediaSection: React.FC<SocialMediaSectionProps> = ({ onOpenHi
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-[#062B63] text-white shadow-md shadow-[#062B63]/15'
-                    : 'bg-[#F8FAFC] text-[#64748B] hover:text-[#062B63] hover:bg-[#EFF6FF] border border-[#E2E8F0]'
+                    ? 'bg-[#0B5ED7] text-white shadow-md shadow-[#0B5ED7]/25'
+                    : 'bg-[#F8FAFC] text-[#64748B] hover:text-[#0B5ED7] hover:bg-[#EFF6FF] border border-[#E2E8F0]'
                 }`}
               >
                 {tab}
@@ -155,7 +155,7 @@ export const SocialMediaSection: React.FC<SocialMediaSectionProps> = ({ onOpenHi
           <div className="mt-14 text-center">
             <button
               onClick={onOpenHireMe}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white font-bold text-sm shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all"
             >
               <Share2 className="w-4 h-4" />
               <span>Scale Your Social Media Strategy &amp; Content</span>

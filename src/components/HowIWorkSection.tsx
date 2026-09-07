@@ -89,7 +89,7 @@ export const HowIWorkSection: React.FC<HowIWorkSectionProps> = ({ onOpenHireMe }
           <div className="mt-14 text-center">
             <button
               onClick={onOpenHireMe}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white font-bold text-sm shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all"
             >
               <span>Ready to Start with Step 01? Let's Discuss Your Project</span>
               <ArrowRight className="w-4 h-4" />

@@ -22,7 +22,7 @@ export const AdminSettingsSeoTab: React.FC = () => {
     <form onSubmit={handleSaveAll} className="space-y-6">
       
       {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-[#062B63] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <h2 className="text-xl sm:text-2xl font-black">Website Settings &amp; SEO Engine</h2>
           <p className="text-xs text-slate-300 mt-1">
@@ -321,7 +321,7 @@ export const AdminSettingsSeoTab: React.FC = () => {
       <div className="flex justify-end">
         <button
           type="submit"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white font-bold text-sm shadow-md transition-all active:scale-[0.98]"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white font-bold text-sm shadow-md shadow-[#0B5ED7]/25 transition-all active:scale-[0.98]"
         >
           <Save className="w-4 h-4" />
           <span>Save All Settings</span>

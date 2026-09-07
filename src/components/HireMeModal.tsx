@@ -327,7 +327,7 @@ export const HireMeModal: React.FC = () => {
                     id="btn-send-opportunity"
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-white bg-[#062B63] hover:bg-[#0B5ED7] shadow-md shadow-blue-900/10 transition-all text-xs sm:text-sm active:scale-[0.98] disabled:opacity-50"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-white bg-[#0B5ED7] hover:bg-[#1D4ED8] shadow-md shadow-[#0B5ED7]/25 transition-all text-xs sm:text-sm active:scale-[0.98] disabled:opacity-50"
                   >
                     <span>{isSubmitting ? 'Sending...' : 'Send Opportunity'}</span>
                     <Send className="w-4 h-4" />

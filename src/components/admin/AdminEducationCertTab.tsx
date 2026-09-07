@@ -69,7 +69,7 @@ export const AdminEducationCertTab: React.FC = () => {
           </div>
           <button
             onClick={() => setIsAddingEdu(!isAddingEdu)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#062B63] text-white text-xs font-bold hover:bg-[#0B5ED7]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0B5ED7] text-white text-xs font-bold hover:bg-[#1D4ED8] shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Degree</span>
@@ -173,7 +173,7 @@ export const AdminEducationCertTab: React.FC = () => {
           </div>
           <button
             onClick={() => setIsAddingCert(!isAddingCert)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#062B63] text-white text-xs font-bold hover:bg-[#0B5ED7]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0B5ED7] text-white text-xs font-bold hover:bg-[#1D4ED8] shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Certification</span>

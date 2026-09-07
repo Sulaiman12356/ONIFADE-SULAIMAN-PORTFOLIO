@@ -56,44 +56,39 @@ export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv
               ======================================================== */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
-            {/* Small Badge: HELLO, I'M MR. CLARITY */}
+            {/* Small Badge: HELLO, I'M */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#0B5ED7]/25 text-xs font-black tracking-wider text-[#0B5ED7] uppercase shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#0B5ED7]" />
-              <span>HELLO, I'M MR. CLARITY</span>
+              <span>HELLO, I'M</span>
             </div>
 
-            {/* MAIN HEADLINE:
-                I HELP BUSINESSES
-                GROW WITH DIGITAL
-                MARKETING & AI.
+            {/* MAIN HEADING:
+                ONIFADE SULAIMAN
+                (MR. CLARITY)
             */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.65rem] font-black tracking-tight text-[#062B63] leading-[1.08] uppercase">
-              I HELP BUSINESSES<br />
-              GROW WITH DIGITAL<br />
-              <span className="text-[#0B5ED7] underline decoration-[#0B5ED7]/30 decoration-4 underline-offset-8">
-                MARKETING &amp; AI.
+            <h1 className="text-4xl sm:text-5xl lg:text-[3.85rem] font-black tracking-tight text-[#062B63] leading-[1.08] uppercase">
+              ONIFADE SULAIMAN<br />
+              <span className="text-[#0B5ED7]">
+                (MR. CLARITY)
               </span>
             </h1>
 
-            {/* Alternative Supporting Headline */}
-            <h2 className="text-xl sm:text-2xl font-black text-[#062B63] tracking-tight leading-snug">
-              Digital Marketing, AI &amp; Creative Solutions That Turn Attention Into Action.
-            </h2>
-
-            {/* Professional Title */}
-            <div className="p-3 rounded-xl bg-white border border-[#E2E8F0] shadow-2xs inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm font-black text-[#0B5ED7] uppercase tracking-wide">
+            {/* PROFESSIONAL TITLE:
+                Digital Marketer | Meta Ads Specialist | AI Digital Solutions Expert
+            */}
+            <div className="p-3.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs inline-flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs sm:text-sm font-black text-[#0B5ED7] uppercase tracking-wide">
               <span>Digital Marketer</span>
               <span className="text-slate-300 font-normal">|</span>
               <span>Meta Ads Specialist</span>
               <span className="text-slate-300 font-normal">|</span>
-              <span>Brand Designer</span>
-              <span className="text-slate-300 font-normal">|</span>
-              <span>AI Digital Solutions</span>
+              <span className="text-[#062B63]">AI Digital Solutions Expert</span>
             </div>
 
-            {/* Supporting Paragraph */}
-            <p className="text-base sm:text-lg text-[#64748B] leading-relaxed font-normal max-w-2xl">
-              &ldquo;I help businesses, organizations and personal brands attract attention, generate leads, build stronger digital identities and improve their online presence through strategic marketing, creative design, AI and technology.&rdquo;
+            {/* DESCRIPTION:
+                I help businesses attract customers, generate leads and build stronger digital brands through Meta Ads, AI-powered landing pages, social media, branding and automation.
+            */}
+            <p className="text-base sm:text-lg text-[#0F172A] leading-relaxed font-normal max-w-2xl">
+              I help businesses attract customers, generate leads and build stronger digital brands through Meta Ads, AI-powered landing pages, social media, branding and automation.
             </p>
 
             {/* Availability Indicator & Work Types */}
@@ -133,7 +128,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv
               <button
                 id="hero-primary-hire-me-btn"
                 onClick={onOpenHireMe}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-white bg-[#062B63] hover:bg-[#0B5ED7] shadow-lg shadow-[#062B63]/20 hover:shadow-xl transition-all active:scale-[0.98] text-sm sm:text-base tracking-wide cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-white bg-[#0B5ED7] hover:bg-[#1D4ED8] shadow-lg shadow-[#0B5ED7]/25 hover:shadow-xl transition-all active:scale-[0.98] text-sm sm:text-base tracking-wide cursor-pointer"
               >
                 <span>HIRE ME</span>
                 <ArrowRight className="w-4 h-4" />
@@ -203,30 +198,30 @@ export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv
                 aria-hidden="true" 
               />
 
-              {/* 2. Navy Blue Shape (Stylized geometric backdrop shape) */}
+              {/* 2. Royal Blue Geometric Shape (Stylized geometric backdrop shape) */}
               <div 
-                className="absolute inset-2 sm:inset-3 bg-[#062B63] rounded-3xl transform rotate-3 sm:rotate-4 shadow-2xl transition-transform duration-500 hover:rotate-2 -z-10" 
+                className="absolute inset-2 sm:inset-3 bg-gradient-to-tr from-[#0B5ED7] via-[#0B5ED7] to-[#1D4ED8] rounded-3xl transform rotate-3 sm:rotate-4 shadow-2xl transition-transform duration-500 hover:rotate-2 -z-10" 
                 aria-hidden="true"
               >
-                {/* Subtle graphical grid inside navy backdrop */}
-                <div className="w-full h-full opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] rounded-3xl" />
+                {/* Subtle graphical grid inside royal blue backdrop */}
+                <div className="w-full h-full opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] rounded-3xl" />
               </div>
 
               {/* 3. White Background Composition Container */}
               <div className="relative bg-white rounded-3xl p-3.5 sm:p-4 shadow-2xl border-2 border-[#E2E8F0] overflow-visible">
                 
                 {/* Top Badge communicating: DIGITAL MARKETING + AI + DESIGN */}
-                <div className="mb-3 px-3.5 py-1.5 rounded-xl bg-[#062B63] text-white flex items-center justify-between shadow-xs">
+                <div className="mb-3 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white flex items-center justify-between shadow-xs">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#0B5ED7] animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse" />
                     <span className="text-[11px] sm:text-xs font-black tracking-wider uppercase text-white">
                       DIGITAL MARKETING + AI + DESIGN
                     </span>
                   </div>
                   <div className="flex items-center gap-1 text-[#EFF6FF]">
-                    <Target className="w-3.5 h-3.5 text-[#0B5ED7]" />
-                    <Cpu className="w-3.5 h-3.5 text-[#0B5ED7]" />
-                    <Palette className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                    <Target className="w-3.5 h-3.5 text-cyan-200" />
+                    <Cpu className="w-3.5 h-3.5 text-cyan-200" />
+                    <Palette className="w-3.5 h-3.5 text-cyan-200" />
                   </div>
                 </div>
 
@@ -292,17 +287,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv
                 {/* Floating Badge 2: AI & Technology Elements */}
                 <div 
                   id="hero-floating-badge-ai"
-                  className="absolute -top-4 -right-3 sm:-right-6 bg-[#062B63] text-white rounded-2xl p-3 sm:p-3.5 shadow-xl border border-white/20 flex items-center gap-3 z-20 hover:scale-105 transition-transform"
+                  className="absolute -top-4 -right-3 sm:-right-6 bg-gradient-to-r from-[#0B5ED7] to-[#1D4ED8] text-white rounded-2xl p-3 sm:p-3.5 shadow-xl border border-white/20 flex items-center gap-3 z-20 hover:scale-105 transition-transform"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 text-[#EFF6FF]">
-                    <Cpu className="w-5 h-5 text-[#0B5ED7]" />
+                  <div className="w-10 h-10 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center flex-shrink-0 text-white">
+                    <Cpu className="w-5 h-5 text-cyan-200" />
                   </div>
                   <div>
                     <div className="text-xs font-black text-white flex items-center gap-1">
                       <span>AI Digital Solutions</span>
-                      <Sparkles className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
                     </div>
-                    <div className="text-[11px] font-semibold text-slate-300">
+                    <div className="text-[11px] font-semibold text-blue-100">
                       Workflows, LLMs &amp; Funnels
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import { Project, Service, Testimonial, ToolItem, BrandDesignItem, SocialMediaWorkItem, VideoContentItem } from '../types';
-import portraitImg from '../assets/images/portrait.jpg';
-import aboutImg from '../assets/images/about_onifade_1788655631635.jpg';
+import portraitImg from '../assets/images/sulaiman.jpg';
+import aboutImg from '../assets/images/sulaiman.jpg';
 import ecommerceImg from '../assets/images/project_ecommerce_1788655646475.jpg';
 import canvaImg from '../assets/images/project_canva_1788655660203.jpg';
 import dashboardImg from '../assets/images/project_dashboard_1788655677623.jpg';
@@ -279,7 +279,7 @@ export const HOW_I_WORK_STEPS = [
     title: 'OPTIMIZE',
     description: 'Review performance and improve what is working.',
     iconName: 'TrendingUp',
-    focusArea: 'A/B Testing, Conversion Rate Lift & Data Analysis',
+    focusArea: 'A/B Testing, Creative Testing & Conversion Rate Lift',
   },
   {
     step: 'STEP 06',
@@ -954,3 +954,90 @@ export const RESUME_DATA = {
     development: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Firebase Cloud DB & Auth', 'Semantic SEO'],
   },
 };
+
+export const DEFAULT_CASE_STUDIES = [
+  {
+    id: 'cs-1',
+    title: 'Scaling an E-Commerce Brand to $45,000/mo at 4.6x ROAS',
+    client: 'GlowAura Skincare & Cosmetics',
+    category: 'META ADS',
+    summary: 'Restructured paid Meta advertising architecture from fragmented ad sets to a consolidated broad-targeting funnel with dynamic UGC hooks.',
+    challenge: 'High cost per acquisition ($38 CAC) on a $55 AOV product, creative fatigue after 3 weeks, and untracked iOS14 drop-offs.',
+    strategy: 'Implemented Meta Conversions API (CAPI) with first-party tracking, produced 12 CapCut UGC creative iterations testing 3 distinct pain-point hooks, and built an Advantage+ shopping campaign scaling to $1,500/day.',
+    results: 'Drove 4.6x verified blended ROAS, dropped CAC from $38 to $16.40, and generated $45,200 in monthly tracked revenue within 60 days.',
+    metrics: '$45.2K Revenue | 4.6x ROAS | -57% CAC',
+    featured: true,
+    isPublished: true,
+    order: 1,
+    thumbnail: ecommerceImg,
+  },
+  {
+    id: 'cs-2',
+    title: 'High-Converting AI SaaS Landing Page with 8.4% Visit-to-Trial Rate',
+    client: 'TaskFlow AI Workspace',
+    category: 'LANDING PAGES',
+    summary: 'Engineered a conversion-focused landing page with direct-response headline hierarchy, interactive ROI calculator, and sub-second load times.',
+    challenge: 'Previous generic WordPress site loaded in 4.8 seconds with bounce rate over 68% and less than 1.9% sign-up conversion.',
+    strategy: 'Redesigned mobile-first in React and Tailwind, optimized above-the-fold value propositions, integrated social proof ticker, and accelerated asset delivery to 0.8s FCP.',
+    results: 'Lifted conversion from 1.9% to 8.4%, reduced bounce rate to 28%, and captured 1,420 beta signups in the first month.',
+    metrics: '8.4% Conversion | 1,420 Leads | 0.8s Load',
+    featured: true,
+    isPublished: true,
+    order: 2,
+    thumbnail: dashboardImg,
+  },
+  {
+    id: 'cs-3',
+    title: 'Building Clarity Digital Academy: Training 500+ Students in Visual Branding',
+    client: 'Clarity Digital Academy',
+    category: 'BRAND DESIGN',
+    summary: 'Founded practical digital academy teaching Canva Pro brand design, conversion typography, and freelance client acquisition.',
+    challenge: 'Aspiring creators and small business owners lacked access to practical, affordable branding training that directly translates to income.',
+    strategy: 'Created 4-week structured cohort curriculum with step-by-step video lessons, live feedback teardowns, and reusable commercial template packs.',
+    results: 'Trained and certified 500+ participants across 4 cohorts with a 98% satisfaction rating and 65+ graduates launching freelance businesses.',
+    metrics: '500+ Students | 98% Satisfaction | 65+ Freelancers',
+    featured: true,
+    isPublished: true,
+    order: 3,
+    thumbnail: canvaImg,
+  },
+];
+
+export const DEFAULT_MEDIA_ITEMS = [
+  {
+    id: 'med-1',
+    name: 'onifade_sulaiman_portrait.jpg',
+    url: portraitImg,
+    fileType: 'image/jpeg',
+    size: 245000,
+    uploadedAt: '2026-09-01T10:00:00.000Z',
+    category: 'image' as const,
+  },
+  {
+    id: 'med-2',
+    name: 'ecommerce_case_study.jpg',
+    url: ecommerceImg,
+    fileType: 'image/jpeg',
+    size: 310000,
+    uploadedAt: '2026-09-01T10:05:00.000Z',
+    category: 'image' as const,
+  },
+  {
+    id: 'med-3',
+    name: 'canva_design_masterclass.jpg',
+    url: canvaImg,
+    fileType: 'image/jpeg',
+    size: 280000,
+    uploadedAt: '2026-09-01T10:10:00.000Z',
+    category: 'image' as const,
+  },
+  {
+    id: 'med-4',
+    name: 'dashboard_saas_preview.jpg',
+    url: dashboardImg,
+    fileType: 'image/jpeg',
+    size: 295000,
+    uploadedAt: '2026-09-01T10:15:00.000Z',
+    category: 'image' as const,
+  },
+];

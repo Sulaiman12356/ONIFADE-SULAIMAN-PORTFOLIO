@@ -33,16 +33,16 @@ export const TrustedBrands: React.FC = () => {
             <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Analytics</span>
           </div>
 
-          {/* Microsoft */}
+          {/* CapCut */}
           <div className="flex items-center gap-2 text-slate-700 hover:text-[#0B5ED7] transition-colors cursor-default">
-            <div className="grid grid-cols-2 gap-0.5 w-3.5 h-3.5">
-              <span className="bg-red-500 rounded-[1px]"></span>
-              <span className="bg-emerald-500 rounded-[1px]"></span>
-              <span className="bg-blue-500 rounded-[1px]"></span>
-              <span className="bg-amber-500 rounded-[1px]"></span>
-            </div>
-            <span className="font-bold text-lg tracking-tight">Microsoft</span>
-            <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Power BI</span>
+            <span className="font-extrabold text-lg tracking-tight">CapCut</span>
+            <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Video</span>
+          </div>
+
+          {/* Firebase */}
+          <div className="flex items-center gap-2 text-slate-700 hover:text-[#0B5ED7] transition-colors cursor-default">
+            <span className="font-bold text-lg tracking-tight text-[#FFA611]">🔥 Firebase</span>
+            <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Backend</span>
           </div>
         </div>
       </div>

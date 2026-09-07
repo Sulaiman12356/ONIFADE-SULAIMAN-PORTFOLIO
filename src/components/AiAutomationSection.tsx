@@ -120,7 +120,7 @@ export const AiAutomationSection: React.FC<AiAutomationSectionProps> = ({ onOpen
               {onOpenHireMe && (
                 <button
                   onClick={onOpenHireMe}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#0B5ED7] hover:bg-[#062B63] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white font-bold text-sm shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all"
                 >
                   <span>Build an AI Automation Workflow</span>
                   <ArrowRight className="w-4 h-4" />

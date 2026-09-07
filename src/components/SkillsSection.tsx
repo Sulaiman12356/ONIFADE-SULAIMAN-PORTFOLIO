@@ -198,8 +198,8 @@ export const SkillsSection: React.FC = () => {
               onClick={() => setActiveCategory('all')}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
                 activeCategory === 'all'
-                  ? 'bg-[#062B63] text-white shadow-md shadow-[#062B63]/20'
-                  : 'bg-white text-[#64748B] hover:text-[#062B63] border border-[#E2E8F0] hover:border-[#0B5ED7]/30'
+                  ? 'bg-[#0B5ED7] text-white shadow-md shadow-[#0B5ED7]/25'
+                  : 'bg-white text-[#64748B] hover:text-[#0B5ED7] border border-[#E2E8F0] hover:border-[#0B5ED7]/30'
               }`}
             >
               All Categories
@@ -211,8 +211,8 @@ export const SkillsSection: React.FC = () => {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === cat.id
-                    ? 'bg-[#062B63] text-white shadow-md shadow-[#062B63]/20'
-                    : 'bg-white text-[#64748B] hover:text-[#062B63] border border-[#E2E8F0] hover:border-[#0B5ED7]/30'
+                    ? 'bg-[#0B5ED7] text-white shadow-md shadow-[#0B5ED7]/25'
+                    : 'bg-white text-[#64748B] hover:text-[#0B5ED7] border border-[#E2E8F0] hover:border-[#0B5ED7]/30'
                 }`}
               >
                 {cat.name}
@@ -295,10 +295,10 @@ export const SkillsSection: React.FC = () => {
               <div className="pt-3 border-t border-[#E2E8F0]">
                 <button
                   onClick={() => openHireMe(undefined, cat.name)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#062B63] text-[#062B63] hover:text-white border border-[#E2E8F0] hover:border-[#062B63] font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#EFF6FF] hover:bg-[#0B5ED7] text-[#0B5ED7] hover:text-white border border-[#0B5ED7]/20 hover:border-[#0B5ED7] font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group/btn"
                 >
                   <span>Inquire for {cat.name}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#0B5ED7] group-hover/btn:text-white group-hover/btn:translate-x-0.5 transition-transform" />
                 </button>
               </div>
 
@@ -316,7 +316,7 @@ export const SkillsSection: React.FC = () => {
                 setSearchQuery('');
                 setActiveCategory('all');
               }}
-              className="px-4 py-2 rounded-xl bg-[#062B63] text-white text-xs font-bold"
+              className="px-4 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-md shadow-[#0B5ED7]/25"
             >
               Reset Filters
             </button>

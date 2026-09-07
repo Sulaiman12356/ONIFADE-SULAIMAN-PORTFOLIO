@@ -497,7 +497,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 onClose();
                 onOpenHireMe();
               }}
-              className="px-6 py-3 rounded-xl bg-[#062B63] hover:bg-[#0B5ED7] text-white text-xs font-bold transition-all shadow-md shrink-0 flex items-center justify-center gap-2 cursor-pointer"
+              className="px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-all shadow-md shadow-[#0B5ED7]/25 shrink-0 flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Discuss Similar Project</span>
               <ArrowRight className="w-3.5 h-3.5" />

@@ -1,5 +1,23 @@
 import React from 'react';
-import { Users, FileText, Briefcase, Eye, ArrowUpRight, CheckCircle2, Clock, Sparkles, Sliders, ExternalLink, ShieldCheck } from 'lucide-react';
+import {
+  Users,
+  FileText,
+  Briefcase,
+  Sparkles,
+  ExternalLink,
+  PlusCircle,
+  Upload,
+  ToggleLeft,
+  ToggleRight,
+  RotateCcw,
+  MessageSquare,
+  Layers,
+  ArrowUpRight,
+  CheckCircle2,
+  AlertTriangle,
+  Clock,
+  Target,
+} from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 export const AdminDashboardTab: React.FC = () => {
@@ -8,22 +26,45 @@ export const AdminDashboardTab: React.FC = () => {
     cvList,
     activeCv,
     hireRequests,
+    contactMessages,
     testimonials,
     projects,
     services,
+    settings,
+    updateSettings,
+    resetToFactoryDefaults,
     setAdminActiveTab,
     setIsAdminOpen,
   } = usePortfolio();
 
   const newRequestsCount = hireRequests.filter((r) => r.status === 'New').length;
-  const inReviewCount = hireRequests.filter((r) => r.status === 'In review').length;
+  const newMessagesCount = contactMessages.filter((m) => m.status === 'New').length;
   const totalDownloads = cvList.reduce((acc, c) => acc + (c.downloadCount || 0), 0);
+
+  const handleToggleHireAvailability = async () => {
+    await updateSettings({
+      allowPublicHireRequests: !settings.allowPublicHireRequests,
+      availabilityStatus: !settings.allowPublicHireRequests
+        ? 'Available for Q2/Q3 High-Growth Projects'
+        : 'Fully Booked - Inquiries Queued',
+    });
+  };
+
+  const handleResetData = () => {
+    if (
+      confirm(
+        'Are you sure you want to reset the portfolio database back to standard default values? This clears temporary edits.'
+      )
+    ) {
+      resetToFactoryDefaults();
+      alert('Portfolio restored to initial baseline defaults.');
+    }
+  };
 
   return (
     <div className="space-y-6">
-      
-      {/* Top Welcome / Hero Bar */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#062B63] to-[#08183A] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+      {/* Top Welcome Bar */}
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#08183A] to-[#0B5ED7] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[#00D2FF] text-[11px] font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3 h-3" />
@@ -33,7 +74,7 @@ export const AdminDashboardTab: React.FC = () => {
             Welcome, {profile.brandName || 'Mr. Clarity'}
           </h2>
           <p className="text-xs text-slate-300 mt-1 max-w-xl">
-            Live management of your portfolio, active CV versioning, lead intake pipeline, testimonials, and verified career accomplishments.
+            Real-time management dashboard: all modifications directly update public website content, contact triggers, and downloadable assets.
           </p>
         </div>
 
@@ -48,96 +89,165 @@ export const AdminDashboardTab: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
+      {/* Primary KPI Metrics: Total Projects, Total Services, Total Inquiries, Total Messages */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        {/* Hire Requests */}
-        <div
-          onClick={() => setAdminActiveTab('hire_requests')}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs cursor-pointer hover:border-[#0B5ED7] transition-all"
-        >
-          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
-            <span>Opportunity Inquiries</span>
-            <Briefcase className="w-4 h-4 text-[#0B5ED7]" />
-          </div>
-          <div className="text-2xl font-black text-[#0B1F3A]">
-            {hireRequests.length}
-          </div>
-          <div className="text-[11px] text-emerald-600 font-bold mt-1 flex items-center gap-1">
-            <span>{newRequestsCount} New</span>
-            <span>•</span>
-            <span className="text-amber-600">{inReviewCount} In Review</span>
-          </div>
-        </div>
-
-        {/* Active CV */}
-        <div
-          onClick={() => setAdminActiveTab('cv_manager')}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs cursor-pointer hover:border-[#0B5ED7] transition-all"
-        >
-          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
-            <span>Active CV Version</span>
-            <FileText className="w-4 h-4 text-emerald-600" />
-          </div>
-          <div className="text-2xl font-black text-[#0B1F3A]">
-            {activeCv?.version || 'v2.6'}
-          </div>
-          <div className="text-[11px] text-slate-500 font-medium mt-1">
-            {totalDownloads} total downloads
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div
-          onClick={() => setAdminActiveTab('testimonials')}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs cursor-pointer hover:border-[#0B5ED7] transition-all"
-        >
-          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
-            <span>Verified Reviews</span>
-            <Users className="w-4 h-4 text-amber-500" />
-          </div>
-          <div className="text-2xl font-black text-[#0B1F3A]">
-            {testimonials.length}
-          </div>
-          <div className="text-[11px] text-slate-500 font-medium mt-1">
-            {testimonials.filter((t) => t.isPublished || t.published || t.permissionStatus === 'granted').length} published live
-          </div>
-        </div>
-
-        {/* Case Studies */}
+        {/* Total Projects */}
         <div
           onClick={() => setAdminActiveTab('projects')}
-          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs cursor-pointer hover:border-[#0B5ED7] transition-all"
+          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:border-[#0B5ED7] transition-all group"
         >
           <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
-            <span>Case Studies &amp; Projects</span>
-            <Sparkles className="w-4 h-4 text-purple-600" />
+            <span>Total Projects</span>
+            <Layers className="w-4 h-4 text-[#0B5ED7] group-hover:scale-110 transition-transform" />
           </div>
-          <div className="text-2xl font-black text-[#0B1F3A]">
-            {projects.length}
-          </div>
+          <div className="text-3xl font-black text-[#08183A]">{projects.length}</div>
           <div className="text-[11px] text-slate-500 font-medium mt-1">
-            {services.length} active service offerings
+            {projects.filter((p) => p.featured).length} Featured on Homepage
           </div>
         </div>
 
+        {/* Total Services */}
+        <div
+          onClick={() => setAdminActiveTab('services')}
+          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:border-[#0B5ED7] transition-all group"
+        >
+          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+            <span>Total Services</span>
+            <Target className="w-4 h-4 text-purple-600 group-hover:scale-110 transition-transform" />
+          </div>
+          <div className="text-3xl font-black text-[#08183A]">{services.length}</div>
+          <div className="text-[11px] text-slate-500 font-medium mt-1">
+            Core Service Offerings
+          </div>
+        </div>
+
+        {/* Total Inquiries (Hire Requests) */}
+        <div
+          onClick={() => setAdminActiveTab('hire_requests')}
+          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:border-[#0B5ED7] transition-all group"
+        >
+          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+            <span>Hire Inquiries</span>
+            <Briefcase className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+          </div>
+          <div className="text-3xl font-black text-[#08183A]">{hireRequests.length}</div>
+          <div className="text-[11px] text-emerald-600 font-bold mt-1 flex items-center gap-1">
+            <span>{newRequestsCount} New Unread</span>
+          </div>
+        </div>
+
+        {/* Total Messages */}
+        <div
+          onClick={() => setAdminActiveTab('messages')}
+          className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:border-[#0B5ED7] transition-all group"
+        >
+          <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
+            <span>Total Messages</span>
+            <MessageSquare className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
+          </div>
+          <div className="text-3xl font-black text-[#08183A]">{contactMessages.length}</div>
+          <div className="text-[11px] text-amber-600 font-bold mt-1">
+            <span>{newMessagesCount} New Messages</span>
+          </div>
+        </div>
       </div>
 
-      {/* Split Section: Recent Inquiries + Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* Recent Inquiries */}
-        <div className="lg:col-span-8 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
+      {/* Quick Action Buttons Section */}
+      <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+        <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#0B5ED7]" />
+          Quick Actions &amp; System Controls
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          {/* Add Project */}
+          <button
+            onClick={() => setAdminActiveTab('projects')}
+            className="p-3.5 rounded-xl bg-blue-50/70 hover:bg-blue-100/80 border border-blue-200/80 text-left transition-all flex flex-col justify-between gap-2 text-[#08183A]"
+          >
+            <div className="flex items-center justify-between w-full">
+              <span className="font-extrabold text-xs">Add Project</span>
+              <PlusCircle className="w-4 h-4 text-[#0B5ED7]" />
+            </div>
+            <p className="text-[10px] text-slate-500">Create new case study or portfolio piece</p>
+          </button>
+
+          {/* Add Service */}
+          <button
+            onClick={() => setAdminActiveTab('services')}
+            className="p-3.5 rounded-xl bg-purple-50/70 hover:bg-purple-100/80 border border-purple-200/80 text-left transition-all flex flex-col justify-between gap-2 text-[#08183A]"
+          >
+            <div className="flex items-center justify-between w-full">
+              <span className="font-extrabold text-xs">Add Service</span>
+              <PlusCircle className="w-4 h-4 text-purple-600" />
+            </div>
+            <p className="text-[10px] text-slate-500">Add marketing or design offering</p>
+          </button>
+
+          {/* Upload CV */}
+          <button
+            onClick={() => setAdminActiveTab('cv')}
+            className="p-3.5 rounded-xl bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200/80 text-left transition-all flex flex-col justify-between gap-2 text-[#08183A]"
+          >
+            <div className="flex items-center justify-between w-full">
+              <span className="font-extrabold text-xs">Upload CV</span>
+              <Upload className="w-4 h-4 text-emerald-600" />
+            </div>
+            <p className="text-[10px] text-slate-500">
+              Active: {activeCv?.version || 'v2.6'} ({totalDownloads} dl)
+            </p>
+          </button>
+
+          {/* Toggle Hire Availability */}
+          <button
+            onClick={handleToggleHireAvailability}
+            className={`p-3.5 rounded-xl border text-left transition-all flex flex-col justify-between gap-2 ${
+              settings.allowPublicHireRequests
+                ? 'bg-emerald-50/80 border-emerald-300 text-emerald-950'
+                : 'bg-rose-50/80 border-rose-300 text-rose-950'
+            }`}
+          >
+            <div className="flex items-center justify-between w-full">
+              <span className="font-extrabold text-xs">Hire Availability</span>
+              {settings.allowPublicHireRequests ? (
+                <ToggleRight className="w-5 h-5 text-emerald-600" />
+              ) : (
+                <ToggleLeft className="w-5 h-5 text-rose-500" />
+              )}
+            </div>
+            <p className="text-[10px]">
+              {settings.allowPublicHireRequests ? 'Status: Accepting Clients' : 'Status: Fully Booked'}
+            </p>
+          </button>
+
+          {/* Clear Sample Data / Reset */}
+          <button
+            onClick={handleResetData}
+            className="p-3.5 rounded-xl bg-slate-50 hover:bg-rose-50/80 border border-slate-200 hover:border-rose-200 text-left transition-all flex flex-col justify-between gap-2 text-slate-700 hover:text-rose-700"
+          >
+            <div className="flex items-center justify-between w-full">
+              <span className="font-extrabold text-xs">Reset Sample Data</span>
+              <RotateCcw className="w-4 h-4 text-slate-400 hover:text-rose-600" />
+            </div>
+            <p className="text-[10px] text-slate-500">Restore factory baseline</p>
+          </button>
+        </div>
+      </div>
+
+      {/* Split: Recent Inquiries & Recent Messages */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Hire Inquiries */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-black text-[#0B1F3A] uppercase tracking-wider flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#0B5ED7]" />
-              <span>Recent Hire &amp; Project Inquiries</span>
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <Briefcase className="w-4 h-4 text-[#0B5ED7]" />
+              <span>Recent Hire Inquiries</span>
             </h3>
             <button
               onClick={() => setAdminActiveTab('hire_requests')}
               className="text-xs font-bold text-[#0B5ED7] hover:underline flex items-center gap-1"
             >
-              <span>View All</span>
+              <span>View All ({hireRequests.length})</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -156,7 +266,7 @@ export const AdminDashboardTab: React.FC = () => {
                 >
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-[#0B1F3A]">{req.fullName}</span>
+                      <span className="font-bold text-xs text-slate-900">{req.fullName}</span>
                       <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-blue-50 text-[#0B5ED7]">
                         {req.opportunityType}
                       </span>
@@ -180,65 +290,61 @@ export const AdminDashboardTab: React.FC = () => {
           )}
         </div>
 
-        {/* Quick Administration Shortcuts */}
-        <div className="lg:col-span-4 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-4">
-          <h3 className="text-sm font-black text-[#0B1F3A] uppercase tracking-wider">
-            Quick Actions
-          </h3>
-
-          <div className="space-y-2">
+        {/* Recent Contact Messages */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-[#0B5ED7]" />
+              <span>Recent Contact Messages</span>
+            </h3>
             <button
-              onClick={() => setAdminActiveTab('cv_manager')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 text-left transition-all flex items-center justify-between"
+              onClick={() => setAdminActiveTab('messages')}
+              className="text-xs font-bold text-[#0B5ED7] hover:underline flex items-center gap-1"
             >
-              <div>
-                <div className="font-bold text-xs text-[#0B1F3A]">Update Active CV</div>
-                <div className="text-[10px] text-slate-500">Upload new PDF or change date</div>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-[#0B5ED7]" />
-            </button>
-
-            <button
-              onClick={() => setAdminActiveTab('profile')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 text-left transition-all flex items-center justify-between"
-            >
-              <div>
-                <div className="font-bold text-xs text-[#0B1F3A]">Edit Profile &amp; Contact</div>
-                <div className="text-[10px] text-slate-500">Phone, email, headline, social links</div>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-[#0B5ED7]" />
-            </button>
-
-            <button
-              onClick={() => setAdminActiveTab('testimonials')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 text-left transition-all flex items-center justify-between"
-            >
-              <div>
-                <div className="font-bold text-xs text-[#0B1F3A]">Add Client Testimonial</div>
-                <div className="text-[10px] text-slate-500">Publish genuine collaborator review</div>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-[#0B5ED7]" />
-            </button>
-
-            <button
-              onClick={() => setAdminActiveTab('settings_seo')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 text-left transition-all flex items-center justify-between"
-            >
-              <div>
-                <div className="font-bold text-xs text-[#0B1F3A]">Edit Credibility Numbers</div>
-                <div className="text-[10px] text-slate-500">Ad budget, projects completed, verified flags</div>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-[#0B5ED7]" />
+              <span>View All ({contactMessages.length})</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-[11px] text-blue-900 leading-relaxed">
-            <strong>Persistent State:</strong> Changes you make are automatically synchronized with the public website in real-time.
-          </div>
+          {contactMessages.length === 0 ? (
+            <div className="p-8 text-center rounded-xl bg-slate-50 text-slate-400 text-xs">
+              No direct messages yet. Submissions from the website Contact section will appear here.
+            </div>
+          ) : (
+            <div className="divide-y divide-slate-100">
+              {contactMessages.slice(0, 4).map((msg) => (
+                <div
+                  key={msg.id}
+                  onClick={() => setAdminActiveTab('messages')}
+                  className="py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 px-2 rounded-xl transition-colors"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-xs text-slate-900">{msg.name}</span>
+                      <span
+                        className={`text-[10px] font-extrabold px-2 py-0.5 rounded ${
+                          msg.status === 'New'
+                            ? 'bg-blue-100 text-[#0B5ED7]'
+                            : 'bg-slate-100 text-slate-600'
+                        }`}
+                      >
+                        {msg.status}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{msg.message}</p>
+                  </div>
+
+                  <div className="text-right">
+                    <div className="text-[10px] text-slate-400">
+                      {new Date(msg.date).toLocaleDateString()}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-
       </div>
-
     </div>
   );
 };
