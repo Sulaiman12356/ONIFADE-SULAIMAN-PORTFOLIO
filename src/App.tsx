@@ -20,7 +20,6 @@ import { HireMeModal } from './components/HireMeModal';
 import { CvModal } from './components/CvModal';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { AdminPortal } from './components/admin/AdminPortal';
-import { FloatingWhatsAppButton } from './components/training/FloatingWhatsAppButton';
 import { usePortfolio } from './context/PortfolioContext';
 import { Project } from './types';
 
@@ -131,9 +130,6 @@ export default function App() {
 
       {/* Corporate Footer */}
       <Footer />
-
-      {/* Floating Fast WhatsApp Assistance */}
-      <FloatingWhatsAppButton />
 
       {/* Interactive Modals */}
       <HireMeModal />

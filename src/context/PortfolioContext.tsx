@@ -250,6 +250,7 @@ const DEFAULT_PROFILE: ProfileData = {
   headline: 'Turn Ideas into Impact. Scale Globally.',
   bio: 'I combine technology, creativity and data to help businesses communicate better, grow digitally and make smarter decisions. Multidisciplinary Technology, Digital Marketing, Graphics Design, and Data professional.',
   profilePhoto: PERSONAL_INFO.portraitImage,
+  aboutPhoto: PERSONAL_INFO.aboutImage,
   availability: 'Available Worldwide (Remote & Hybrid)',
   location: PERSONAL_INFO.location,
   email: PERSONAL_INFO.email,
@@ -442,7 +443,34 @@ function saveToStorage<T>(key: string, value: T) {
 
 export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Local state with safe initial fallback
-  const [profile, setProfile] = useState<ProfileData>(() => loadFromStorage('profile', DEFAULT_PROFILE));
+  const [profile, setProfile] = useState<ProfileData>(() => {
+    const loaded = loadFromStorage('profile', DEFAULT_PROFILE);
+    const isLegacyPhoto = (url?: string) =>
+      !url ||
+      url.includes('sulaiman') ||
+      url.includes('unsplash.com') ||
+      url.includes('placeholder') ||
+      url.includes('portrait') ||
+      url.includes('onifade');
+    return {
+      ...loaded,
+      email: 'ipesolasulaiman@gmail.com',
+      phone: '+234 805 178 0169',
+      profilePhoto: isLegacyPhoto(loaded.profilePhoto)
+        ? PERSONAL_INFO.portraitImage
+        : (loaded.profilePhoto || PERSONAL_INFO.portraitImage),
+      aboutPhoto: isLegacyPhoto(loaded.aboutPhoto)
+        ? PERSONAL_INFO.aboutImage
+        : (loaded.aboutPhoto || PERSONAL_INFO.aboutImage),
+      socialLinks: {
+        ...DEFAULT_PROFILE.socialLinks,
+        ...(loaded.socialLinks || {}),
+        whatsapp: 'https://wa.me/2348051780169',
+        email: 'ipesolasulaiman@gmail.com',
+        phone: '+234 805 178 0169',
+      },
+    };
+  });
   const [services, setServices] = useState<Service[]>(() => loadFromStorage('services', INITIAL_SERVICES));
   const [projects, setProjects] = useState<Project[]>([]);
   const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>([]);
@@ -570,8 +598,33 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.data() as ProfileData;
-          setProfile((prev) => ({ ...prev, ...data }));
-          saveToStorage('profile', { ...profile, ...data });
+          const isLegacyPhoto = (url?: string) =>
+            !url ||
+            url.includes('sulaiman') ||
+            url.includes('unsplash.com') ||
+            url.includes('placeholder') ||
+            url.includes('portrait') ||
+            url.includes('onifade');
+          const sanitized: ProfileData = {
+            ...data,
+            email: 'ipesolasulaiman@gmail.com',
+            phone: '+234 805 178 0169',
+            profilePhoto: isLegacyPhoto(data.profilePhoto)
+              ? PERSONAL_INFO.portraitImage
+              : (data.profilePhoto || PERSONAL_INFO.portraitImage),
+            aboutPhoto: isLegacyPhoto(data.aboutPhoto)
+              ? PERSONAL_INFO.aboutImage
+              : (data.aboutPhoto || PERSONAL_INFO.aboutImage),
+            socialLinks: {
+              ...DEFAULT_PROFILE.socialLinks,
+              ...(data.socialLinks || {}),
+              whatsapp: 'https://wa.me/2348051780169',
+              email: 'ipesolasulaiman@gmail.com',
+              phone: '+234 805 178 0169',
+            },
+          };
+          setProfile((prev) => ({ ...prev, ...sanitized }));
+          saveToStorage('profile', sanitized);
         }
       },
       (error) => {
@@ -585,9 +638,18 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       (snapshot) => {
         if (snapshot.exists()) {
           const links = snapshot.data();
+          const cleanWa = links.whatsapp && links.whatsapp.includes('234')
+            ? links.whatsapp
+            : 'https://wa.me/2348051780169';
           setProfile((prev) => ({
             ...prev,
-            socialLinks: { ...prev.socialLinks, ...links },
+            socialLinks: {
+              ...prev.socialLinks,
+              ...links,
+              whatsapp: cleanWa,
+              email: links.email || 'ipesolasulaiman@gmail.com',
+              phone: links.phone || '+234 805 178 0169',
+            },
           }));
         }
       },

@@ -357,6 +357,7 @@ export interface ProfileData {
   headline: string;
   bio: string;
   profilePhoto: string;
+  aboutPhoto?: string;
   availability: string;
   location: string;
   email: string;

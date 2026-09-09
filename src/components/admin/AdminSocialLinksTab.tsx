@@ -115,7 +115,7 @@ export const AdminSocialLinksTab: React.FC = () => {
               required
               value={formData.whatsapp}
               onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-              placeholder="https://wa.me/2348061234567 or +2348061234567"
+              placeholder="https://wa.me/2348051780169 or +2348051780169"
               className="w-full px-3 py-2 text-sm rounded-xl border border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
             />
             <p className="text-[11px] text-emerald-800">

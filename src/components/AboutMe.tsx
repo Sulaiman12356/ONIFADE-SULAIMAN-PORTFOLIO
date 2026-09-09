@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { PERSONAL_INFO, DEFAULT_ABOUT_SECTIONS } from '../data/portfolioData';
+import { resolveAboutImage } from '../utils/imageUtils';
 import { AboutSectionItem } from '../types';
 
 interface AboutMeProps {
@@ -42,7 +43,10 @@ interface AboutMeProps {
 export const AboutMe: React.FC<AboutMeProps> = ({ onOpenCv, onOpenHireMe }) => {
   const { profile, aboutSections: contextSections } = usePortfolio();
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const portraitSrc = profile.profilePhoto || PERSONAL_INFO.portraitImage;
+  const portraitSrc = resolveAboutImage(
+    profile.aboutPhoto || profile.profilePhoto,
+    PERSONAL_INFO.aboutImage || PERSONAL_INFO.portraitImage
+  );
 
   // Use sections from context (synced with Firestore / localStorage) or fallback
   const sectionsList: AboutSectionItem[] =
@@ -103,7 +107,12 @@ export const AboutMe: React.FC<AboutMeProps> = ({ onOpenCv, onOpenHireMe }) => {
                 <div className="relative w-full max-w-md">
                   <div className="relative rounded-2xl overflow-hidden bg-[#F8FAFC] border-2 border-[#E2E8F0] shadow-xl p-2">
                     <img
-                      src={portraitSrc}
+                      src={portraitSrc || '/onifade.jpg'}
+                      onError={(e) => {
+                        if (e.currentTarget.src !== window.location.origin + '/onifade.jpg') {
+                          e.currentTarget.src = '/onifade.jpg';
+                        }
+                      }}
                       alt="Onifade Sulaiman (Mr. Clarity)"
                       className="w-full h-auto aspect-4/5 object-cover object-top rounded-xl"
                     />

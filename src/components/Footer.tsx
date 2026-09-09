@@ -19,6 +19,8 @@ export const Footer: React.FC = () => {
   };
 
   const email = profile.email || 'ipesolasulaiman@gmail.com';
+  const phone = profile.phone || '+234 805 178 0169';
+  const whatsapp = profile.socialLinks?.whatsapp || 'https://wa.me/2348051780169';
 
   return (
     <footer id="main-footer" className="bg-[#062B63] text-white pt-16 pb-12 border-t border-white/10 relative">
@@ -85,17 +87,23 @@ export const Footer: React.FC = () => {
             </h4>
             
             <div className="space-y-3 text-sm text-slate-300">
-              {profile.socialLinks?.whatsapp && (
-                <a
-                  href={profile.socialLinks.whatsapp}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2.5 hover:text-white transition-colors"
-                >
-                  <BrandIcon name="whatsapp" size={16} className="text-[#25D366]" />
-                  <span>WhatsApp Direct</span>
-                </a>
-              )}
+              <a
+                href={whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-white transition-colors"
+              >
+                <BrandIcon name="whatsapp" size={16} className="text-[#25D366]" />
+                <span>WhatsApp: +234 805 178 0169</span>
+              </a>
+
+              <a
+                href={`tel:+2348051780169`}
+                className="flex items-center gap-2.5 hover:text-white transition-colors"
+              >
+                <Phone className="w-4 h-4 text-[#0B5ED7]" />
+                <span>Call: +234 805 178 0169</span>
+              </a>
 
               {profile.socialLinks?.linkedin && (
                 <a

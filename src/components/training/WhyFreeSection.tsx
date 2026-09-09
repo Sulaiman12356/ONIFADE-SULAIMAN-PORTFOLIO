@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Quote, Globe2 } from 'lucide-react';
-import sulaimanImg from '../../assets/images/sulaiman.jpg';
+import sulaimanImg from '../../assets/images/onifade.jpg';
 
 interface WhyFreeSectionProps {
   onAcceptInvitation: () => void;

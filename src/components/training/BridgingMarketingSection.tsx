@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Download, Compass, Target, Layout, Sparkles, Cpu, ExternalLink } from 'lucide-react';
-import sulaimanImg from '../../assets/images/sulaiman.jpg';
+import sulaimanImg from '../../assets/images/onifade.jpg';
 
 interface BridgingMarketingSectionProps {
   onOpenHireMe: () => void;

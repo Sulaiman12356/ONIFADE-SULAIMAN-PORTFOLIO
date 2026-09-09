@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Sparkles, MessageCircle, Award } from 'lucide-react';
-import sulaimanImg from '../../assets/images/sulaiman.jpg';
+import sulaimanImg from '../../assets/images/onifade.jpg';
 
 interface AboutMentorTrainingProps {
   onLearnDirectly: () => void;

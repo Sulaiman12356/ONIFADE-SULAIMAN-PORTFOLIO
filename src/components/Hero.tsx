@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { resolveProfileImage } from '../utils/imageUtils';
 
 interface HeroProps {
   onOpenHireMe: () => void;
@@ -26,7 +27,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv }) => {
   const { profile } = usePortfolio();
-  const portraitSrc = profile.profilePhoto || PERSONAL_INFO.portraitImage;
+  const portraitSrc = resolveProfileImage(profile.profilePhoto, PERSONAL_INFO.portraitImage);
 
   const availableWorkTypes = [
     'Full-Time',
@@ -225,7 +226,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenHireMe, onOpenCv, onDownloadCv
                 {/* Portrait Image Container */}
                 <div className="relative rounded-2xl overflow-hidden bg-slate-100 aspect-[4/5] sm:aspect-[3/4] max-h-[480px] w-full border border-[#E2E8F0] group">
                   <img
-                    src={portraitSrc}
+                    src={portraitSrc || '/onifade.jpg'}
+                    onError={(e) => {
+                      if (e.currentTarget.src !== window.location.origin + '/onifade.jpg') {
+                        e.currentTarget.src = '/onifade.jpg';
+                      }
+                    }}
                     alt="Onifade Sulaiman (Mr. Clarity) - Digital Marketer & AI Specialist"
                     className="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-700"
                     referrerPolicy="no-referrer"
