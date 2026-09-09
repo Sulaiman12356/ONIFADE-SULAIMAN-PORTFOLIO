@@ -8,14 +8,11 @@ import { ServicesSection } from './components/ServicesSection';
 import { WhyHireMe } from './components/WhyHireMe';
 import { HowIWorkSection } from './components/HowIWorkSection';
 import { SkillsSection } from './components/SkillsSection';
-import { ProjectsSection } from './components/ProjectsSection';
-import { BrandDesignSection } from './components/BrandDesignSection';
-import { SocialMediaSection } from './components/SocialMediaSection';
 import { AiAutomationSection } from './components/AiAutomationSection';
-import { VideoGallerySection } from './components/VideoGallerySection';
 import { ExperienceSection } from './components/ExperienceSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ResumeSection } from './components/ResumeSection';
+import { FAQSection } from './components/FAQSection';
 import { ContactSection } from './components/ContactSection';
 import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
@@ -23,12 +20,13 @@ import { HireMeModal } from './components/HireMeModal';
 import { CvModal } from './components/CvModal';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { AdminPortal } from './components/admin/AdminPortal';
-import { Project } from './types';
+import { FloatingWhatsAppButton } from './components/training/FloatingWhatsAppButton';
 import { usePortfolio } from './context/PortfolioContext';
+import { Project } from './types';
 
 export default function App() {
-  const { downloadActiveCv, isHireMeOpen, openHireMe, closeHireMe, hireMeInitialData } = usePortfolio();
-  const [selectedService, setSelectedService] = useState<string>('');
+  const { downloadActiveCv, openHireMe } = usePortfolio();
+  const [, setSelectedService] = useState<string>('');
   const [isCvOpen, setIsCvOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -53,7 +51,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-[#0B1F3A] font-sans antialiased selection:bg-[#0B5ED7] selection:text-white">
-      {/* Sticky Top Navigation */}
+      {/* Sticky Top Navigation & Announcement Bar */}
       <Navbar
         onOpenHireMe={() => handleOpenHireMe()}
         onOpenCv={handleOpenCv}
@@ -68,7 +66,7 @@ export default function App() {
           onDownloadCv={handleDownloadCv}
         />
 
-        {/* 2. Tool & Trust Strip immediately below Hero: "TOOLS & PLATFORMS I WORK WITH" */}
+        {/* 2. Tool & Platform strip: "TOOLS & PLATFORMS I WORK WITH" */}
         <CredibilitySection />
 
         {/* 3. Key Growth & Performance Metrics Strip */}
@@ -80,7 +78,7 @@ export default function App() {
           onOpenHireMe={() => handleOpenHireMe()}
         />
 
-        {/* 5. What I Do: "Digital Solutions Built Around Growth" (6 Service Cards) */}
+        {/* 5. What I Do: "Digital Solutions Built Around Growth" (7 Service Cards) */}
         <ServicesSection
           onOpenHireMe={(serviceName) => handleOpenHireMe(serviceName)}
         />
@@ -96,30 +94,9 @@ export default function App() {
         {/* 8. My Digital Marketing Expertise (Skill Domains) */}
         <SkillsSection />
 
-        {/* 9. SELECTED WORK: Real projects, campaigns, designs and digital solutions */}
-        <ProjectsSection
-          onOpenCaseStudy={handleOpenCaseStudy}
-          onOpenHireMe={() => handleOpenHireMe()}
-        />
-
-        {/* 10. BRAND DESIGN: Strategic brand identities, logos, flyers, marketing assets */}
-        <BrandDesignSection
-          onOpenHireMe={() => handleOpenHireMe('Brand Identity & Graphic Design')}
-        />
-
-        {/* 11. SOCIAL MEDIA WORK: Content designs, reels, TikTok, campaign creatives */}
-        <SocialMediaSection
-          onOpenHireMe={() => handleOpenHireMe('Social Media Growth & Content')}
-        />
-
-        {/* 12. AI & AUTOMATION: Practical business technology and workflow pipelines */}
+        {/* 9. AI & AUTOMATION: Practical business technology and workflow pipelines */}
         <AiAutomationSection
           onOpenHireMe={() => handleOpenHireMe('AI Business Solutions & Automation')}
-        />
-
-        {/* 13. VIDEO & CONTENT: Short-form videos, reels, promotional videos with CapCut focus */}
-        <VideoGallerySection
-          onOpenHireMe={() => handleOpenHireMe('Direct-Response Video Creatives')}
         />
 
         {/* 14. Professional Experience & Growth Milestones */}
@@ -136,12 +113,17 @@ export default function App() {
           onDownloadCv={handleDownloadCv}
         />
 
-        {/* 17. LET'S WORK TOGETHER: Contact channels and fast inquiry form */}
+        {/* 17. Frequently Asked Questions */}
+        <FAQSection
+          onOpenHireMe={() => handleOpenHireMe()}
+        />
+
+        {/* 18. LET'S WORK TOGETHER: Contact channels and fast inquiry form */}
         <ContactSection
           onOpenHireMe={() => handleOpenHireMe()}
         />
 
-        {/* 18. Final High-Conversion Action Banner */}
+        {/* 19. Final High-Conversion Action Banner */}
         <CtaBanner
           onOpenHireMe={() => handleOpenHireMe()}
         />
@@ -149,6 +131,9 @@ export default function App() {
 
       {/* Corporate Footer */}
       <Footer />
+
+      {/* Floating Fast WhatsApp Assistance */}
+      <FloatingWhatsAppButton />
 
       {/* Interactive Modals */}
       <HireMeModal />

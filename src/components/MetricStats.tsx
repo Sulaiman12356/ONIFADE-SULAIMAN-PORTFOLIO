@@ -30,54 +30,36 @@ export interface EditableMetric {
 const DEFAULT_METRICS: EditableMetric[] = [
   {
     id: 'budget',
-    value: '$500K+',
-    label: 'Meta Ad Spend Managed',
-    sublabel: 'Profitable multi-channel acquisition',
+    value: '₦500K+',
+    label: 'Meta Ads Spend Managed',
+    sublabel: 'High-converting acquisition campaigns',
     isVerified: true,
     isVisible: true,
     iconType: 'budget',
   },
   {
-    id: 'roas',
-    value: '4.8x',
-    label: 'Average Campaign ROAS',
-    sublabel: 'Direct-response conversion funnels',
-    isVerified: true,
-    isVisible: true,
-    iconType: 'roas',
-  },
-  {
     id: 'projects',
-    value: '50+',
-    label: 'Projects Delivered',
-    sublabel: 'Ads, AI pages & brand systems',
+    value: '30+',
+    label: 'Campaigns & Deliveries',
+    sublabel: 'Delivered for growing businesses',
     isVerified: true,
     isVisible: true,
     iconType: 'projects',
   },
   {
-    id: 'training',
-    value: '500+',
-    label: 'Students & Founders Trained',
-    sublabel: 'Founder, Clarity Digital Academy',
-    isVerified: true,
-    isVisible: true,
-    iconType: 'training',
-  },
-  {
     id: 'clients',
-    value: '30+',
-    label: 'Clients & Brands Scaled',
-    sublabel: 'Startups, SMEs & e-commerce',
+    value: '20+',
+    label: 'Clients Served',
+    sublabel: 'Founders, agencies and businesses',
     isVerified: true,
     isVisible: true,
     iconType: 'clients',
   },
   {
     id: 'experience',
-    value: '3+',
-    label: 'Years Proven Experience',
-    sublabel: 'Digital marketing & AI solutions',
+    value: '2+',
+    label: 'Years Experience',
+    sublabel: 'Practical digital marketing and design',
     isVerified: true,
     isVisible: true,
     iconType: 'experience',
@@ -86,7 +68,7 @@ const DEFAULT_METRICS: EditableMetric[] = [
 
 export const MetricStats: React.FC = () => {
   const [metrics, setMetrics] = useState<EditableMetric[]>(() => {
-    const saved = localStorage.getItem('clarity_verified_metrics_v2');
+    const saved = localStorage.getItem('clarity_verified_metrics_v3');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -102,7 +84,7 @@ export const MetricStats: React.FC = () => {
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('clarity_verified_metrics_v2', JSON.stringify(metrics));
+    localStorage.setItem('clarity_verified_metrics_v3', JSON.stringify(metrics));
   }, [metrics]);
 
   const handleOpenAdmin = () => {

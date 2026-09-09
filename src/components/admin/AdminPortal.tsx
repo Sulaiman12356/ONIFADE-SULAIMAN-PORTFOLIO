@@ -28,10 +28,13 @@ import {
   MessageSquare,
   FolderOpen,
   Search,
+  BookOpen,
+  HelpCircle,
 } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { AdminDashboardTab } from './AdminDashboardTab';
 import { AdminProfileTab } from './AdminProfileTab';
+import { AdminAboutTab } from './AdminAboutTab';
 import { AdminServicesTab } from './AdminServicesTab';
 import { AdminSkillsTab } from './AdminSkillsTab';
 import { AdminProjectsTab } from './AdminProjectsTab';
@@ -42,6 +45,7 @@ import { AdminVideosTab } from './AdminVideosTab';
 import { AdminExperienceTab } from './AdminExperienceTab';
 import { AdminEducationCertTab } from './AdminEducationCertTab';
 import { AdminCvManagerTab } from './AdminCvManagerTab';
+import { AdminFaqsTab } from './AdminFaqsTab';
 import { AdminTestimonialsTab } from './AdminTestimonialsTab';
 import { AdminHireRequestsTab } from './AdminHireRequestsTab';
 import { AdminMessagesTab } from './AdminMessagesTab';
@@ -136,6 +140,7 @@ export const AdminPortal: React.FC = () => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'profile', label: 'Profile', icon: User },
+    { id: 'about_story', label: 'About Story (15)', icon: BookOpen },
     { id: 'services', label: 'Services', icon: Sparkles },
     { id: 'skills', label: 'Skills', icon: Award },
     { id: 'projects', label: 'Projects', icon: FolderKanban },
@@ -146,6 +151,7 @@ export const AdminPortal: React.FC = () => {
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'cv', label: 'CV', icon: FileText },
+    { id: 'faqs', label: 'FAQs (10)', icon: HelpCircle },
     {
       id: 'testimonials',
       label: 'Testimonials',
@@ -435,6 +441,7 @@ export const AdminPortal: React.FC = () => {
               <div className="max-w-5xl mx-auto">
                 {adminActiveTab === 'dashboard' && <AdminDashboardTab />}
                 {adminActiveTab === 'profile' && <AdminProfileTab />}
+                {adminActiveTab === 'about_story' && <AdminAboutTab />}
                 {adminActiveTab === 'services' && <AdminServicesTab />}
                 {adminActiveTab === 'skills' && <AdminSkillsTab />}
                 {adminActiveTab === 'projects' && <AdminProjectsTab />}
@@ -447,6 +454,7 @@ export const AdminPortal: React.FC = () => {
                 {(adminActiveTab === 'cv' || adminActiveTab === 'cv_manager') && (
                   <AdminCvManagerTab />
                 )}
+                {adminActiveTab === 'faqs' && <AdminFaqsTab />}
                 {adminActiveTab === 'testimonials' && <AdminTestimonialsTab />}
                 {adminActiveTab === 'hire_requests' && <AdminHireRequestsTab />}
                 {adminActiveTab === 'messages' && <AdminMessagesTab />}

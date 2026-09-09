@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Globe, ArrowUp, Linkedin, Github, Instagram, MessageCircle, Lock, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, ArrowUp, Lock, ShieldCheck } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { BrandIcon } from './BrandIcons';
 
 export const Footer: React.FC = () => {
   const { profile, settings, setIsAdminOpen, setAdminActiveTab } = usePortfolio();
@@ -16,6 +17,8 @@ export const Footer: React.FC = () => {
     setAdminActiveTab('dashboard');
     setIsAdminOpen(true);
   };
+
+  const email = profile.email || 'ipesolasulaiman@gmail.com';
 
   return (
     <footer id="main-footer" className="bg-[#062B63] text-white pt-16 pb-12 border-t border-white/10 relative">
@@ -65,10 +68,12 @@ export const Footer: React.FC = () => {
               <a href="#home" className="hover:text-white hover:translate-x-1 transition-all">Home</a>
               <a href="#about" className="hover:text-white hover:translate-x-1 transition-all">About</a>
               <a href="#services" className="hover:text-white hover:translate-x-1 transition-all">Services</a>
-              <a href="#expertise" className="hover:text-white hover:translate-x-1 transition-all">Expertise</a>
-              <a href="#projects" className="hover:text-white hover:translate-x-1 transition-all">Projects</a>
+              <a href="#why-hire-me" className="hover:text-white hover:translate-x-1 transition-all">Why Hire Me</a>
+              <a href="#how-i-work" className="hover:text-white hover:translate-x-1 transition-all">Work Process</a>
+              <a href="#skills" className="hover:text-white hover:translate-x-1 transition-all">Skills</a>
               <a href="#experience" className="hover:text-white hover:translate-x-1 transition-all">Experience</a>
               <a href="#cv" className="hover:text-white hover:translate-x-1 transition-all font-bold text-[#EFF6FF]">CV Dossier</a>
+              <a href="#faq" className="hover:text-white hover:translate-x-1 transition-all">FAQ</a>
               <a href="#contact" className="hover:text-white hover:translate-x-1 transition-all">Contact</a>
             </div>
           </div>
@@ -80,51 +85,49 @@ export const Footer: React.FC = () => {
             </h4>
             
             <div className="space-y-3 text-sm text-slate-300">
-              {profile.socialLinks.whatsapp && (
+              {profile.socialLinks?.whatsapp && (
                 <a
                   href={profile.socialLinks.whatsapp}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  <BrandIcon name="whatsapp" size={16} className="text-[#25D366]" />
                   <span>WhatsApp Direct</span>
                 </a>
               )}
 
-              {profile.socialLinks.linkedin && (
+              {profile.socialLinks?.linkedin && (
                 <a
                   href={profile.socialLinks.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
                 >
-                  <Linkedin className="w-4 h-4 text-[#0B5ED7]" />
+                  <BrandIcon name="linkedin" size={16} className="text-[#0A66C2]" />
                   <span>LinkedIn</span>
                 </a>
               )}
 
-              {profile.socialLinks.instagram && (
+              {profile.socialLinks?.instagram && (
                 <a
                   href={profile.socialLinks.instagram}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2.5 hover:text-white transition-colors"
                 >
-                  <Instagram className="w-4 h-4 text-[#0B5ED7]" />
+                  <BrandIcon name="instagram" size={16} className="text-[#E4405F]" />
                   <span>Instagram</span>
                 </a>
               )}
 
-              {profile.email && (
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="flex items-center gap-2.5 hover:text-white transition-colors"
-                >
-                  <Mail className="w-4 h-4 text-[#0B5ED7]" />
-                  <span className="truncate">{profile.email}</span>
-                </a>
-              )}
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center gap-2.5 hover:text-white transition-colors"
+              >
+                <Mail className="w-4 h-4 text-[#0B5ED7]" />
+                <span className="truncate">{email}</span>
+              </a>
             </div>
           </div>
 

@@ -117,11 +117,20 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    match /aboutSections/{sectionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /faqs/{faqId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Interactive collections: public visitors can create leads/inquiries, only admin can manage
     match /hireRequests/{requestId} {
-      allow create: if request.resource.data.clientName is string &&
-                       request.resource.data.clientEmail is string &&
-                       request.resource.data.projectDescription is string;
+      allow create: if (request.resource.data.name is string || request.resource.data.fullName is string || request.resource.data.clientName is string) &&
+                       (request.resource.data.email is string || request.resource.data.clientEmail is string);
       allow read, update, delete: if isAdmin();
     }
 

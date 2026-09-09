@@ -196,7 +196,7 @@ export const AdminExperienceTab: React.FC = () => {
               rows={3}
               value={achievementsInput}
               onChange={(e) => setAchievementsInput(e.target.value)}
-              placeholder="Trained 500+ students in Canva Pro and digital marketing&#10;Managed $500K+ ad spend across Meta and TikTok with 4.8x ROAS&#10;Built automated client reporting systems"
+              placeholder="Trained 500+ students in Canva Pro and digital marketing&#10;Managed ₦500K+ ad spend across Meta and TikTok with 4.8x ROAS&#10;Built automated client reporting systems"
               className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs"
             />
           </div>

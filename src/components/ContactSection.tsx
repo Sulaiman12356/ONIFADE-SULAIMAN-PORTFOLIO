@@ -3,11 +3,6 @@ import {
   Mail,
   Phone,
   MessageSquare,
-  Linkedin,
-  Instagram,
-  Facebook,
-  Github,
-  Twitter,
   Send,
   CheckCircle2,
   Sparkles,
@@ -15,6 +10,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { BrandIcon } from './BrandIcons';
 
 interface ContactSectionProps {
   onOpenHireMe?: () => void;
@@ -33,9 +29,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenHireMe }) 
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const email = profile.email || 'onifadesulaiman@gmail.com';
-  const phone = profile.phone || '+234 806 123 4567';
-  const whatsappNumber = profile.phone ? profile.phone.replace(/[^0-9]/g, '') : '2348061234567';
+  const email = profile.email || 'ipesolasulaiman@gmail.com';
+  const phone = profile.phone || '+234 805 178 0169';
+  const whatsappNumber = profile.phone ? profile.phone.replace(/[^0-9]/g, '') : '2348051780169';
   const whatsappUrl = profile.socialLinks?.whatsapp || `https://wa.me/${whatsappNumber}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,8 +62,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenHireMe }) 
   const socialChannels = [
     {
       name: 'WhatsApp',
-      handle: 'Direct Chat / Fast Reply',
-      icon: <MessageSquare className="w-5 h-5 text-[#25D366]" />,
+      handle: '+234 805 178 0169',
+      icon: <BrandIcon name="whatsapp" size={20} className="text-[#25D366]" />,
       url: whatsappUrl,
       color: 'bg-[#F0FDF4] border-[#BBF7D0] text-[#15803D]',
       cta: 'Chat on WhatsApp',
@@ -84,33 +80,33 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenHireMe }) 
       name: 'Phone',
       handle: phone,
       icon: <Phone className="w-5 h-5 text-[#062B63]" />,
-      url: `tel:${phone}`,
+      url: `tel:+2348051780169`,
       color: 'bg-[#F8FAFC] border-[#E2E8F0] text-[#062B63]',
       cta: 'Call Phone',
     },
     {
       name: 'LinkedIn',
-      handle: 'Professional Network',
-      icon: <Linkedin className="w-5 h-5 text-[#0A66C2]" />,
+      handle: 'Professional Profile',
+      icon: <BrandIcon name="linkedin" size={20} className="text-[#0A66C2]" />,
       url: profile.socialLinks?.linkedin || 'https://linkedin.com',
       color: 'bg-white border-[#E2E8F0] text-[#0A66C2]',
       cta: 'Connect on LinkedIn',
     },
     {
       name: 'Instagram',
-      handle: '@mrclarity_official',
-      icon: <Instagram className="w-5 h-5 text-[#E1306C]" />,
+      handle: '@onifade_sulaiman',
+      icon: <BrandIcon name="instagram" size={20} className="text-[#E4405F]" />,
       url: profile.socialLinks?.instagram || 'https://instagram.com',
-      color: 'bg-white border-[#E2E8F0] text-[#E1306C]',
+      color: 'bg-white border-[#E2E8F0] text-[#E4405F]',
       cta: 'Follow on Instagram',
     },
     {
       name: 'Facebook',
-      handle: 'Mr. Clarity Growth',
-      icon: <Facebook className="w-5 h-5 text-[#1877F2]" />,
+      handle: 'Mr. Clarity',
+      icon: <BrandIcon name="facebook" size={20} className="text-[#1877F2]" />,
       url: profile.socialLinks?.facebook || 'https://facebook.com',
       color: 'bg-white border-[#E2E8F0] text-[#1877F2]',
-      cta: 'Follow on Facebook',
+      cta: 'Connect on Facebook',
     },
   ];
 

@@ -1,4 +1,4 @@
-import { Project, Service, Testimonial, ToolItem, BrandDesignItem, SocialMediaWorkItem, VideoContentItem } from '../types';
+import { Project, Service, Testimonial, ToolItem, BrandDesignItem, SocialMediaWorkItem, VideoContentItem, FAQItem, AboutSectionItem } from '../types';
 import portraitImg from '../assets/images/sulaiman.jpg';
 import aboutImg from '../assets/images/sulaiman.jpg';
 import ecommerceImg from '../assets/images/project_ecommerce_1788655646475.jpg';
@@ -8,24 +8,25 @@ import dashboardImg from '../assets/images/project_dashboard_1788655677623.jpg';
 export const PERSONAL_INFO = {
   name: 'Onifade Sulaiman',
   brandName: 'Mr. Clarity',
-  title: 'Digital Marketer | Meta Ads Specialist | Brand Designer | AI Landing Page Designer | AI Automation Specialist',
-  primaryPositioning: 'Digital Marketer | Meta Ads Specialist | Brand Designer | AI Landing Page Designer | Social Media Manager | AI Automation Specialist | AI Software Developer',
-  heroEyebrow: 'DIGITAL MARKETING • META ADS • AI AUTOMATION',
-  primaryStatement: 'I help ambitious brands, startups, and founders scale revenue with high-converting Meta ads, AI-powered landing pages, and strategic brand design.',
-  secondaryStatement: 'Combining digital marketing psychology, compelling design, AI automation, and modern software to help businesses acquire customers and scale efficiently.',
+  title: 'Digital Marketer | Meta Ads Specialist | AI Landing Page Designer | Brand Designer | Social Media Manager | AI Automation Specialist | AI Software Developer | CapCut Video Editor',
+  primaryPositioning: 'Digital Marketer | Meta Ads Specialist | AI Landing Page Designer | Brand Designer | Social Media Manager | AI Automation Specialist | AI Software Developer | CapCut Video Editor',
+  heroEyebrow: 'DIGITAL MARKETING, META ADS AND DIGITAL SOLUTIONS',
+  primaryStatement: 'I help businesses grow using Digital Marketing, Meta Ads, AI, Branding, Landing Pages, Social Media and Automation.',
+  secondaryStatement: 'I help businesses attract the right audience, generate leads and build a stronger online presence through practical digital marketing and creative digital solutions.',
   impactStatement: 'From multi-channel ad campaigns to conversion-focused landing pages and automated workflows, I deliver measurable growth and positive ROI.',
   email: 'ipesolasulaiman@gmail.com',
-  phone: '+234 805 1780 169',
+  phone: '+234 805 178 0169',
   location: 'Lagos & Ogun State, Nigeria',
   globalAvailability: 'Available Worldwide (Remote, Contract & Consulting)',
-  availabilityStatus: 'Available for New Projects & Contracts',
+  availabilityStatus: 'AVAILABLE FOR SELECTED PROJECTS',
   workTypes: ['Full-time', 'Part-time', 'Freelance', 'Remote Consulting'],
-  yearsExperience: '3+',
+  yearsExperience: '2+',
   projectsCompleted: '30+',
   happyClients: '20+',
-  adSpendManaged: '$500K+',
-  averageRoas: '4.8x',
+  adSpendManaged: '₦500K+',
+  averageRoas: '4.5x',
   studentsTrained: '200+',
+
   portraitImage: portraitImg,
   aboutImage: aboutImg,
 };
@@ -33,27 +34,27 @@ export const PERSONAL_INFO = {
 export const METRIC_STATS = [
   {
     id: 'adspend',
-    value: '$500K+',
-    label: 'Ad Spend Managed',
-    subtext: 'Profitable Meta & TikTok campaigns',
-  },
-  {
-    id: 'roas',
-    value: '4.8x',
-    label: 'Average ROAS',
-    subtext: 'High-converting acquisition funnels',
+    value: '₦500K+',
+    label: 'Meta Ads Spend Managed',
+    subtext: 'High-converting acquisition campaigns',
   },
   {
     id: 'projects',
-    value: '50+',
-    label: 'Projects Delivered',
-    subtext: 'Ads, landing pages, and AI systems',
+    value: '30+',
+    label: 'Projects Completed',
+    subtext: 'Delivered for growing businesses',
   },
   {
-    id: 'trained',
-    value: '500+',
-    label: 'Trained & Mentored',
-    subtext: 'Founder, Clarity Digital Academy',
+    id: 'clients',
+    value: '20+',
+    label: 'Clients Served',
+    subtext: 'Founders, agencies and businesses',
+  },
+  {
+    id: 'experience',
+    value: '2+',
+    label: 'Years of Experience',
+    subtext: 'Practical digital marketing and design',
   },
 ];
 
@@ -63,7 +64,7 @@ export const TRUSTED_BRANDS = [
   { name: 'Canva Pro', category: 'Visual Brand Design' },
   { name: 'OpenAI & Claude', category: 'AI & Automation' },
   { name: 'Figma', category: 'Landing Page UI/UX' },
-  { name: 'Zapier & Make', category: 'Workflow Automation' },
+  { name: 'Firebase', category: 'Cloud Database & Auth' },
 ];
 
 export const VALUE_PROPOSITIONS = [
@@ -79,152 +80,142 @@ export const VALUE_PROPOSITIONS = [
   },
   {
     title: 'AI Speed & Automation',
-    description: 'Leveraging cutting-edge AI and automated workflows to accelerate delivery, qualify leads instantly, and reduce operational overhead.',
+    description: 'Leveraging modern AI and automated workflows to accelerate delivery, qualify leads instantly, and reduce operational overhead.',
     icon: 'Cpu',
   },
   {
     title: 'Reliable & Collaborative',
-    description: 'Transparent communication, weekly performance reporting, strict deadlines, and a proactive commercial growth mindset.',
+    description: 'Transparent communication, regular performance updates, strict deadlines, and a proactive commercial growth mindset.',
     icon: 'ShieldCheck',
   },
 ];
 
 export const SERVICES: Service[] = [
   {
-    id: 'meta-tiktok-ads',
-    title: 'Meta & TikTok Advertising',
+    id: 'meta-ads-management',
+    title: 'Meta Ads Management',
     iconName: 'Target',
-    description: 'High-ROAS Facebook & Instagram Ad campaigns, TikTok Ads, audience segmentation, CAPI, creative testing, and budget scaling.',
+    description: 'I help businesses plan, launch and improve Meta advertising campaigns designed to reach the right audience and generate meaningful opportunities.',
     deliverables: [
-      'Full-Funnel Meta Ad Strategy (Top, Middle & Bottom of Funnel)',
-      'TikTok Ad Campaigns & Viral Short-Form Creative Direction',
-      'Advanced Audience Research, Lookalikes & Custom Audiences',
-      'Conversions API (CAPI) & Pixel Optimization for Accurate Tracking',
-      'Continuous A/B Creative Testing & Budget Scaling',
+      'Facebook Ads',
+      'Instagram Ads',
+      'Audience Targeting',
+      'Lead Generation',
+      'Campaign Setup',
+      'Campaign Optimization',
+      'Retargeting',
     ],
-    targetAudience: 'E-commerce brands, SMEs, service providers, and startups looking to scale customer acquisition profitably.',
-    outcome: 'Consistent 3.5x - 5.5x Return on Ad Spend (ROAS) and significantly lower Customer Acquisition Costs (CAC).',
+    targetAudience: 'Businesses, startups, and service providers looking to reach customers and generate profitable leads.',
+    outcome: 'Optimized Meta ad campaigns that consistently convert audiences into qualified leads and sales.',
   },
   {
-    id: 'ai-landing-pages',
-    title: 'AI Landing Page Design & CRO',
+    id: 'landing-page-design',
+    title: 'Landing Page Design',
     iconName: 'Layout',
-    description: 'High-converting, lightning-fast landing pages engineered with conversion psychology, responsive UI/UX, and persuasive copy.',
+    description: 'I create clean and focused landing pages that guide visitors toward a clear action such as sending a message, making an enquiry or submitting their details.',
     deliverables: [
-      'Conversion-Rate-Optimized (CRO) Sales & Lead Generation Pages',
-      'Mobile-First Responsive Layouts with Sub-2s Load Speeds',
-      'Persuasive Direct-Response Copywriting & Value Framing',
-      'A/B Testing Setup for Headlines, Offers & Call-to-Actions',
-      'Seamless Integration with Email Marketing & CRM Platforms',
+      'Landing Pages',
+      'Lead Capture Pages',
+      'Business Websites',
+      'Conversion Focused Pages',
+      'WhatsApp Integration',
+      'Meta Pixel Integration',
     ],
-    targetAudience: 'Founders, agencies, course creators, and businesses launching paid ads that need pages that actually convert.',
-    outcome: 'Boosts landing page conversion rates by 25% - 60% compared to standard generic websites.',
+    targetAudience: 'Founders, coaches, and businesses running ads that need high-converting, mobile-friendly landing pages.',
+    outcome: 'Clear landing pages that increase conversion rates and guide visitors to take immediate action.',
   },
   {
-    id: 'brand-identity-design',
-    title: 'Brand Design & Visual Identity',
+    id: 'brand-design',
+    title: 'Brand Design',
     iconName: 'Palette',
-    description: 'Premium visual brand systems, distinctive logos, typography, color palettes, social media templates, and marketing collateral.',
+    description: 'I create professional visual designs that help businesses look consistent, trustworthy and memorable.',
     deliverables: [
-      'Comprehensive Brand Identity Systems (Logos, Color Palette, Typography)',
-      'High-Converting Social Media Templates & Carousel Graphics',
-      'Investor Pitch Decks, Sales Presentations & Corporate Stationery',
-      'Packaging, Product Labeling & Digital Asset Guidelines',
-      'Custom Canva Brand Kits for In-House Team Autonomy',
+      'Logo Design',
+      'Brand Identity',
+      'Flyers',
+      'Social Media Designs',
+      'Marketing Materials',
     ],
-    targetAudience: 'Startups, personal brands, and established companies rebranding to command higher prices and visual authority.',
-    outcome: 'Cohesive, premium brand identity that increases perceived value and establishes instant market credibility.',
+    targetAudience: 'Brands and entrepreneurs who want a clean, recognizable visual identity across digital and physical touchpoints.',
+    outcome: 'A cohesive, professional brand identity that commands respect and builds instant trust with prospective clients.',
   },
   {
     id: 'social-media-management',
-    title: 'Social Media Management & Strategy',
+    title: 'Social Media Management',
     iconName: 'Share2',
-    description: 'End-to-end organic social media management, content strategy, editorial calendars, community engagement, and brand building.',
+    description: 'I help businesses maintain a professional social media presence with useful content, consistent branding and a clear content direction.',
     deliverables: [
-      'Strategic 30-Day Content Calendars & Thematic Pillars',
-      'High-Engagement Carousel Posts, Static Graphics & Infographics',
-      'Short-Form Video Scripting & Visual Hook Optimization',
-      'Audience Engagement, Inbound Comment & DM Management',
-      'Monthly Analytics, Growth Insights & Iteration Reports',
+      'Content Planning',
+      'Social Media Strategy',
+      'Content Creation',
+      'Post Design',
+      'Community Management',
+      'Page Management',
     ],
-    targetAudience: 'CEOs, consultants, coaches, and brands wanting a consistent, professional organic presence without spending 20 hours a week.',
-    outcome: 'Steadily builds organic brand authority, fosters an engaged audience, and drives qualified inbound inquiries.',
+    targetAudience: 'Businesses and personal brands wanting consistent, engaging social media presence without daily hassle.',
+    outcome: 'Consistent, relevant content that builds audience trust, engagement, and inbound inquiries.',
   },
   {
     id: 'ai-automation',
-    title: 'AI Automation & Workflow Systems',
+    title: 'AI Automation',
     iconName: 'Cpu',
-    description: 'Custom Zapier/Make automations, instant lead routing, automated CRM synchronization, AI customer support, and productivity tools.',
+    description: 'I use practical AI tools and automation to reduce repetitive work and improve business workflows.',
     deliverables: [
-      'Automated Lead Capture & Instant WhatsApp/Email Follow-Up Funnels',
-      'Multi-Tool Workflow Integrations via Zapier, Make, and Webhooks',
-      'AI Chatbot Setup for 24/7 Customer Inquiries & Pre-Qualification',
-      'CRM Pipeline Automation (HubSpot, Notion, Airtable, Google Sheets)',
-      'AI Prompt Systems & Content Acceleration Frameworks',
+      'Marketing Automation',
+      'Lead Workflows',
+      'Content Workflows',
+      'Business Automation',
+      'AI Productivity Systems',
     ],
-    targetAudience: 'Growing businesses needing to reclaim 10-20 hours every week by automating repetitive sales and administrative workflows.',
-    outcome: 'Eliminates manual bottlenecks, achieves 0-minute response times to new leads, and scales business operations smoothly.',
+    targetAudience: 'Growing businesses looking to automate lead routing, follow-ups, and repetitive marketing processes.',
+    outcome: 'Instant lead handling, reduced operational overhead, and streamlined day-to-day business operations.',
   },
   {
-    id: 'ai-web-development',
-    title: 'AI-Powered Web & Software Solutions',
+    id: 'ai-software-web-dev',
+    title: 'AI Software and Website Development',
     iconName: 'Code2',
-    description: 'Custom web applications, AI-integrated digital tools, client portals, and modern interactive web experiences built with React & Next.js.',
+    description: 'I build practical websites and digital systems that solve real business problems.',
     deliverables: [
-      'Modern, High-Performance Web Applications (React, TypeScript, Tailwind)',
-      'AI API Integrations (OpenAI GPT-4, Claude, Google Gemini)',
-      'Custom Client Portals, Booking Engines & Lead Dashboards',
-      'Search Engine Optimization (SEO) & Semantic Schema Architecture',
-      'Secure Cloud Database & Authentication Integration (Firebase)',
+      'Business Websites',
+      'Web Applications',
+      'Landing Pages',
+      'Digital Platforms',
+      'AI Powered Web Solutions',
     ],
-    targetAudience: 'Startups, digital agencies, and businesses looking to build custom interactive tools or AI-enhanced web products.',
-    outcome: 'Production-ready, highly responsive software interfaces that solve customer problems and differentiate your brand.',
+    targetAudience: 'Companies and startups needing modern, fast, and responsive digital web solutions with database capabilities.',
+    outcome: 'High-performance web applications and business platforms that run smoothly across all devices.',
   },
   {
-    id: 'video-editing-creatives',
-    title: 'Video Editing & Motion Ad Creatives',
+    id: 'video-editing',
+    title: 'Video Editing',
     iconName: 'Video',
-    description: 'Direct-response video ads, viral reels, TikTok hooks, UGC-style creative variations, and dynamic motion graphics that stop the scroll.',
+    description: 'I edit short form videos designed for social media, marketing campaigns and business promotion.',
     deliverables: [
-      'High-Impact 15s to 45s Paid Video Ad Variations for Meta & TikTok',
-      'Subtitled Reels, Shorts & TikTok Organic Growth Edits',
-      'Disruptive 2-Second Visual Hooks & Pattern Interrupts',
-      'Dynamic Sound Design, Kinetic Typography & Motion Graphics',
-      'Creative Batch Production for Performance Ad Testing',
+      'CapCut Editing',
+      'Reels',
+      'Short Form Videos',
+      'Promotional Videos',
+      'Social Media Videos',
     ],
-    targetAudience: 'E-commerce stores and service businesses running video ads on Meta and TikTok that need higher thumb-stop ratios.',
-    outcome: 'Significantly lowers Cost Per Click (CPC) and increases Video Completion Rates and Click-Through Rates (CTR).',
-  },
-  {
-    id: 'digital-strategy-consulting',
-    title: 'Digital Strategy & Growth Consulting',
-    iconName: 'TrendingUp',
-    description: 'Holistic digital marketing roadmaps, offer crafting, conversion funnel audits, and fractional growth advisory for expanding businesses.',
-    deliverables: [
-      'Comprehensive Digital Marketing Audit & Gap Analysis',
-      'Offer Positioning, Pricing & Irresistible Hook Crafting',
-      'Omnichannel Acquisition Architecture (Paid + Organic + Retention)',
-      '1-on-1 Executive Growth Sessions & Strategy Sprints',
-      'Step-by-Step Implementation Roadmap for Internal Teams',
-    ],
-    targetAudience: 'Founders, corporate executives, and business owners preparing to scale their acquisition to 6 and 7 figures.',
-    outcome: 'Clear, actionable roadmap that eliminates marketing confusion and focuses resources on the highest-leverage growth channels.',
+    targetAudience: 'Creators and businesses needing scroll-stopping, subtitled short-form video content for social platforms and paid ads.',
+    outcome: 'Engaging, fast-paced video edits with clear hooks and subtitles that capture attention.',
   },
 ];
 
 export const TOOLS_LIST: ToolItem[] = [
-  { name: 'Meta Ads Manager', category: 'Marketing', iconBg: 'bg-blue-50', iconColor: 'text-[#0B5ED7]', tag: 'Facebook & Instagram' },
-  { name: 'TikTok Ads', category: 'Marketing', iconBg: 'bg-slate-50', iconColor: 'text-slate-900', tag: 'Paid & Viral Growth' },
-  { name: 'Canva Pro Expert', category: 'Design', iconBg: 'bg-cyan-50', iconColor: 'text-cyan-600', tag: 'Visual Brand Design' },
-  { name: 'Figma', category: 'Design', iconBg: 'bg-purple-50', iconColor: 'text-purple-600', tag: 'Landing Page UI/UX' },
-  { name: 'CapCut & Premiere', category: 'Video', iconBg: 'bg-slate-100', iconColor: 'text-slate-800', tag: 'Video & Ad Creatives' },
-  { name: 'OpenAI / Claude / Gemini', category: 'AI', iconBg: 'bg-blue-50', iconColor: 'text-[#062B63]', tag: 'AI Models & APIs' },
-  { name: 'Zapier & Make', category: 'Automation', iconBg: 'bg-orange-50', iconColor: 'text-orange-600', tag: 'Workflow Automation' },
-  { name: 'React & TypeScript', category: 'Web Dev', iconBg: 'bg-sky-50', iconColor: 'text-sky-600', tag: 'AI Web Apps' },
-  { name: 'Google Analytics 4', category: 'Analytics', iconBg: 'bg-yellow-50', iconColor: 'text-yellow-600', tag: 'Conversion Tracking' },
-  { name: 'Meta Pixel & CAPI', category: 'Tracking', iconBg: 'bg-blue-50', iconColor: 'text-[#0B5ED7]', tag: 'Attribution Tracking' },
-  { name: 'Adobe Photoshop', category: 'Design', iconBg: 'bg-indigo-50', iconColor: 'text-indigo-600', tag: 'Brand Imagery' },
-  { name: 'Firebase', category: 'Backend', iconBg: 'bg-amber-50', iconColor: 'text-amber-600', tag: 'Cloud Database & Auth' },
+  { name: 'Meta Ads', category: 'Marketing', iconBg: 'bg-blue-50', iconColor: 'text-[#0B5ED7]', tag: 'Facebook & Instagram' },
+  { name: 'Facebook', category: 'Social Media', iconBg: 'bg-blue-50', iconColor: 'text-[#1877F2]', tag: 'Social Platform' },
+  { name: 'Instagram', category: 'Social Media', iconBg: 'bg-pink-50', iconColor: 'text-[#E4405F]', tag: 'Visual Social' },
+  { name: 'TikTok', category: 'Social Media', iconBg: 'bg-slate-50', iconColor: 'text-slate-900', tag: 'Short Video' },
+  { name: 'Canva', category: 'Design', iconBg: 'bg-cyan-50', iconColor: 'text-cyan-600', tag: 'Brand Design' },
+  { name: 'CapCut', category: 'Video', iconBg: 'bg-slate-100', iconColor: 'text-slate-900', tag: 'Video Editing' },
+  { name: 'WhatsApp', category: 'Messaging', iconBg: 'bg-green-50', iconColor: 'text-green-600', tag: 'Client Comms' },
+  { name: 'ChatGPT', category: 'AI', iconBg: 'bg-emerald-50', iconColor: 'text-emerald-700', tag: 'AI Strategy' },
+  { name: 'Claude', category: 'AI', iconBg: 'bg-amber-50', iconColor: 'text-amber-800', tag: 'AI Workflows' },
+  { name: 'Firebase', category: 'Backend', iconBg: 'bg-yellow-50', iconColor: 'text-amber-600', tag: 'Database & Auth' },
+  { name: 'Google', category: 'Analytics', iconBg: 'bg-red-50', iconColor: 'text-red-600', tag: 'Analytics & Tools' },
+  { name: 'GitHub', category: 'Development', iconBg: 'bg-slate-100', iconColor: 'text-slate-900', tag: 'Code Repository' },
+  { name: 'LinkedIn', category: 'Professional', iconBg: 'bg-blue-50', iconColor: 'text-[#0A66C2]', tag: 'Professional Network' },
 ];
 
 export const SKILL_PERCENTAGES = [
@@ -290,561 +281,13 @@ export const HOW_I_WORK_STEPS = [
   },
 ];
 
-export const PROJECTS: Project[] = [
-  {
-    id: 'ecommerce-meta-ads',
-    title: 'E-Commerce Meta Ads Scaling',
-    category: 'META ADS',
-    subtitle: 'High-Converting Facebook & Instagram Ad Funnel Generating 4.8x ROAS for Lifestyle Retail Brand',
-    client: 'EazyMart & Premium Lifestyle Retailers',
-    role: 'Lead Paid Growth & Creative Strategist',
-    timeline: '6 Weeks (Q4 High Season)',
-    thumbnail: ecommerceImg,
-    metricHighlight: '4.8x ROAS | +180% Revenue',
-    shortDescription: 'Full-funnel Meta Ads campaign combining disruptive short-form video hooks with dynamic retargeting to achieve 4.8x ROAS.',
-    summary: 'Architected and managed full-funnel Meta ad campaigns combining disruptive short-form video hooks with dynamic catalog retargeting to maximize holiday revenue.',
-    outcome: 'Generated $38,400+ in verified sales from $8,000 ad spend while reducing CAC by 41%.',
-    challenge: 'The brand suffered from escalating customer acquisition costs (CAC > $24) and severe ad creative fatigue, causing unprofitable returns on previous ad spends.',
-    solution: 'Engineered 12 video ad iterations with high-hook rate visual pattern interrupts, structured a 3-tier audience funnel (Cold Lookalikes -> Warm Video Viewers -> Hot Cart Abandoners), and implemented Conversions API (CAPI) for pixel attribution.',
-    isVerifiedResults: true,
-    results: [
-      'Generated $38,400+ in tracked revenue on $8,000 ad spend (4.8x verified blended ROAS).',
-      'Reduced average customer acquisition cost (CAC) by 41% from $24.20 to $14.10.',
-      'Achieved a 3.4% click-through rate (CTR), outperforming the industry benchmark of 1.2%.',
-      'Created an evergreen retargeting machine producing consistent daily store orders.',
-    ],
-    tools: ['Meta Ads Manager', 'Facebook Pixel & CAPI', 'Canva Pro', 'Google Analytics 4', 'CapCut'],
-    deliverables: [
-      'Full-Funnel Campaign Architecture',
-      '12 Video & Carousel Ad Creatives',
-      'Weekly Optimization & Attribution Dashboards',
-      'Evergreen Retargeting Playbook',
-    ],
-    metaAdsDetails: {
-      campaignObjective: 'Sales & Conversion (E-commerce Revenue Generation)',
-      industry: 'E-commerce & Lifestyle Consumer Goods',
-      targetAudience: 'Fashion-forward shoppers aged 21-42 in top urban metros, with interest in modern everyday essentials.',
-      campaignStrategy: 'Full-funnel strategy: TOFU (Broad & Lookalike 1-3% with hook video ads), MOFU (30-day page engagers with social proof carousels), BOFU (Add to cart & Checkout abandoners with dynamic catalog ads & urgency offers).',
-      creativeStrategy: 'Direct-response UGC unboxing and fast 2-second visual problem hooks created in CapCut and Canva, highlighting customer transformations and value guarantees.',
-      adSetup: 'Consolidated CBO (Advantage+ Budget) with 3 ad sets, automated bid caps for acquisition and lowest cost for retargeting.',
-      funnelDetails: 'Meta Feed/Reel Ad -> High-Speed Mobile Landing Page -> Shopify Checkout with instant WhatsApp customer support.',
-      trackingSetup: 'Meta Pixel + Conversions API (CAPI) through server gateway with 9.2/10 Event Match Quality score.',
-      optimizationStrategy: 'Daily kill/scale creative routines, pruning ad variants with hook rate under 25% and scaling winning hooks by 20% every 48 hours.',
-      metrics: {
-        reach: '248,500',
-        impressions: '412,000',
-        ctr: '3.4%',
-        cpc: '$0.28',
-        leads: 'N/A',
-        cpl: 'N/A',
-        conversions: '1,420 Purchases',
-        roas: '4.8x ROAS',
-      },
-      isVerifiedResults: true,
-      verifiedBadgeText: 'Verified Client Ad Spend & Pixel Data',
-    },
-  },
-  {
-    id: 'b2b-lead-meta-campaign',
-    title: 'High-Ticket B2B Lead Generation Meta Campaign',
-    category: 'META ADS',
-    subtitle: 'Meta Instant Lead Forms & Retargeting Generating 180+ Qualified Consultations',
-    client: 'Apex Corporate Advisory',
-    role: 'Paid Acquisition & Lead Strategist',
-    timeline: '4 Weeks',
-    thumbnail: dashboardImg,
-    metricHighlight: '180+ Qualified Leads | $4.20 CPL',
-    shortDescription: 'Engineered a targeted Meta Lead Generation campaign with qualifying multi-step forms and automated CRM routing.',
-    summary: 'Constructed an intent-driven Meta Lead Ads funnel targeting business executives and SME directors for strategic advisory consultations.',
-    outcome: 'Delivered 180+ verified qualified business leads at $4.20 Cost Per Lead (CPL), down from $11.50 previous baseline.',
-    challenge: 'Previous agency ran broad traffic campaigns that produced unqualified consumer clicks with zero commercial pipeline value.',
-    solution: 'Designed high-friction qualification lead forms on Meta to filter decision makers, paired with authority video snippets and instant WhatsApp booking confirmation.',
-    isVerifiedResults: true,
-    results: [
-      'Delivered 184 verified corporate leads with verified phone numbers and business emails.',
-      'Reduced Cost Per Lead (CPL) by 63% from $11.50 down to $4.20.',
-      'Achieved a 28% consultation booking rate within 48 hours of form completion.',
-    ],
-    tools: ['Meta Ads Manager', 'Zapier', 'Canva Pro', 'WhatsApp CRM', 'Meta Instant Forms'],
-    deliverables: [
-      'High-Intent Lead Form Architecture',
-      'Single-Image & Carousel Authority Creatives',
-      'Automated Lead Qualification Sequence',
-    ],
-    metaAdsDetails: {
-      campaignObjective: 'Lead Generation (Qualified B2B Consultations)',
-      industry: 'Corporate Consulting & Business Advisory',
-      targetAudience: 'Business Owners, Founders, Managing Directors, and Operations Executives aged 28-55.',
-      campaignStrategy: 'In-platform Meta Lead Generation with conditional logic questions to weed out students and tire-kickers.',
-      creativeStrategy: 'Clean, corporate authority cards with bold headlines highlighting executive pain points and clear ROI promises.',
-      adSetup: 'Advantage+ Audience targeting coupled with custom lookalikes based on existing client rosters.',
-      funnelDetails: 'Meta Native Lead Form -> Automated Zapier Webhook -> Instant WhatsApp Notification -> Google Sheet CRM.',
-      trackingSetup: 'Lead Generation event optimization with custom CRM status sync.',
-      optimizationStrategy: 'Filtered lead questions after week 1 to increase intent; concentrated 70% budget on winning headline variant.',
-      metrics: {
-        reach: '94,200',
-        impressions: '142,600',
-        ctr: '2.8%',
-        cpc: '$0.42',
-        leads: '184 Leads',
-        cpl: '$4.20',
-        conversions: '52 Booked Calls',
-        roas: 'N/A (B2B Lead Pipeline)',
-      },
-      isVerifiedResults: true,
-      verifiedBadgeText: 'Verified Lead Registry & CRM Tracking',
-    },
-  },
-  {
-    id: 'ai-landing-page-funnel',
-    title: 'AI-Powered High-Converting Landing Page',
-    category: 'LANDING PAGES',
-    subtitle: 'Conversion-Optimized Sales Page & Automated Lead Capture Funnel for SaaS Service Provider',
-    client: 'Apex Digital & B2B Solutions',
-    role: 'AI Landing Page Designer & CRO Strategist',
-    timeline: '3 Weeks',
-    thumbnail: dashboardImg,
-    metricHighlight: '+42% Conversion Rate | 2.1s Load Speed',
-    shortDescription: 'Modern, high-velocity landing page built with conversion psychology, mobile-first responsiveness, and sub-2.1s load speed.',
-    summary: 'Designed and developed a conversion-focused landing page with direct-response copywriting, mobile-first responsiveness, and integrated automated lead routing.',
-    outcome: 'Increased visit-to-lead conversion rate from 1.8% to 4.2% (+133% relative lift) and reduced mobile load time by 68%.',
-    challenge: 'The client was driving paid traffic to a bloated WordPress site that took 6.5 seconds to load and converted less than 1.8% of visitors into leads.',
-    solution: 'Re-architected the entire page structure using clean visual hierarchy, clear value propositions, interactive qualification cards, and instant webhook triggers.',
-    isVerifiedResults: true,
-    results: [
-      'Increased visit-to-lead conversion rate from 1.8% to 4.2% (+133% relative lift).',
-      'Reduced mobile page load time by 68% (from 6.5s down to 2.1s).',
-      'Generated over 120 qualified B2B inquiries within the first 30 days of launch.',
-      'Connected leads directly to sales reps on WhatsApp with zero manual delay.',
-    ],
-    tools: ['Figma', 'React & Tailwind CSS', 'Zapier Automation', 'Meta Pixel', 'Hotjar'],
-    deliverables: [
-      'High-Fidelity Mobile & Desktop Figma Designs',
-      'Production-Ready High-Speed Web Application',
-      'Direct-Response Copywriting & Value Stacking',
-      'Automated Lead Notification System',
-    ],
-    landingPageDetails: {
-      desktopScreenshot: dashboardImg,
-      mobileScreenshot: ecommerceImg,
-      businessObjective: 'Acquire high-intent inbound trial signups and consultative sales inquiries from paid Meta ad traffic.',
-      designStrategy: 'Minimalist high-contrast layout, prominent value proposition above the fold, sticky navigation, and zero visual clutter.',
-      conversionStrategy: 'Directional visual cues, social proof logos positioned directly below the headline, risk-free trial guarantee, and dual primary CTAs.',
-      ctaText: 'Start Your Free 14-Day Growth Trial →',
-      leadCapture: 'Interactive 3-step qualifying form storing lead data with instant WhatsApp notification.',
-      metaAdsIntegration: 'Custom Meta Pixel standard and custom events (ViewContent, InitiateCheckout, Lead, CompleteRegistration).',
-      tracking: 'Google Analytics 4 event streams, Hotjar heatmaps, and UTM parameter capture stored in CRM.',
-      mobileOptimization: 'Single-column fluid flow, 48px touch targets, sticky bottom action bar for mobile users, and optimized WebP images.',
-      aiWorkflowUsed: 'Claude for direct-response headline variations, Midjourney for custom visual assets, and v0/AI coding for rapid frontend prototyping.',
-      liveUrl: 'https://apex-growth-preview.demo',
-    },
-  },
-  {
-    id: 'ecommerce-landing-page',
-    title: 'High-Converting D2C Product Launch Page',
-    category: 'LANDING PAGES',
-    subtitle: 'Direct-Response Product Landing Page with Instant Checkout & Social Proof Stacking',
-    client: 'GlowSkin Organics',
-    role: 'Lead CRO & Landing Page Designer',
-    timeline: '2 Weeks',
-    thumbnail: ecommerceImg,
-    metricHighlight: '6.8% E-Commerce CVR | Instant Checkout',
-    shortDescription: 'Visual storytelling e-commerce landing page crafted for direct Meta ad traffic with dynamic before/after gallery and sticky buy bar.',
-    summary: 'Constructed an aesthetic, high-trust single-product landing page designed to turn cold TikTok & Meta ad traffic into immediate checkout customers.',
-    outcome: 'Achieved an average 6.8% store checkout conversion rate with a 22% bump in average order value (AOV) via strategic bundles.',
-    challenge: 'The brand relied on a generic multi-product catalog page where visitors bounced without purchasing.',
-    solution: 'Designed a dedicated single-product lander featuring ingredient transparency, real customer video reviews, FAQs, and a dynamic one-click bundle selector.',
-    isVerifiedResults: true,
-    results: [
-      'Achieved a 6.8% conversion rate on paid cold traffic (industry average ~2%).',
-      'Lifted Average Order Value (AOV) from $38 to $49 through 2-pack and 3-pack bundle offers.',
-      'Passed all Core Web Vitals with a 96/100 Mobile Performance Score.',
-    ],
-    tools: ['Figma', 'Shopify / Webflow', 'Canva Pro', 'Meta Pixel', 'Klaviyo'],
-    deliverables: [
-      'Mobile-First Landing Page Architecture',
-      'Sticky Add-to-Cart Module',
-      'Customer Review Carousel & Trust Badges',
-      'Klaviyo Abandoned Checkout Email Flow',
-    ],
-    landingPageDetails: {
-      desktopScreenshot: ecommerceImg,
-      mobileScreenshot: canvaImg,
-      businessObjective: 'Maximize instant purchase conversion from paid TikTok and Meta ad traffic for a hero skincare product.',
-      designStrategy: 'Clean pastel aesthetic, high-definition product closeups, dermatologist credibility badges, and clear typography.',
-      conversionStrategy: 'Quantity tier selector (Buy 1, Buy 2 Get 1 Free, Buy 3 Get Free Shipping) and live inventory counter.',
-      ctaText: 'Claim Your 40% Launch Discount Now →',
-      leadCapture: 'Exit-intent discount popup and 1-click cart drawer.',
-      metaAdsIntegration: 'ViewContent, AddToCart, and Purchase attribution tracking with CAPI.',
-      tracking: 'Meta Pixel, TikTok Pixel, GA4, and Triple Whale attribution.',
-      mobileOptimization: 'Thumb-friendly sticky bottom purchase bar, compressed media, sub-1.9s page render.',
-      aiWorkflowUsed: 'ChatGPT for objection-handling FAQs and AI image background enhancements.',
-      liveUrl: 'https://glowskin-lander.demo',
-    },
-  },
-  {
-    id: 'brand-identity-system',
-    title: 'Full Visual Brand Identity System',
-    category: 'BRANDING',
-    subtitle: 'Complete Visual Identity, Logo Architecture & Marketing Assets for Emerging Tech Startup',
-    client: 'NexGen Logistics & Mobility',
-    role: 'Brand Identity Designer & Creative Director',
-    timeline: '3 Weeks',
-    thumbnail: canvaImg,
-    metricHighlight: 'Full Brand Book | 35+ Assets',
-    shortDescription: 'Comprehensive corporate visual identity including vector logo suite, brand guidelines book, and marketing collateral.',
-    summary: 'Created a modern, technology-focused visual brand identity including primary/secondary logos, typography rules, color system, and company marketing collateral.',
-    outcome: 'Client successfully secured pre-seed funding with investor praise for pristine brand execution and consistency.',
-    challenge: 'The client was pitching to institutional angel investors but had an outdated logo and no brand consistency across touchpoints.',
-    solution: 'Developed a bold, corporate identity emphasizing reliability and speed, featuring a sleek geometric mark, navy/royal blue palette, and strict brand guidelines.',
-    isVerifiedResults: false,
-    workCompleted: 'Delivered complete vector logo suite (SVG, PNG, EPS, PDF), 38-page Brand Identity Guidelines, business stationery, investor pitch deck template, and 15 social media layouts.',
-    results: [
-      'Client successfully secured pre-seed funding with investor praise for brand presentation.',
-      'Delivered comprehensive brand guidelines document ensuring future team consistency.',
-      'Designed investor pitch deck, stationery, business cards, and social media kits.',
-    ],
-    tools: ['Adobe Illustrator', 'Canva Pro', 'Figma', 'Photoshop'],
-    deliverables: [
-      'Vector Logo Suite (.SVG, .PNG, .EPS, .PDF)',
-      '38-page Comprehensive Brand Identity Guidelines Book',
-      '15 Custom Social Media Presentation Templates',
-      'Stationery & Corporate Pitch Deck System',
-    ],
-  },
-  {
-    id: 'canva-training-academy',
-    title: 'Canva Design & Brand Academy',
-    category: 'BRANDING',
-    subtitle: 'Comprehensive Masterclass Curriculum, Visual Asset Library & Certification for 500+ Students',
-    client: 'Clarity Digital Academy',
-    role: 'Founder, Lead Instructor & Creative Director',
-    timeline: 'Ongoing (Quarterly Cohorts)',
-    thumbnail: canvaImg,
-    metricHighlight: '500+ Students | 98% Satisfaction',
-    shortDescription: 'Intensive practical branding masterclass empowering 500+ entrepreneurs and creators to build high-end visual assets.',
-    summary: 'Built an intensive, practical brand design bootcamp that equips entrepreneurs, freelancers, and marketers with professional visual design skills in Canva.',
-    outcome: 'Trained and certified 500+ students across 4 cohorts; 65+ graduates launched freelance design businesses.',
-    challenge: 'Aspiring creators and small business owners produced amateur-looking graphics that failed to convert followers into paying customers.',
-    solution: 'Developed a structured curriculum focusing on typographic contrast, color psychology, layout composition, and direct application to advertising and social branding.',
-    isVerifiedResults: true,
-    results: [
-      'Successfully graduated over 500 active learners with verified practical design portfolios.',
-      'Over 65 students transitioned into paid freelance design and social media contracts within 60 days.',
-      'Maintained a 4.9/5 student rating across 4 consecutive training batches.',
-      'Produced complete reusable corporate template systems and certification credentials.',
-    ],
-    tools: ['Canva Pro', 'WhatsApp CRM', 'Notion', 'Google Slides', 'CapCut'],
-    deliverables: [
-      '3-Day Intensive Live & Recorded Workshop Series',
-      'Comprehensive Canva Design Blueprint Handbook',
-      '40+ Ready-to-Use Social Flyer & Carousel Templates',
-      'Custom Certificate of Completion Verification System',
-    ],
-  },
-  {
-    id: 'omnichannel-social-growth',
-    title: 'Organic Social Media Growth & Viral System',
-    category: 'SOCIAL MEDIA',
-    subtitle: 'Instagram & Facebook Content Strategy Delivering 320% Organic Engagement Growth',
-    client: 'Lifestyle Brand & Personal Growth Consultancy',
-    role: 'Social Media Strategist & Content Lead',
-    timeline: '8 Weeks',
-    thumbnail: aboutImg,
-    metricHighlight: '+320% Engagement | 45K+ Reach',
-    shortDescription: 'End-to-end social media management, content calendar execution, educational carousels, and community nurturing.',
-    summary: 'Formulated and executed a high-retention content calendar across Instagram and Facebook featuring value carousels, topical reels, and weekly stories.',
-    outcome: 'Grew monthly profile reach by 320% organically and drove 65+ inbound direct message customer inquiries.',
-    challenge: 'Low engagement rates (under 0.8%) due to sporadic posting and text-heavy graphics with weak hooks.',
-    solution: 'Introduced 3 weekly educational carousels, 2 CapCut short-form reels, and active direct message conversational flows.',
-    isVerifiedResults: true,
-    results: [
-      'Lifted organic engagement rate from 0.8% to 4.2% across 60 days.',
-      'Generated 45,000+ non-follower account impressions strictly organically.',
-      'Converted 65+ inbound DM conversations into paying event attendees.',
-    ],
-    tools: ['Canva Pro', 'CapCut', 'Meta Business Suite', 'Notion Content Calendar', 'Instagram Insights'],
-    deliverables: [
-      'Monthly Themed Content Calendar',
-      '24 Carousel Graphics & Infographics',
-      '12 Short-Form Reels with Subtitles',
-      'DM Engagement Playbook',
-    ],
-  },
-  {
-    id: 'ai-lead-automation-crm',
-    title: 'AI Lead Automation & Instant CRM System',
-    category: 'AI & AUTOMATION',
-    subtitle: 'Zero-Delay Automated Lead Qualification, Instant WhatsApp Notification & CRM Sync',
-    client: 'Commercial Property & Consultancies',
-    role: 'AI Automation Specialist',
-    timeline: '2 Weeks',
-    thumbnail: dashboardImg,
-    metricHighlight: '0-Min Response Time | 85% Time Saved',
-    shortDescription: 'Multi-tool Zapier & Make automated system routing ad leads to WhatsApp, automated email, and Google CRM within 60 seconds.',
-    summary: 'Engineered an end-to-end automated workflow connecting Meta ad lead forms and website inquiries directly to WhatsApp, automated email sequences, and CRM pipeline.',
-    outcome: 'Eliminated 14-hour manual delay by establishing instant automated response under 60 seconds, lifting booking rates by 38%.',
-    challenge: 'Leads generated from Meta ads sat uncontacted for 12-24 hours, causing over 60% of potential buyers to go cold or pick competitors.',
-    solution: 'Built instant webhook triggers via Zapier and Make, integrated automated SMS/WhatsApp greetings within 60 seconds, and pushed filtered lead data into CRM pipelines.',
-    isVerifiedResults: true,
-    results: [
-      'Reduced average lead response time from 14 hours to less than 60 seconds.',
-      'Increased lead-to-booking rate by 38% due to instant contact engagement.',
-      'Saved the business over 15 hours of manual data entry every week.',
-    ],
-    tools: ['Zapier', 'Make.com', 'WhatsApp Business API', 'Google Sheets CRM', 'Meta Webhooks'],
-    deliverables: [
-      'Full End-to-End Workflow Architecture Diagram',
-      'Instant WhatsApp & Email Nurturing Sequences',
-      'CRM Pipeline Setup & Real-Time Sync',
-      'Client Operational Handover Guide',
-    ],
-  },
-  {
-    id: 'ai-web-app-portal',
-    title: 'Modern AI-Integrated Client Web Platform',
-    category: 'WEB DEVELOPMENT',
-    subtitle: 'High-Performance React & Tailwind Web Application with Real-Time Cloud Database & Admin Controls',
-    client: 'PropTech Digital Solutions',
-    role: 'Full-Stack Developer & UI Designer',
-    timeline: '4 Weeks',
-    thumbnail: dashboardImg,
-    metricHighlight: 'Sub-second Load | 100% Mobile Fluid',
-    shortDescription: 'Custom, blazing-fast web portal featuring responsive UI, cloud database integration, and intuitive client administration.',
-    summary: 'Engineered a modern web application using React, TypeScript, Tailwind CSS, and Firebase Firestore to provide an interactive property portfolio with dynamic admin editing.',
-    outcome: 'Delivered production-ready web platform with zero lag, secure cloud auth, and comprehensive administrative portal.',
-    challenge: 'Client lacked a modern digital interface and was losing deals to competitors with sleek interactive websites.',
-    solution: 'Developed a custom component-driven application with modular architecture, instant search filtering, and cloud persistence.',
-    isVerifiedResults: false,
-    workCompleted: 'Built complete responsive frontend in React/TypeScript, implemented Firebase Firestore database, designed custom UI components, and integrated automated lead forms.',
-    results: [
-      'Delivered fully functional, mobile-responsive web platform with 98+ Google Lighthouse score.',
-      'Integrated real-time Firestore database synchronization for instant data updates.',
-      'Empowered internal staff to manage listings and inquiries with zero coding knowledge.',
-    ],
-    tools: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase Firestore', 'Vite'],
-    deliverables: [
-      'Full Source Code & Component Hierarchy',
-      'Cloud Database Rules & Security Schema',
-      'Admin Control Panel & Inbound Lead Pipeline',
-    ],
-  },
-  {
-    id: 'capcut-motion-video-ads',
-    title: 'High-Impact Direct-Response Video Ad Creatives',
-    category: 'VIDEO',
-    subtitle: 'CapCut-Edited Scroll-Stopping Video Ads with Kinetic Hooks & Captions for Meta and TikTok',
-    client: 'Consumer Tech & Fitness Brands',
-    role: 'Video Editor & Direct-Response Creative Strategist',
-    timeline: 'Ongoing Campaigns',
-    thumbnail: portraitImg,
-    metricHighlight: '72% 3s Hook Rate | 3.6x ROAS',
-    shortDescription: 'Fast-paced, pattern-interrupt short-form video creatives engineered in CapCut with dynamic kinetic captions and sound design.',
-    summary: 'Scripted, cut, and edited direct-response video ad variations tailored for Meta Reels, Stories, and TikTok Ads, optimizing for high thumb-stop rates.',
-    outcome: 'Achieved 72% 3-second hook retention rate and dropped cost per click by 34% across paid ad accounts.',
-    challenge: 'Client’s previous studio videos looked like traditional commercials, resulting in high swipe-away rates and poor ROAS.',
-    solution: 'Edited native, UGC-style dynamic videos using CapCut with fast cuts, sound effects, bold keyword captions, and relatable opening hooks.',
-    isVerifiedResults: true,
-    results: [
-      'Average 3-second hook rate increased from 24% to 72%.',
-      'Dropped Cost Per Click (CPC) from $0.62 to $0.41 across Meta & TikTok.',
-      'Contributed to an average 3.6x Return on Ad Spend for the ad sets tested.',
-    ],
-    tools: ['CapCut Pro', 'Canva Pro', 'TikTok Creative Center', 'Meta Ads Manager'],
-    deliverables: [
-      '8 High-Converting Video Ad Variations (15s & 30s)',
-      'Subtitled Reels & TikTok Formats',
-      'Sound Design & Kinetic Typography Animations',
-    ],
-  },
-];
+export const PROJECTS: Project[] = [];
 
-export const BRAND_DESIGNS: BrandDesignItem[] = [
-  {
-    id: 'bd-1',
-    title: 'NexGen Mobility Corporate Logo Mark',
-    category: 'Logos',
-    imageUrl: canvaImg,
-    description: 'Minimalist geometric monogram representing motion, reliability, and modern technological velocity.',
-    client: 'NexGen Logistics',
-    tools: ['Adobe Illustrator', 'Canva Pro'],
-    year: '2024',
-  },
-  {
-    id: 'bd-2',
-    title: 'Executive Masterclass Promotional Flyer',
-    category: 'Flyers',
-    imageUrl: canvaImg,
-    description: 'High-contrast promotional flyer crafted for digital distribution and corporate sponsorship drives.',
-    client: 'Clarity Digital Academy',
-    tools: ['Canva Pro'],
-    year: '2024',
-  },
-  {
-    id: 'bd-3',
-    title: 'High-Converting Carousel Graphic Suite',
-    category: 'Social media graphics',
-    imageUrl: aboutImg,
-    description: '10-slide educational carousel system engineered for Instagram and LinkedIn with high typographic hierarchy.',
-    client: 'Growth Strategy Client',
-    tools: ['Canva Pro', 'Figma'],
-    year: '2024',
-  },
-  {
-    id: 'bd-4',
-    title: 'Complete Visual Brand Identity Guide',
-    category: 'Brand identities',
-    imageUrl: canvaImg,
-    description: 'Full 38-page corporate style manual containing typography scales, color codes, logo clearspace, and tone guidelines.',
-    client: 'Apex Digital Solutions',
-    tools: ['Figma', 'Illustrator', 'Canva'],
-    year: '2024',
-  },
-  {
-    id: 'bd-5',
-    title: 'Product Packaging & Marketing Brochure',
-    category: 'Marketing materials',
-    imageUrl: ecommerceImg,
-    description: 'Physical marketing collateral, product sleeve mockup, and direct-mail promotional inserts.',
-    client: 'Lifestyle Brand',
-    tools: ['Adobe Photoshop', 'Canva Pro'],
-    year: '2024',
-  },
-  {
-    id: 'bd-6',
-    title: 'Black Friday Campaign Visual Ads System',
-    category: 'Campaign designs',
-    imageUrl: ecommerceImg,
-    description: 'Cohesive cross-platform seasonal promotional banners for Facebook feeds, stories, and email newsletters.',
-    client: 'EazyMart Retail',
-    tools: ['Canva Pro', 'CapCut'],
-    year: '2024',
-  },
-  {
-    id: 'bd-7',
-    title: 'Investor Pitch & Commercial Deck',
-    category: 'Presentations',
-    imageUrl: dashboardImg,
-    description: '22-slide high-impact investor presentation deck formatted with clean data visualization and structured narratives.',
-    client: 'Fintech Startup',
-    tools: ['Google Slides', 'Canva Pro'],
-    year: '2024',
-  },
-];
+export const BRAND_DESIGNS: BrandDesignItem[] = [];
 
-export const SOCIAL_MEDIA_ITEMS: SocialMediaWorkItem[] = [
-  {
-    id: 'sm-1',
-    title: 'Meta Ads Retargeting Carousel Graphic',
-    platform: 'Instagram',
-    category: 'Campaigns',
-    imageUrl: ecommerceImg,
-    description: 'Direct-response product carousel breaking down customer objections and showcasing verified 5-star reviews.',
-    postType: 'Carousel',
-    metrics: '+4.8x ROAS Funnel',
-  },
-  {
-    id: 'sm-2',
-    title: 'Canva Design Tips & Typography Hacks',
-    platform: 'Instagram',
-    category: 'Content',
-    imageUrl: canvaImg,
-    description: 'Educational micro-infographic providing immediate value to designers and business owners.',
-    postType: 'Post',
-    metrics: '1,200+ Saves & Shares',
-  },
-  {
-    id: 'sm-3',
-    title: 'Corporate Announcement & Brand Launch',
-    platform: 'Facebook',
-    category: 'Branding',
-    imageUrl: canvaImg,
-    description: 'Clean, authoritative Facebook visual banner announcing new service offerings and certifications.',
-    postType: 'Post',
-    metrics: '8,400 Organic Reach',
-  },
-  {
-    id: 'sm-4',
-    title: 'Viral 3-Second Hook Video Creative',
-    platform: 'TikTok',
-    category: 'TikTok',
-    imageUrl: portraitImg,
-    description: 'Dynamic short-form reel highlighting common marketing mistakes and practical fixes.',
-    postType: 'Reel',
-    metrics: '42K Organic Views',
-  },
-  {
-    id: 'sm-5',
-    title: 'Quarterly Digital Marketing Content Calendar',
-    platform: 'Instagram',
-    category: 'Content',
-    imageUrl: dashboardImg,
-    description: 'Strategic 90-day social media roadmap balancing educational, authority, and conversion content pillars.',
-    postType: 'Calendar',
-    metrics: '3x Weekly Consistency',
-  },
-  {
-    id: 'sm-6',
-    title: 'High-Impact Facebook Ad Static Creative',
-    platform: 'Facebook',
-    category: 'Facebook',
-    imageUrl: ecommerceImg,
-    description: 'High-contrast headline banner targeting local business owners with an irresistible consultation offer.',
-    postType: 'Ad Creative',
-    metrics: '3.4% Click-Through Rate',
-  },
-];
+export const SOCIAL_MEDIA_ITEMS: SocialMediaWorkItem[] = [];
 
-export const VIDEO_ITEMS: VideoContentItem[] = [
-  {
-    id: 'vid-1',
-    title: 'Direct-Response Product Unboxing Ad',
-    category: 'Short-form videos',
-    platform: 'Meta Ads',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    thumbnail: ecommerceImg,
-    description: 'Fast-paced lifestyle unboxing ad edited in CapCut with bold subtitles, sound effects, and direct call-to-action.',
-    primaryTool: 'CapCut',
-    duration: '0:15',
-    projectUrl: 'https://instagram.com',
-  },
-  {
-    id: 'vid-2',
-    title: '3 Common Meta Ad Budget Mistakes (And How to Fix Them)',
-    category: 'Reels',
-    platform: 'Instagram',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-    thumbnail: portraitImg,
-    description: 'Educational authority reel with kinetic text overlays, dynamic zoom transitions, and actionable tips.',
-    primaryTool: 'CapCut',
-    duration: '0:32',
-    projectUrl: 'https://instagram.com',
-  },
-  {
-    id: 'vid-3',
-    title: 'Behind-The-Scenes Brand Identity Creation',
-    category: 'TikTok videos',
-    platform: 'TikTok',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-    thumbnail: canvaImg,
-    description: 'Trending audio workflow showcase demonstrating logo sketching and Canva vector refinement.',
-    primaryTool: 'CapCut',
-    duration: '0:22',
-    projectUrl: 'https://tiktok.com',
-  },
-  {
-    id: 'vid-4',
-    title: 'Clarity Digital Academy Masterclass Promo',
-    category: 'Promotional videos',
-    platform: 'Instagram',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4',
-    thumbnail: aboutImg,
-    description: 'High-energy cohort announcement video featuring student testimonials, screen recordings, and urgency countdown.',
-    primaryTool: 'CapCut',
-    duration: '0:45',
-    projectUrl: 'https://wa.me/2348061234567',
-  },
-];
+export const VIDEO_ITEMS: VideoContentItem[] = [];
 
 export const AI_WORKFLOW_AREAS = [
   {
@@ -916,9 +359,9 @@ export const RESUME_DATA = {
       company: 'Mr. Clarity Growth Consulting',
       period: '2022 - Present',
       points: [
-        'Manage end-to-end paid advertising campaigns across Meta (Facebook/Instagram) and TikTok with $500K+ in ad spend managed at an average 4.8x ROAS.',
-        'Design high-converting, mobile-first AI landing pages that increase lead conversion rates by 25% to 60%.',
-        'Implement automated lead capture funnels and AI CRM workflows that reduce lead response times to under 60 seconds.',
+        'Manage end-to-end paid advertising campaigns across Meta (Facebook/Instagram) with ₦500K+ in ad spend managed at an average 4.5x ROAS.',
+        'Design high-converting, mobile-first landing pages with direct WhatsApp conversion funnels.',
+        'Implement automated lead capture funnels and WhatsApp CRM workflows that reduce lead response times to under 60 seconds.',
       ],
     },
     {
@@ -955,51 +398,341 @@ export const RESUME_DATA = {
   },
 };
 
-export const DEFAULT_CASE_STUDIES = [
+export const DEFAULT_CASE_STUDIES: any[] = [];
+
+export const DEFAULT_FAQS: FAQItem[] = [
   {
-    id: 'cs-1',
-    title: 'Scaling an E-Commerce Brand to $45,000/mo at 4.6x ROAS',
-    client: 'GlowAura Skincare & Cosmetics',
-    category: 'META ADS',
-    summary: 'Restructured paid Meta advertising architecture from fragmented ad sets to a consolidated broad-targeting funnel with dynamic UGC hooks.',
-    challenge: 'High cost per acquisition ($38 CAC) on a $55 AOV product, creative fatigue after 3 weeks, and untracked iOS14 drop-offs.',
-    strategy: 'Implemented Meta Conversions API (CAPI) with first-party tracking, produced 12 CapCut UGC creative iterations testing 3 distinct pain-point hooks, and built an Advantage+ shopping campaign scaling to $1,500/day.',
-    results: 'Drove 4.6x verified blended ROAS, dropped CAC from $38 to $16.40, and generated $45,200 in monthly tracked revenue within 60 days.',
-    metrics: '$45.2K Revenue | 4.6x ROAS | -57% CAC',
-    featured: true,
-    isPublished: true,
+    id: 'faq-1',
+    question: 'What services do you offer?',
+    answer: 'I offer Meta Ads Management (Facebook and Instagram Ads), Landing Page Design, Brand Design, Social Media Management, AI Automation, AI Website Development, Video Editing and Digital Marketing Strategy.',
     order: 1,
-    thumbnail: ecommerceImg,
+    isPublished: true,
   },
   {
-    id: 'cs-2',
-    title: 'High-Converting AI SaaS Landing Page with 8.4% Visit-to-Trial Rate',
-    client: 'TaskFlow AI Workspace',
-    category: 'LANDING PAGES',
-    summary: 'Engineered a conversion-focused landing page with direct-response headline hierarchy, interactive ROI calculator, and sub-second load times.',
-    challenge: 'Previous generic WordPress site loaded in 4.8 seconds with bounce rate over 68% and less than 1.9% sign-up conversion.',
-    strategy: 'Redesigned mobile-first in React and Tailwind, optimized above-the-fold value propositions, integrated social proof ticker, and accelerated asset delivery to 0.8s FCP.',
-    results: 'Lifted conversion from 1.9% to 8.4%, reduced bounce rate to 28%, and captured 1,420 beta signups in the first month.',
-    metrics: '8.4% Conversion | 1,420 Leads | 0.8s Load',
-    featured: true,
-    isPublished: true,
+    id: 'faq-2',
+    question: 'Who do you work with?',
+    answer: 'I work with businesses, entrepreneurs, startups, organizations and brands looking to improve their digital marketing, generate leads, optimize campaigns or create better digital assets.',
     order: 2,
-    thumbnail: dashboardImg,
+    isPublished: true,
   },
   {
-    id: 'cs-3',
-    title: 'Building Clarity Digital Academy: Training 500+ Students in Visual Branding',
-    client: 'Clarity Digital Academy',
-    category: 'BRAND DESIGN',
-    summary: 'Founded practical digital academy teaching Canva Pro brand design, conversion typography, and freelance client acquisition.',
-    challenge: 'Aspiring creators and small business owners lacked access to practical, affordable branding training that directly translates to income.',
-    strategy: 'Created 4-week structured cohort curriculum with step-by-step video lessons, live feedback teardowns, and reusable commercial template packs.',
-    results: 'Trained and certified 500+ participants across 4 cohorts with a 98% satisfaction rating and 65+ graduates launching freelance businesses.',
-    metrics: '500+ Students | 98% Satisfaction | 65+ Freelancers',
-    featured: true,
-    isPublished: true,
+    id: 'faq-3',
+    question: 'Can you help me run Facebook and Instagram Ads?',
+    answer: 'Yes. I handle campaign strategy, audience targeting, ad creatives, campaign setup, testing, optimization and reporting.',
     order: 3,
-    thumbnail: canvaImg,
+    isPublished: true,
+  },
+  {
+    id: 'faq-4',
+    question: 'Do you design landing pages for ads?',
+    answer: 'Yes. I design conversion-focused landing pages designed to turn ad traffic into leads, inquiries and sales.',
+    order: 4,
+    isPublished: true,
+  },
+  {
+    id: 'faq-5',
+    question: 'What is the difference between graphics design and digital marketing?',
+    answer: 'Graphics design helps communicate visually and build trust, while digital marketing focuses on reaching the right audience, driving traffic and generating measurable business results. I combine both.',
+    order: 5,
+    isPublished: true,
+  },
+  {
+    id: 'faq-6',
+    question: 'How do you use AI in your work?',
+    answer: 'I use AI for research, content drafting, workflow automation, website development and improving productivity. AI helps speed up processes, but strategy and human judgment remain central.',
+    order: 6,
+    isPublished: true,
+  },
+  {
+    id: 'faq-7',
+    question: 'What is your process for starting a project?',
+    answer: 'We begin by discussing your business, audience, offer and goals. From there, I develop a plan, create the necessary assets or campaigns, launch and optimize based on results.',
+    order: 7,
+    isPublished: true,
+  },
+  {
+    id: 'faq-8',
+    question: 'How much do you charge?',
+    answer: 'Pricing depends on the scope of the project, deliverables and requirements. Reach out with your project details and I will provide a clear proposal.',
+    order: 8,
+    isPublished: true,
+  },
+  {
+    id: 'faq-9',
+    question: 'Are you open to full-time or contract roles?',
+    answer: 'Yes. I am open to freelance projects, contract roles, full-time positions and strategic collaborations.',
+    order: 9,
+    isPublished: true,
+  },
+  {
+    id: 'faq-10',
+    question: 'How can I get started?',
+    answer: "You can use the 'Hire Me' button, send a message through the contact form, email me at ipesolasulaiman@gmail.com or reach out via WhatsApp at +234 805 178 0169.",
+    order: 10,
+    isPublished: true,
+  },
+];
+
+export const DEFAULT_ABOUT_SECTIONS: AboutSectionItem[] = [
+  {
+    id: 'about-01',
+    sectionNumber: '01',
+    title: 'WHO I AM',
+    subtitle: 'Onifade Sulaiman (Mr. Clarity)',
+    content: `I am Onifade Sulaiman, professionally known as Mr. Clarity. I am a Digital Marketer and Digital Solutions Specialist focused on helping businesses build stronger digital presence, attract the right audience and turn ideas into practical digital solutions.
+
+My work sits at the intersection of Digital Marketing, Meta Ads, Landing Pages, Brand Design, Social Media Management, AI Automation and Digital Development.
+
+I enjoy taking something unclear and turning it into something simple, useful and understandable. That mindset is a major part of what the name Mr. Clarity represents.`,
+    order: 1,
+    isPublished: true,
+  },
+  {
+    id: 'about-02',
+    sectionNumber: '02',
+    title: 'WHERE IT STARTED',
+    subtitle: 'Curiosity and Questions',
+    content: `I did not start with everything figured out.
+
+I started by learning, creating and trying to understand how things work.
+
+My curiosity was not only about creating something that looked good. I became interested in why some businesses get attention online while others struggle to be noticed.
+
+I started asking questions:
+• Why do some advertisements get people to stop scrolling?
+• Why do some brands immediately look trustworthy?
+• Why does one landing page make you want to take action while another makes you leave?
+• Why do some businesses have good products but still struggle to get customers online?
+
+Those questions gradually changed the way I looked at digital work.`,
+    order: 2,
+    isPublished: true,
+  },
+  {
+    id: 'about-03',
+    sectionNumber: '03',
+    title: 'FROM DESIGN TO DIGITAL MARKETING',
+    subtitle: 'Beyond Visual Aesthetics',
+    content: `One of the important stages of my journey was graphics design.
+
+Design taught me something simple but powerful: People often notice what they see before they understand what you are saying.
+
+That changed the way I approached design. I became less interested in creating something that was simply beautiful and more interested in understanding what the design was supposed to achieve:
+• Was it meant to attract attention?
+• Build trust?
+• Communicate an offer?
+• Promote a product?
+• Generate a response?
+
+That shift eventually led me deeper into Digital Marketing.`,
+    order: 3,
+    isPublished: true,
+  },
+  {
+    id: 'about-04',
+    sectionNumber: '04',
+    title: 'DISCOVERING META ADS',
+    subtitle: 'Beyond the Boost Button',
+    content: `In 2024, I began taking Digital Marketing more seriously.
+
+I started learning how Facebook and Instagram advertising actually works beyond simply pressing the boost button.
+
+I became interested in audience targeting, campaign objectives, ad creatives, lead generation, offers, landing pages and conversion.
+
+The more I learned, the more I realized that successful advertising is not simply about spending money to show an advert. It is about understanding the audience, presenting the right message, creating a clear offer and giving people a reason to take the next step.`,
+    order: 4,
+    isPublished: true,
+  },
+  {
+    id: 'about-05',
+    sectionNumber: '05',
+    title: 'FROM RUNNING ADS TO UNDERSTANDING THE CUSTOMER JOURNEY',
+    subtitle: 'Looking at the Complete Journey',
+    content: `One of the biggest lessons I learned was that an advertisement does not exist alone. You can have a good advert and still lose the customer after the click.
+
+That made me start looking at the entire customer journey:
+• The ad
+• The creative
+• The message
+• The landing page
+• The branding
+• The offer
+• The follow-up
+• The overall customer experience
+
+Today, when I look at a digital marketing project, I do not only ask, "How do we run the advert?"
+I also ask, "What happens after someone sees it?"`,
+    order: 5,
+    isPublished: true,
+  },
+  {
+    id: 'about-06',
+    sectionNumber: '06',
+    title: 'WHY I COMBINE MARKETING, DESIGN AND TECHNOLOGY',
+    subtitle: 'Connecting the Digital Pieces',
+    content: `As I worked on different digital projects, I noticed that many businesses have good ideas but disconnected digital systems.
+
+Their social media may look good, but their landing page may not convert.
+Their landing page may look good, but their advertising strategy may be unclear.
+They may receive leads but have no proper process for managing them.
+
+That is why I became increasingly interested in combining marketing, design and technology.
+
+Today, I see AI tools, automation, websites and digital systems as practical tools for solving business problems, not simply technologies to show off.`,
+    order: 6,
+    isPublished: true,
+  },
+  {
+    id: 'about-07',
+    sectionNumber: '07',
+    title: 'WHAT I DO TODAY',
+    subtitle: 'Core Digital Solutions Built Around Practical Growth',
+    content: `Today, I help businesses, founders and teams build clear and effective digital solutions across 8 specialized disciplines:
+
+1. META ADS MANAGEMENT: Facebook and Instagram advertising strategy, campaign setup, audience targeting, creative direction, testing and optimization.
+2. LANDING PAGE DESIGN: Conversion-focused landing pages designed to support advertising campaigns, lead generation and clear customer journeys.
+3. BRAND DESIGN: Professional visual identities, marketing graphics and brand assets that help businesses communicate clearly.
+4. SOCIAL MEDIA MANAGEMENT: Content planning, social media strategy, creative content and audience engagement.
+5. AI AUTOMATION: Practical AI-powered workflows and automation designed to reduce repetitive work and improve digital processes.
+6. AI SOFTWARE AND WEBSITE DEVELOPMENT: Modern websites, landing pages and digital applications designed around practical business needs.
+7. VIDEO EDITING: Short-form and promotional video editing using tools such as CapCut.
+8. DIGITAL MARKETING STRATEGY: Helping businesses understand their audience, positioning, offers, campaigns and digital customer journey.`,
+    order: 7,
+    isPublished: true,
+  },
+  {
+    id: 'about-08',
+    sectionNumber: '08',
+    title: 'WHAT I HAVE LEARNED ALONG THE WAY',
+    subtitle: 'Key Marketing Principles',
+    quote: 'Marketing is not simply about making noise. It is about communication.',
+    content: `I have learned that marketing is not simply about making noise.
+It is about communication.
+It is about understanding people.
+It is about presenting the right message to the right audience at the right time.
+It is about making the offer clear.
+It is about building trust.
+And most importantly, it is about making the next step easy to understand.`,
+    order: 8,
+    isPublished: true,
+  },
+  {
+    id: 'about-09',
+    sectionNumber: '09',
+    title: 'MY APPROACH',
+    subtitle: 'The 5-Stage Framework',
+    quote: 'I do not believe every business needs the same strategy. The right approach depends on the business, the audience, the offer and the goal.',
+    content: `UNDERSTAND: Understand the business, audience, offer and objective.
+PLAN: Build a practical strategy based on the actual goal.
+CREATE: Develop the campaign, creative, landing page, content or digital solution.
+LAUNCH: Put the strategy into action.
+IMPROVE: Review performance, identify weaknesses and improve where necessary.`,
+    order: 9,
+    isPublished: true,
+  },
+  {
+    id: 'about-10',
+    sectionNumber: '10',
+    title: 'MY PROFESSIONAL JOURNEY',
+    subtitle: 'Continuous Growth & Focus',
+    content: `2024: Started building practical experience in Digital Marketing, Graphics Design and online business promotion.
+2025: Expanded into Meta Ads, landing pages, branding, social media management and broader digital marketing projects.
+2026: Focused more deeply on Meta Ads, landing pages, branding, social media, AI automation and digital development.
+CURRENT: Continuing to build, learn and work on freelance projects, professional opportunities, partnerships and digital solutions.`,
+    order: 10,
+    isPublished: true,
+  },
+  {
+    id: 'about-11',
+    sectionNumber: '11',
+    title: 'WHAT DRIVES ME',
+    subtitle: 'The Philosophy Behind Mr. Clarity',
+    content: `I enjoy taking unclear ideas and turning them into understandable solutions.
+That is where the name Mr. Clarity comes from.
+
+For me, clarity is not just a name. It is an approach:
+• Clarity in the message.
+• Clarity in the design.
+• Clarity in the strategy.
+• Clarity in the customer journey.
+• Clarity in what happens next.`,
+    order: 11,
+    isPublished: true,
+  },
+  {
+    id: 'about-12',
+    sectionNumber: '12',
+    title: 'WHERE I AM GOING',
+    subtitle: 'Committed to Continuous Learning',
+    content: `I am still learning, and I intend to keep learning.
+
+Digital marketing, technology and AI continue to change quickly. That means staying relevant requires curiosity, practice and the willingness to improve.
+
+My goal is to continue working on challenging projects, learn from businesses and teams, and build practical digital solutions that create real value.
+
+Long term, I want to keep developing at the intersection of marketing, design, technology and AI.`,
+    order: 12,
+    isPublished: true,
+  },
+  {
+    id: 'about-13',
+    sectionNumber: '13',
+    title: 'WHY WORK WITH ME',
+    subtitle: 'Focused on the Problem Behind the Project',
+    content: `You should not work with me simply because I can run Meta Ads, design graphics, build a landing page or use AI tools.
+
+Work with me because I am interested in the problem behind the project.
+
+I want to understand:
+• What are you trying to achieve?
+• Who are you trying to reach?
+• What is currently not working?
+• What should happen after someone sees your campaign?
+• What digital experience should your customer have?
+
+That mindset allows me to look beyond individual tasks and think about the bigger picture.`,
+    highlights: [
+      'Meta Ads',
+      'Landing Pages',
+      'Brand Design',
+      'Social Media',
+      'AI Automation',
+      'Website Development',
+      'Video Editing',
+      'Digital Strategy',
+    ],
+    order: 13,
+    isPublished: true,
+  },
+  {
+    id: 'about-14',
+    sectionNumber: '14',
+    title: 'A SHORT PERSONAL NOTE',
+    subtitle: 'Building the Story',
+    content: `I am still building my story.
+
+I am proud of how far I have come since I started taking this journey seriously in 2024, but I also know there is still a lot more to learn.
+
+Every project, campaign, client interaction and challenge teaches me something.
+
+I see my portfolio as more than a collection of work. It is a record of what I have learned, what I can do today and where I am heading next.
+
+This is not the final version of my story.
+It is the part I am currently building.`,
+    order: 14,
+    isPublished: true,
+  },
+  {
+    id: 'about-15',
+    sectionNumber: '15',
+    title: "LET'S WORK TOGETHER",
+    subtitle: "LET'S BUILD SOMETHING THAT MAKES SENSE.",
+    content: `Have a business idea, marketing challenge or digital project you want to discuss? I would be happy to hear about it.
+
+Phone: +234 805 178 0169
+Email: ipesolasulaiman@gmail.com`,
+    order: 15,
+    isPublished: true,
   },
 ];
 

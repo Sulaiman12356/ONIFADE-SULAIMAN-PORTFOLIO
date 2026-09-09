@@ -1,83 +1,92 @@
-import { PERSONAL_INFO, RESUME_DATA } from '../data/portfolioData';
+import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const downloadCvFile = () => {
   const content = `================================================================================
-ONIFADE SULAIMAN (MR. CLARITY) - CURRICULUM VITAE
+ONIFADE SULAIMAN - CURRICULUM VITAE
 ================================================================================
-Professional Brand: Mr. Clarity
-Positioning: Digital Marketer | Graphics Designer | Data Enthusiast | Tech Innovator
-Email: ${PERSONAL_INFO.email}
-Phone: ${PERSONAL_INFO.phone}
-Location: ${PERSONAL_INFO.location}
-Availability: Full-time • Part-time • Freelance • Remote (Worldwide)
+NAME:
+Onifade Sulaiman (Mr. Clarity)
 
---------------------------------------------------------------------------------
-EXECUTIVE SUMMARY
---------------------------------------------------------------------------------
-${RESUME_DATA.summary}
+PROFESSIONAL TITLE:
+Digital Marketer and Digital Solutions Specialist
 
---------------------------------------------------------------------------------
+EMAIL:
+${PERSONAL_INFO.email}
+
+PHONE:
+${PERSONAL_INFO.phone}
+
+LOCATION:
+${PERSONAL_INFO.location}
+
+AVAILABILITY:
+Full-Time, Contract, Freelance, Remote, Consulting, Collaboration
+
+================================================================================
+PROFESSIONAL SUMMARY
+================================================================================
+Digital Marketing professional with practical experience in Meta Ads, social media marketing, landing page design, branding, content design, AI automation and digital development. I help businesses improve their online presence, attract potential customers and create better digital experiences.
+
+================================================================================
+ACHIEVEMENTS & VERIFIED METRICS
+================================================================================
+• ₦500K+ Meta Ads Spend Managed
+• 30+ Projects Completed
+• 20+ Clients Served
+• 2+ Years Experience
+
+================================================================================
+CORE SKILLS
+================================================================================
+• Meta Ads
+• Facebook Ads
+• Instagram Ads
+• TikTok Ads
+• Digital Marketing
+• Lead Generation
+• Landing Page Design
+• Marketing Funnels
+• Social Media Management
+• Brand Design
+• Canva Design
+• CapCut Video Editing
+• AI Tools
+• AI Automation
+• AI Workflow Design
+• Website Design
+• AI Website Development
+• Web Applications
+• Firebase
+• Content Creation
+• Marketing Strategy
+
+================================================================================
 EDUCATION
---------------------------------------------------------------------------------
-Degree: B.Sc. Computer Science (400 Level)
-Institution: Olabisi Onabanjo University (OOU)
-Timeline: 2024 - Present
-Core Areas: Data Structures, Database Systems (SQL), Software Engineering, Web Technologies
-
---------------------------------------------------------------------------------
-KEY IMPACT METRICS
---------------------------------------------------------------------------------
-• 3+ Years of Verified Experience in Digital Marketing, Design & Data
-• 50+ Projects Successfully Completed
-• 20+ Happy Corporate & SME Clients
-• $500K+ Ad Spend Managed (Meta & TikTok Ads) with 4.8x average ROAS
-• 500+ Students & Professionals Trained at Clarity Digital Academy
-
---------------------------------------------------------------------------------
-PROFESSIONAL EXPERIENCE
---------------------------------------------------------------------------------
-1. Lead Digital Strategist & Founder | Clarity Digital Academy & Consulting
-   Period: 2022 - Present
-   Key Responsibilities & Achievements:
-   - Trained over 500 students and professionals in Canva graphic design, visual branding, and digital monetization.
-   - Built, optimized, and scaled paid advertising campaigns across Facebook, Instagram, and TikTok with over $500,000 ad spend managed.
-   - Designed comprehensive brand identities, promotional assets, and corporate presentations.
-   - Automated client reporting workflows and dashboard metrics, increasing operational efficiency.
-
-2. Digital Marketing & Design Consultant | Freelance & Agency Collaborations
-   Period: 2024 - Present
-   Key Responsibilities & Achievements:
-   - Partnered with 20+ clients across e-commerce, fintech, and retail to lower Customer Acquisition Cost (CAC) by up to 41%.
-   - Built Power BI and Excel interactive dashboards for multi-store retail intelligence and inventory tracking.
-   - Designed high-converting social media carousels, flyer systems, and sales funnels.
-
---------------------------------------------------------------------------------
-TECHNICAL & FUNCTIONAL PROFICIENCIES
---------------------------------------------------------------------------------
-• Digital Marketing: Meta Ads Manager (Facebook/Instagram), TikTok Ads, Google Analytics 4, Pixel & CAPI tracking, Audience Segmentation.
-• Graphic Design: Canva Pro Master, Adobe Photoshop, Adobe Illustrator, Figma, Brand Identity Systems, Presentation Decks.
-• Data & Analytics: Microsoft Power BI, Advanced Excel (DAX, Power Query), SQL (PostgreSQL, MySQL), Python (Data Analysis).
-• AI & Automation: Zapier, Make.com, Prompt Engineering (Claude, GPT, Gemini), Notion Systems, Workflow Optimization.
-
---------------------------------------------------------------------------------
-CERTIFICATIONS
---------------------------------------------------------------------------------
-• Meta Certified Digital Marketing Associate
-• Advanced Canva Design & Visual Identity Specialist
-• AI Workflow Automation & Prompt Engineering Fundamentals
+================================================================================
+B.Sc. Computer Science
+Olabisi Onabanjo University
 
 ================================================================================
-Verified & Updated: 2025/2026
-Contact: ${PERSONAL_INFO.email} | ${PERSONAL_INFO.phone}
+PHILOSOPHY & APPROACH
+================================================================================
+Clarity in the message. Clarity in the design. Clarity in the strategy. Clarity in the customer journey. Clarity in what happens next.
+
+================================================================================
+CONTACT & COLLABORATION
+================================================================================
+Phone: +234 805 178 0169
+Email: ipesolasulaiman@gmail.com
+Portfolio: Onifade Sulaiman (Mr. Clarity)
 ================================================================================`;
 
   const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'Onifade_Sulaiman_Mr_Clarity_CV.txt';
+  link.download = 'Onifade_Sulaiman_CV.txt';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 };
+

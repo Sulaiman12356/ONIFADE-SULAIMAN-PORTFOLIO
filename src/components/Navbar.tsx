@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['home', 'about', 'services', 'how-i-work', 'projects', 'brand-design', 'cv', 'contact'];
+      const sections = ['home', 'about', 'services', 'skills', 'brand-design', 'social-media', 'ai-automation', 'video-content', 'experience', 'testimonials', 'cv', 'contact'];
       const scrollPosition = window.scrollY + 120;
 
       for (const sectionId of sections) {
@@ -42,7 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'Projects', href: '#services', id: 'projects' },
     { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'CV', href: '#cv', id: 'cv' },
     { name: 'Contact', href: '#contact', id: 'contact' },

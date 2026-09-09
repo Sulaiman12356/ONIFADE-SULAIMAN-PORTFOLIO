@@ -235,38 +235,70 @@ export interface CVRecord {
 }
 
 export type OpportunityType =
+  | 'Meta Ads Management'
+  | 'Facebook Ads'
+  | 'Instagram Ads'
+  | 'TikTok Ads'
+  | 'Landing Page'
+  | 'Website Development'
+  | 'Brand Design'
+  | 'Social Media Management'
+  | 'AI Automation'
+  | 'Video Editing'
+  | 'Digital Marketing Strategy'
   | 'Full-Time'
-  | 'Part-Time'
   | 'Contract'
   | 'Freelance'
   | 'Consulting'
-  | 'Internship'
   | 'Collaboration'
-  | 'Speaking/Training'
   | 'Other';
 
 export type HireRequestStatus =
   | 'New'
-  | 'In review'
   | 'Contacted'
-  | 'Interview'
+  | 'In Progress'
+  | 'Completed'
   | 'Closed'
-  | 'Rejected';
+  | string;
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  order: number;
+  isPublished: boolean;
+}
+
+export interface AboutSectionItem {
+  id: string;
+  sectionNumber: string;
+  title: string;
+  subtitle?: string;
+  content: string;
+  quote?: string;
+  highlights?: string[];
+  order: number;
+  isPublished: boolean;
+}
 
 export interface HireMeRequest {
   id: string;
   fullName: string;
+  name?: string;
   email: string;
   phone: string;
-  company: string;
-  jobTitle: string;
-  opportunityType: OpportunityType;
-  budgetRange: string;
-  description: string;
-  expectedStartDate: string;
-  portfolioUrl: string;
-  additionalMessage: string;
+  company?: string;
+  jobTitle?: string;
+  opportunityType: OpportunityType | string;
+  adsBudgetNaira?: string;
+  adsBudgetUSD?: string;
+  budgetRange?: string;
+  description?: string;
+  expectedStartDate?: string;
+  portfolioUrl?: string;
+  additionalMessage?: string;
   status: HireRequestStatus;
+  createdAt?: string;
   dateSubmitted: string;
   notes?: string;
   roleTitle?: string;

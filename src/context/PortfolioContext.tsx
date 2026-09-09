@@ -48,6 +48,8 @@ import {
   VideoContentItem,
   CaseStudyItem,
   MediaItem,
+  AboutSectionItem,
+  FAQItem,
 } from '../types';
 import {
   PERSONAL_INFO,
@@ -59,11 +61,27 @@ import {
   RESUME_DATA,
   DEFAULT_CASE_STUDIES,
   DEFAULT_MEDIA_ITEMS,
+  DEFAULT_ABOUT_SECTIONS,
+  DEFAULT_FAQS,
 } from '../data/portfolioData';
 
 export interface PortfolioContextType {
   profile: ProfileData;
   updateProfile: (data: Partial<ProfileData>) => Promise<void>;
+  aboutSections: AboutSectionItem[];
+  setAboutSections: React.Dispatch<React.SetStateAction<AboutSectionItem[]>>;
+  addAboutSection: (item: Omit<AboutSectionItem, 'id'>) => Promise<void>;
+  updateAboutSection: (id: string, updates: Partial<AboutSectionItem>) => Promise<void>;
+  deleteAboutSection: (id: string) => Promise<void>;
+  toggleAboutSectionPublish: (id: string) => Promise<void>;
+  reorderAboutSections: (sections: AboutSectionItem[]) => Promise<void>;
+  faqs: FAQItem[];
+  setFaqs: React.Dispatch<React.SetStateAction<FAQItem[]>>;
+  addFaq: (item: Omit<FAQItem, 'id'>) => Promise<void>;
+  updateFaq: (id: string, updates: Partial<FAQItem>) => Promise<void>;
+  deleteFaq: (id: string) => Promise<void>;
+  toggleFaqPublish: (id: string) => Promise<void>;
+  reorderFaqs: (faqs: FAQItem[]) => Promise<void>;
   services: Service[];
   setServices: React.Dispatch<React.SetStateAction<Service[]>>;
   updateService: (id: string, updates: Partial<Service>) => Promise<void>;
@@ -240,7 +258,7 @@ const DEFAULT_PROFILE: ProfileData = {
     linkedin: 'https://linkedin.com/in/onifade-sulaiman',
     github: 'https://github.com/onifadesulaiman',
     instagram: 'https://instagram.com/mrclarity_official',
-    whatsapp: 'https://wa.me/2348061234567',
+    whatsapp: 'https://wa.me/2348051780169',
     tiktok: 'https://tiktok.com/@mrclarity',
     facebook: 'https://facebook.com/mrclarity',
     twitter: 'https://x.com/mrclarity_dev',
@@ -274,7 +292,7 @@ const DEFAULT_PROFILE: ProfileData = {
       verified: true,
     },
     advertisingBudgetManaged: {
-      value: '$500K+',
+      value: '₦500K+',
       label: 'Advertising Budget',
       sublabel: 'Ad Spend Managed',
       verified: true,
@@ -311,7 +329,7 @@ const DEFAULT_EXPERIENCE: ExperienceItem[] = [
     description: 'Founded digital academy and specialized advisory helping brands scale performance ad funnels and build high-impact creative identities.',
     achievements: [
       'Trained 500+ students and business owners in Canva Pro, visual branding, and digital acquisition.',
-      'Managed $500K+ in ad spend across Meta and TikTok with a 4.8x average return on ad spend (ROAS).',
+      'Managed ₦500K+ in ad spend across Meta with a 4.5x average return on ad spend (ROAS).',
       'Engineered automated client reporting and lead alert workflows using AI webhooks and Zapier.',
     ],
     skills: ['Meta Ads', 'Canva', 'TikTok Ads', 'AI Automation', 'Client Advisory'],
@@ -426,17 +444,8 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Local state with safe initial fallback
   const [profile, setProfile] = useState<ProfileData>(() => loadFromStorage('profile', DEFAULT_PROFILE));
   const [services, setServices] = useState<Service[]>(() => loadFromStorage('services', INITIAL_SERVICES));
-  const [projects, setProjects] = useState<Project[]>(() => {
-    const stored = loadFromStorage<Project[]>('projects', []);
-    if (!stored || stored.length === 0 || !stored.some((p) => p.category === 'META ADS')) {
-      return INITIAL_PROJECTS;
-    }
-    return stored;
-  });
-  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>(() => {
-    const stored = loadFromStorage<CaseStudyItem[]>('caseStudies', []);
-    return stored && stored.length > 0 ? stored : (DEFAULT_CASE_STUDIES as CaseStudyItem[]);
-  });
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>([]);
   const [mediaList, setMediaList] = useState<MediaItem[]>(() => {
     const stored = loadFromStorage<MediaItem[]>('mediaList', []);
     return stored && stored.length > 0 ? stored : (DEFAULT_MEDIA_ITEMS as MediaItem[]);
@@ -456,23 +465,20 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     projectViews: null,
     serviceViews: null,
   });
-  const [brandDesigns, setBrandDesigns] = useState<BrandDesignItem[]>(() => {
-    const stored = loadFromStorage<BrandDesignItem[]>('brandDesigns', []);
-    return stored && stored.length > 0 ? stored : INITIAL_BRAND_DESIGNS;
-  });
-  const [socialMediaItems, setSocialMediaItems] = useState<SocialMediaWorkItem[]>(() => {
-    const stored = loadFromStorage<SocialMediaWorkItem[]>('socialMediaItems', []);
-    return stored && stored.length > 0 ? stored : INITIAL_SOCIAL_MEDIA_ITEMS;
-  });
-  const [videoItems, setVideoItems] = useState<VideoContentItem[]>(() => {
-    const stored = loadFromStorage<VideoContentItem[]>('videoItems', []);
-    return stored && stored.length > 0 ? stored : INITIAL_VIDEO_ITEMS;
-  });
+  const [brandDesigns, setBrandDesigns] = useState<BrandDesignItem[]>([]);
+  const [socialMediaItems, setSocialMediaItems] = useState<SocialMediaWorkItem[]>([]);
+  const [videoItems, setVideoItems] = useState<VideoContentItem[]>([]);
   const [skills, setSkills] = useState<SkillItem[]>(() => loadFromStorage('skills', DEFAULT_SKILLS));
   const [experience, setExperience] = useState<ExperienceItem[]>(() => loadFromStorage('experience', DEFAULT_EXPERIENCE));
   const [education, setEducation] = useState<EducationItem[]>(() => loadFromStorage('education', DEFAULT_EDUCATION));
   const [certifications, setCertifications] = useState<CertificationItem[]>(() => loadFromStorage('certifications', DEFAULT_CERTIFICATIONS));
   const [testimonials, setTestimonials] = useState<Testimonial[]>(() => loadFromStorage('testimonials', []));
+  const [aboutSections, setAboutSections] = useState<AboutSectionItem[]>(() =>
+    loadFromStorage('aboutSections', DEFAULT_ABOUT_SECTIONS)
+  );
+  const [faqs, setFaqs] = useState<FAQItem[]>(() =>
+    loadFromStorage('faqs', DEFAULT_FAQS)
+  );
   const [cvList, setCvList] = useState<CVRecord[]>(() => loadFromStorage('cvList', DEFAULT_CV_LIST));
   const [hireRequests, setHireRequests] = useState<HireMeRequest[]>(() => loadFromStorage('hireRequests', []));
   const [contactMessages, setContactMessages] = useState<ContactMessage[]>(() => loadFromStorage('contactMessages', []));
@@ -904,6 +910,44 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       }
     );
 
+    // 20. About Sections Collection
+    const unsubAboutSections = onSnapshot(
+      collection(db, 'aboutSections'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: AboutSectionItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<AboutSectionItem, 'id'>) });
+          });
+          items.sort((a, b) => a.order - b.order);
+          setAboutSections(items);
+          saveToStorage('aboutSections', items);
+        }
+      },
+      (error) => {
+        console.warn('About sections sync notice:', error.message);
+      }
+    );
+
+    // 21. FAQs Collection
+    const unsubFaqs = onSnapshot(
+      collection(db, 'faqs'),
+      (snapshot) => {
+        if (!snapshot.empty) {
+          const items: FAQItem[] = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...(docSnap.data() as Omit<FAQItem, 'id'>) });
+          });
+          items.sort((a, b) => a.order - b.order);
+          setFaqs(items);
+          saveToStorage('faqs', items);
+        }
+      },
+      (error) => {
+        console.warn('FAQs sync notice:', error.message);
+      }
+    );
+
     return () => {
       unsubProfile();
       unsubSocial();
@@ -915,6 +959,8 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       unsubEducation();
       unsubCertifications();
       unsubTestimonials();
+      unsubAboutSections();
+      unsubFaqs();
       unsubCv();
       unsubHireRequests();
       unsubMessages();
@@ -1040,6 +1086,16 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       // 15. Media
       for (const m of DEFAULT_MEDIA_ITEMS) {
         await setDoc(doc(db, 'media', m.id), m, { merge: true });
+      }
+
+      // 16. About Sections
+      for (const aboutSec of DEFAULT_ABOUT_SECTIONS) {
+        await setDoc(doc(db, 'aboutSections', aboutSec.id), aboutSec, { merge: true });
+      }
+
+      // 17. FAQs
+      for (const faq of DEFAULT_FAQS) {
+        await setDoc(doc(db, 'faqs', faq.id), faq, { merge: true });
       }
 
       setSyncStatusMessage('Firebase Database Seeded Successfully!');
@@ -1681,9 +1737,25 @@ ${skills
     req: Omit<HireMeRequest, 'id' | 'status' | 'dateSubmitted'>
   ): Promise<boolean> => {
     const id = 'req_' + Date.now();
+    const clientName = req.name || req.fullName || req.clientName || 'Direct Client';
+    const clientEmail = req.email || req.clientEmail || '';
+    const phone = req.phone || '';
+    const adsBudgetNaira = req.adsBudgetNaira || '';
+    const adsBudgetUSD = req.adsBudgetUSD || '';
+    const opportunityType = req.opportunityType || 'Meta Ads Management';
+
     const newReq: HireMeRequest = {
       ...req,
       id,
+      name: clientName,
+      fullName: clientName,
+      clientName: clientName,
+      email: clientEmail,
+      clientEmail: clientEmail,
+      phone,
+      adsBudgetNaira,
+      adsBudgetUSD,
+      opportunityType,
       status: 'New',
       dateSubmitted: new Date().toISOString(),
     };
@@ -1691,19 +1763,18 @@ ${skills
     setHireRequests((prev) => [newReq, ...prev]);
 
     try {
-      // Direct Firestore write conforming to security rules
+      // Direct Firestore write conforming to security rules & prompt fields
       await addDoc(collection(db, 'hireRequests'), {
-        clientName: req.clientName,
-        clientEmail: req.clientEmail,
-        company: req.company || '',
-        opportunityType: req.opportunityType,
-        roleTitle: req.roleTitle || '',
-        serviceNeeded: req.serviceNeeded || '',
-        budgetRange: req.budgetRange,
-        timeline: req.timeline,
-        projectDescription: req.projectDescription,
-        preferredContact: req.preferredContact,
-        whatsappNumber: req.whatsappNumber || '',
+        name: clientName,
+        fullName: clientName,
+        clientName: clientName,
+        email: clientEmail,
+        clientEmail: clientEmail,
+        phone: phone,
+        adsBudgetNaira: adsBudgetNaira,
+        adsBudgetUSD: adsBudgetUSD,
+        opportunityType: opportunityType,
+        projectDescription: `${opportunityType} project inquiry. Ads Budget: ₦${adsBudgetNaira || 'N/A'} / $${adsBudgetUSD || 'N/A'}`,
         status: 'New',
         dateSubmitted: new Date().toISOString(),
         createdAt: serverTimestamp(),
@@ -1711,7 +1782,8 @@ ${skills
 
       logAnalyticsEvent('hire_request_submitted', {
         opportunityType: req.opportunityType,
-        serviceNeeded: req.serviceNeeded,
+        adsBudgetNaira,
+        adsBudgetUSD,
       });
 
       return true;
@@ -1813,6 +1885,8 @@ ${skills
     setCertifications(DEFAULT_CERTIFICATIONS);
     setTestimonials([]);
     setCvList(DEFAULT_CV_LIST);
+    setAboutSections(DEFAULT_ABOUT_SECTIONS);
+    setFaqs(DEFAULT_FAQS);
     setSettings(DEFAULT_SETTINGS);
     setSeo(DEFAULT_SEO);
 
@@ -1824,6 +1898,8 @@ ${skills
     localStorage.removeItem(STORAGE_PREFIX + 'education');
     localStorage.removeItem(STORAGE_PREFIX + 'certifications');
     localStorage.removeItem(STORAGE_PREFIX + 'testimonials');
+    localStorage.removeItem(STORAGE_PREFIX + 'aboutSections');
+    localStorage.removeItem(STORAGE_PREFIX + 'faqs');
     localStorage.removeItem(STORAGE_PREFIX + 'cvList');
     localStorage.removeItem(STORAGE_PREFIX + 'settings');
     localStorage.removeItem(STORAGE_PREFIX + 'seo');
@@ -2263,11 +2339,135 @@ ${skills
     }
   };
 
+  // About Sections CRUD (Single source of truth)
+  const addAboutSection = async (item: Omit<AboutSectionItem, 'id'>) => {
+    const id = 'about-' + Date.now();
+    const newItem: AboutSectionItem = { ...item, id };
+    const updated = [...aboutSections, newItem].sort((a, b) => a.order - b.order);
+    setAboutSections(updated);
+    saveToStorage('aboutSections', updated);
+    try {
+      await setDoc(doc(db, 'aboutSections', id), newItem);
+    } catch (err) {
+      console.warn('About section add Firestore notice:', err);
+    }
+  };
+
+  const updateAboutSection = async (id: string, updates: Partial<AboutSectionItem>) => {
+    const updated = aboutSections.map((s) => (s.id === id ? { ...s, ...updates } : s));
+    setAboutSections(updated);
+    saveToStorage('aboutSections', updated);
+    try {
+      await updateDoc(doc(db, 'aboutSections', id), updates);
+    } catch (err) {
+      console.warn('About section update Firestore notice:', err);
+    }
+  };
+
+  const deleteAboutSection = async (id: string) => {
+    const updated = aboutSections.filter((s) => s.id !== id);
+    setAboutSections(updated);
+    saveToStorage('aboutSections', updated);
+    try {
+      await deleteDoc(doc(db, 'aboutSections', id));
+    } catch (err) {
+      console.warn('About section delete Firestore notice:', err);
+    }
+  };
+
+  const toggleAboutSectionPublish = async (id: string) => {
+    const s = aboutSections.find((item) => item.id === id);
+    if (!s) return;
+    await updateAboutSection(id, { isPublished: !s.isPublished });
+  };
+
+  const reorderAboutSections = async (sections: AboutSectionItem[]) => {
+    const reindexed = sections.map((sec, idx) => ({ ...sec, order: idx + 1 }));
+    setAboutSections(reindexed);
+    saveToStorage('aboutSections', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'aboutSections', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
+  // FAQs CRUD (Single source of truth)
+  const addFaq = async (item: Omit<FAQItem, 'id'>) => {
+    const id = 'faq-' + Date.now();
+    const newItem: FAQItem = { ...item, id };
+    const updated = [...faqs, newItem].sort((a, b) => a.order - b.order);
+    setFaqs(updated);
+    saveToStorage('faqs', updated);
+    try {
+      await setDoc(doc(db, 'faqs', id), newItem);
+    } catch (err) {
+      console.warn('FAQ add Firestore notice:', err);
+    }
+  };
+
+  const updateFaq = async (id: string, updates: Partial<FAQItem>) => {
+    const updated = faqs.map((f) => (f.id === id ? { ...f, ...updates } : f));
+    setFaqs(updated);
+    saveToStorage('faqs', updated);
+    try {
+      await updateDoc(doc(db, 'faqs', id), updates);
+    } catch (err) {
+      console.warn('FAQ update Firestore notice:', err);
+    }
+  };
+
+  const deleteFaq = async (id: string) => {
+    const updated = faqs.filter((f) => f.id !== id);
+    setFaqs(updated);
+    saveToStorage('faqs', updated);
+    try {
+      await deleteDoc(doc(db, 'faqs', id));
+    } catch (err) {
+      console.warn('FAQ delete Firestore notice:', err);
+    }
+  };
+
+  const toggleFaqPublish = async (id: string) => {
+    const f = faqs.find((item) => item.id === id);
+    if (!f) return;
+    await updateFaq(id, { isPublished: !f.isPublished });
+  };
+
+  const reorderFaqs = async (newFaqs: FAQItem[]) => {
+    const reindexed = newFaqs.map((faq, idx) => ({ ...faq, order: idx + 1 }));
+    setFaqs(reindexed);
+    saveToStorage('faqs', reindexed);
+    try {
+      for (const item of reindexed) {
+        await setDoc(doc(db, 'faqs', item.id), item, { merge: true });
+      }
+    } catch (err) {
+      console.warn('Reorder error:', err);
+    }
+  };
+
   return (
     <PortfolioContext.Provider
       value={{
         profile,
         updateProfile,
+        aboutSections,
+        setAboutSections,
+        addAboutSection,
+        updateAboutSection,
+        deleteAboutSection,
+        toggleAboutSectionPublish,
+        reorderAboutSections,
+        faqs,
+        setFaqs,
+        addFaq,
+        updateFaq,
+        deleteFaq,
+        toggleFaqPublish,
+        reorderFaqs,
         services,
         setServices,
         updateService,

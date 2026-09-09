@@ -180,14 +180,14 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
                     <span className="text-[10px] text-[#64748B] font-normal">Active {activeCv?.version || 'v2.6'}</span>
                   </h4>
                   <p className="text-[#64748B] line-clamp-2 leading-relaxed font-normal">
-                    {profile.bio || 'Results-driven Digital Marketer, Meta Ads Specialist, Brand Designer, and AI Automation Specialist with 3+ years of demonstrated success helping ambitious brands, startups, and founders scale customer acquisition.'}
+                    {profile.bio || 'Results-driven Digital Marketer, Meta Ads Specialist, Brand Designer, and AI Automation Specialist with 2+ years of demonstrated success helping ambitious brands, startups, and founders scale customer acquisition.'}
                   </p>
                 </div>
 
                 {/* Experience Preview */}
                 <div>
                   <h4 className="text-[11px] font-black uppercase tracking-wider text-[#062B63] border-b border-[#E2E8F0] pb-1 mb-1.5">
-                    Recent Experience ({experience.length || 3} Roles)
+                    Recent Experience ({experience.length || 2} Roles)
                   </h4>
                   <div className="space-y-2">
                     {experience.length > 0 ? (
@@ -211,20 +211,20 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
                       <>
                         <div>
                           <div className="flex justify-between font-bold text-[#062B63]">
-                            <span>Lead Digital Growth &amp; Paid Ads Strategist</span>
-                            <span className="text-[#64748B] font-normal text-[11px]">2022 – Present</span>
+                            <span>Lead Digital Marketing &amp; Meta Ads Specialist</span>
+                            <span className="text-[#64748B] font-normal text-[11px]">2024 – Present</span>
                           </div>
                           <div className="text-[#0B5ED7] font-semibold text-[11px]">
-                            Mr. Clarity Growth Consulting
+                            Mr. Clarity Digital Solutions
                           </div>
                         </div>
                         <div>
                           <div className="flex justify-between font-bold text-[#062B63]">
-                            <span>Founder &amp; Lead Instructor</span>
-                            <span className="text-[#64748B] font-normal text-[11px]">2022 – Present</span>
+                            <span>Brand Designer &amp; Social Media Manager</span>
+                            <span className="text-[#64748B] font-normal text-[11px]">2024 – Present</span>
                           </div>
                           <div className="text-[#0B5ED7] font-semibold text-[11px]">
-                            Clarity Digital Academy (500+ alumni)
+                            Independent &amp; Client Projects
                           </div>
                         </div>
                       </>
