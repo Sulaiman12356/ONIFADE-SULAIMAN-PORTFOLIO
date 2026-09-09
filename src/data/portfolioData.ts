@@ -1,6 +1,6 @@
 import { Project, Service, Testimonial, ToolItem, BrandDesignItem, SocialMediaWorkItem, VideoContentItem, FAQItem, AboutSectionItem } from '../types';
-import portraitImg from '../assets/images/sulaiman.jpg';
-import aboutImg from '../assets/images/sulaiman.jpg';
+import portraitImg from '../assets/images/onifade.jpg';  
+import aboutImg from '../assets/images/onifade.jpg';
 import ecommerceImg from '../assets/images/project_ecommerce_1788655646475.jpg';
 import canvaImg from '../assets/images/project_canva_1788655660203.jpg';
 import dashboardImg from '../assets/images/project_dashboard_1788655677623.jpg';
