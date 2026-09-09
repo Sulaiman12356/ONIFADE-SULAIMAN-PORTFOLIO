@@ -180,7 +180,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
                     <span className="text-[10px] text-[#64748B] font-normal">Active {activeCv?.version || 'v2.6'}</span>
                   </h4>
                   <p className="text-[#64748B] line-clamp-2 leading-relaxed font-normal">
-                    {profile.bio || 'Results-driven Digital Marketer, Meta Ads Specialist, Brand Designer, and AI Automation Specialist with 2+ years of demonstrated success helping ambitious brands, startups, and founders scale customer acquisition.'}
+                    {profile.bio || 'Results-driven Digital Marketer, Meta Ads Specialist, Brand Designer, and AI Automation Specialist with 3+ years of demonstrated success helping ambitious brands, startups, and founders scale customer acquisition.'}
                   </p>
                 </div>
 

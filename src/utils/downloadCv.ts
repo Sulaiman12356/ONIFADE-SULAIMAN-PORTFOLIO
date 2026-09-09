@@ -33,7 +33,7 @@ ACHIEVEMENTS & VERIFIED METRICS
 • ₦500K+ Meta Ads Spend Managed
 • 30+ Projects Completed
 • 20+ Clients Served
-• 2+ Years Experience
+• 3+ Years Experience
 
 ================================================================================
 CORE SKILLS

@@ -309,14 +309,14 @@ const DEFAULT_PROFILE: ProfileData = {
 
 const DEFAULT_SKILLS: SkillItem[] = [
   { id: '1', skill: 'Meta & Instagram Ads', category: 'Marketing', level: 96, yearsExperience: '3+', tools: 'Ads Manager, CAPI, Pixel, Advantage+', featured: true },
-  { id: '2', skill: 'TikTok Ads & Creative Strategy', category: 'Marketing', level: 93, yearsExperience: '2+', tools: 'TikTok Ads Manager, Spark Ads', featured: true },
+  { id: '2', skill: 'TikTok Ads & Creative Strategy', category: 'Marketing', level: 93, yearsExperience: '3+', tools: 'TikTok Ads Manager, Spark Ads', featured: true },
   { id: '3', skill: 'AI Landing Page Design & CRO', category: 'Conversion', level: 95, yearsExperience: '3+', tools: 'React, Tailwind, Figma, Direct-Response Copy', featured: true },
   { id: '4', skill: 'Canva Pro & Brand Identity', category: 'Design', level: 98, yearsExperience: '3+', tools: 'Canva Pro, Brand Kits, Visual Systems', featured: true },
   { id: '5', skill: 'Adobe Illustrator & Photoshop', category: 'Design', level: 88, yearsExperience: '3+', tools: 'Illustrator, Photoshop, Vector Art', featured: true },
   { id: '6', skill: 'Social Media Management & Strategy', category: 'Marketing', level: 92, yearsExperience: '3+', tools: 'Instagram, Facebook, Content Calendars', featured: true },
-  { id: '7', skill: 'AI Workflow Automation', category: 'Automation', level: 91, yearsExperience: '2+', tools: 'Zapier, Make.com, Webhooks, CRM', featured: true },
-  { id: '8', skill: 'CapCut Direct-Response Video Ads', category: 'Content', level: 94, yearsExperience: '2+', tools: 'CapCut, Reels, Subtitles, Hooks', featured: true },
-  { id: '9', skill: 'AI Web & Software Development', category: 'Development', level: 88, yearsExperience: '2+', tools: 'React, TypeScript, Next.js, Firebase', featured: true },
+  { id: '7', skill: 'AI Workflow Automation', category: 'Automation', level: 91, yearsExperience: '3+', tools: 'Zapier, Make.com, Webhooks, CRM', featured: true },
+  { id: '8', skill: 'CapCut Direct-Response Video Ads', category: 'Content', level: 94, yearsExperience: '3+', tools: 'CapCut, Reels, Subtitles, Hooks', featured: true },
+  { id: '9', skill: 'AI Web & Software Development', category: 'Development', level: 88, yearsExperience: '3+', tools: 'React, TypeScript, Next.js, Firebase', featured: true },
   { id: '10', skill: 'Lead Generation & Funnel Architecture', category: 'Marketing', level: 95, yearsExperience: '3+', tools: 'Funnel Optimization, WhatsApp CRM, Email', featured: true },
 ];
 

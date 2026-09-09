@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
   globalAvailability: 'Available Worldwide (Remote, Contract & Consulting)',
   availabilityStatus: 'AVAILABLE FOR SELECTED PROJECTS',
   workTypes: ['Full-time', 'Part-time', 'Freelance', 'Remote Consulting'],
-  yearsExperience: '2+',
+  yearsExperience: '3+',
   projectsCompleted: '30+',
   happyClients: '20+',
   adSpendManaged: '₦500K+',
@@ -52,7 +52,7 @@ export const METRIC_STATS = [
   },
   {
     id: 'experience',
-    value: '2+',
+    value: '3+',
     label: 'Years of Experience',
     subtext: 'Practical digital marketing and design',
   },

@@ -39,7 +39,7 @@ export const AdminSkillsTab: React.FC = () => {
         skill: formData.skill || 'New Skill',
         category: formData.category || 'Marketing',
         level: Number(formData.level) || 85,
-        yearsExperience: formData.yearsExperience || '2+',
+        yearsExperience: formData.yearsExperience || '3+',
         tools: formData.tools || '',
         featured: formData.featured ?? true,
       };

@@ -57,7 +57,7 @@ const DEFAULT_METRICS: EditableMetric[] = [
   },
   {
     id: 'experience',
-    value: '2+',
+    value: '3+',
     label: 'Years Experience',
     sublabel: 'Practical digital marketing and design',
     isVerified: true,
@@ -71,7 +71,10 @@ export const MetricStats: React.FC = () => {
     const saved = localStorage.getItem('clarity_verified_metrics_v3');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        return parsed.map((m: EditableMetric) =>
+          m.id === 'experience' && (m.value === '2+' || m.value === '2') ? { ...m, value: '3+' } : m
+        );
       } catch (e) {
         return DEFAULT_METRICS;
       }

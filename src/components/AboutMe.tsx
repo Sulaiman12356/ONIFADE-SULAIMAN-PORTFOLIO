@@ -133,7 +133,7 @@ export const AboutMe: React.FC<AboutMeProps> = ({ onOpenCv, onOpenHireMe }) => {
                           Experience
                         </div>
                         <div className="text-xl font-black text-[#0B5ED7]">
-                          2+ Years
+                          3+ Years
                         </div>
                       </div>
                     </div>
