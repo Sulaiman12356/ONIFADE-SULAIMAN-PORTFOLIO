@@ -281,6 +281,9 @@ export interface AboutSectionItem {
   isPublished: boolean;
 }
 
+export type BudgetCurrency = 'NGN' | 'USD';
+export type BudgetType = 'advertising' | 'project';
+
 export interface HireMeRequest {
   id: string;
   fullName: string;
@@ -290,15 +293,18 @@ export interface HireMeRequest {
   company?: string;
   jobTitle?: string;
   opportunityType: OpportunityType | string;
+  budgetCurrency?: BudgetCurrency;
+  budgetType?: BudgetType;
+  budgetRange?: string;
+  customBudget?: string;
   adsBudgetNaira?: string;
   adsBudgetUSD?: string;
-  budgetRange?: string;
   description?: string;
   expectedStartDate?: string;
   portfolioUrl?: string;
   additionalMessage?: string;
   status: HireRequestStatus;
-  createdAt?: string;
+  createdAt?: string | any;
   dateSubmitted: string;
   notes?: string;
   roleTitle?: string;

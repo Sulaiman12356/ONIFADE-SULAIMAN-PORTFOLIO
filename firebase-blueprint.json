@@ -240,18 +240,26 @@
       "description": "Hire inquiry submitted by potential client or employer",
       "type": "object",
       "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "fullName": { "type": "string", "maxLength": 100 },
         "clientName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
         "clientEmail": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "maxLength": 40 },
         "company": { "type": "string", "maxLength": 120 },
-        "opportunityType": { "type": "string", "maxLength": 60 },
+        "opportunityType": { "type": "string", "maxLength": 80 },
+        "budgetCurrency": { "type": "string", "enum": ["NGN", "USD"] },
+        "budgetType": { "type": "string", "enum": ["advertising", "project"] },
+        "budgetRange": { "type": "string", "maxLength": 80 },
+        "customBudget": { "type": "string", "maxLength": 80 },
         "roleTitle": { "type": "string", "maxLength": 100 },
         "projectDescription": { "type": "string", "maxLength": 2000 },
-        "budgetRange": { "type": "string", "maxLength": 60 },
         "timeline": { "type": "string", "maxLength": 60 },
-        "status": { "type": "string", "enum": ["New", "In review", "Contacted", "Interview", "Closed", "Rejected"] },
-        "createdAt": { "type": "string" }
+        "status": { "type": "string", "enum": ["New", "In review", "Contacted", "In Progress", "Interview", "Completed", "Closed", "Rejected"] },
+        "createdAt": { "type": "string" },
+        "dateSubmitted": { "type": "string" }
       },
-      "required": ["clientName", "clientEmail", "projectDescription"]
+      "required": ["email", "opportunityType"]
     },
     "Message": {
       "title": "Message",

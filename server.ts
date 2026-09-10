@@ -64,56 +64,96 @@ app.post('/api/notify-hire', async (req, res) => {
     const cleanPhone = clientPhone.replace(/[^0-9]/g, '');
     const whatsappUrl = cleanPhone.length >= 7 ? `https://wa.me/${cleanPhone}` : `https://wa.me/2348051780169`;
 
-    const ownerEmail = 'ipesolasulaiman@gmail.com';
-    const emailSubject = `New Project Request from ${clientName} - ${projectType}`;
+    const recipientEmails = ['ipesolosulaiman@gmail.com', 'ipesolasulaiman@gmail.com'];
+    const emailSubject = `NEW PROJECT REQUEST | ${projectType.toUpperCase()}`;
+
+    const adminPlainText = `NEW PROJECT REQUEST
+A new client has submitted a project request through your portfolio website.
+
+CLIENT DETAILS
+Name:
+${clientName}
+Email:
+${clientEmail}
+Phone:
+${clientPhone}
+
+PROJECT DETAILS
+Project Type:
+${projectType}
+Budget Type:
+${budgetCategoryLabel}
+Budget Currency:
+${currency}
+Budget:
+${finalBudget}
+Submitted:
+${submittedAt}
+
+You can contact the client using the information provided above.`;
 
     const adminHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #ffffff; border: 1px solid #E2E8F0; border-radius: 16px;">
         <div style="background-color: #062B63; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; text-align: left;">
           <h1 style="color: #ffffff; font-size: 20px; font-weight: 800; margin: 0; letter-spacing: -0.5px;">ONIFADE SULAIMAN (MR. CLARITY)</h1>
-          <p style="color: #60A5FA; font-size: 13px; margin: 4px 0 0 0; font-weight: 600;">NEW INCOMING CLIENT PROJECT REQUEST</p>
+          <p style="color: #60A5FA; font-size: 13px; margin: 4px 0 0 0; font-weight: 700; text-transform: uppercase;">NEW PROJECT REQUEST | ${projectType.toUpperCase()}</p>
         </div>
 
         <p style="font-size: 15px; color: #1E293B; line-height: 1.5; margin-bottom: 20px;">
-          You have received a new verified client project inquiry from your portfolio website.
+          A new client has submitted a project request through your portfolio website.
         </p>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px;">
+        <h3 style="font-size: 13px; font-weight: 800; color: #062B63; text-transform: uppercase; margin: 20px 0 10px 0; border-bottom: 2px solid #EFF6FF; padding-bottom: 6px;">
+          CLIENT DETAILS
+        </h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px;">
           <tbody>
             <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600; width: 38%;">Client Name</td>
-              <td style="padding: 10px 0; color: #0F172A; font-weight: 700;">${clientName}</td>
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600; width: 35%;">Name</td>
+              <td style="padding: 8px 0; color: #0F172A; font-weight: 700;">${clientName}</td>
             </tr>
             <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Client Email</td>
-              <td style="padding: 10px 0; color: #0B5ED7; font-weight: 600;"><a href="mailto:${clientEmail}" style="color: #0B5ED7; text-decoration: none;">${clientEmail}</a></td>
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Email</td>
+              <td style="padding: 8px 0; color: #0B5ED7; font-weight: 600;"><a href="mailto:${clientEmail}" style="color: #0B5ED7; text-decoration: none;">${clientEmail}</a></td>
             </tr>
             <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Client Phone</td>
-              <td style="padding: 10px 0; color: #0F172A; font-weight: 600;">${clientPhone}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Project Opportunity</td>
-              <td style="padding: 10px 0; color: #062B63; font-weight: 700;">${projectType}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Budget Currency</td>
-              <td style="padding: 10px 0; color: #0F172A; font-weight: 600;">${currency === 'NGN' ? 'Naira (₦)' : 'US Dollar ($)'}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Budget Type</td>
-              <td style="padding: 10px 0; color: #0F172A; font-weight: 600;">${budgetCategoryLabel}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #F1F5F9;">
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Budget Range / Amount</td>
-              <td style="padding: 10px 0; color: #059669; font-weight: 800; font-size: 15px;">${finalBudget}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #64748B; font-weight: 600;">Submitted At</td>
-              <td style="padding: 10px 0; color: #64748B;">${submittedAt}</td>
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Phone</td>
+              <td style="padding: 8px 0; color: #0F172A; font-weight: 600;">${clientPhone}</td>
             </tr>
           </tbody>
         </table>
+
+        <h3 style="font-size: 13px; font-weight: 800; color: #062B63; text-transform: uppercase; margin: 20px 0 10px 0; border-bottom: 2px solid #EFF6FF; padding-bottom: 6px;">
+          PROJECT DETAILS
+        </h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px;">
+          <tbody>
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600; width: 35%;">Project Type</td>
+              <td style="padding: 8px 0; color: #062B63; font-weight: 700;">${projectType}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Budget Type</td>
+              <td style="padding: 8px 0; color: #0F172A; font-weight: 600;">${budgetCategoryLabel}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Budget Currency</td>
+              <td style="padding: 8px 0; color: #0F172A; font-weight: 600;">${currency}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Budget</td>
+              <td style="padding: 8px 0; color: #059669; font-weight: 800; font-size: 15px;">${finalBudget}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Submitted</td>
+              <td style="padding: 8px 0; color: #64748B;">${submittedAt}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 13px; color: #64748B; margin: 16px 0;">
+          You can contact the client using the information provided above.
+        </p>
 
         <div style="display: flex; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #E2E8F0;">
           <a href="mailto:${clientEmail}?subject=Re: Project Request - Onifade Sulaiman (Mr. Clarity)&body=Hello ${encodeURIComponent(clientName)},%0A%0AThank you for reaching out regarding your ${encodeURIComponent(projectType)} project." style="display: inline-block; background-color: #0B5ED7; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; text-align: center; margin-right: 8px;">
@@ -125,32 +165,38 @@ app.post('/api/notify-hire', async (req, res) => {
         </div>
 
         <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #F1F5F9; font-size: 11px; color: #94A3B8; text-align: center;">
-          Sent automatically from Onifade Sulaiman's Portfolio System • ipesolasulaiman@gmail.com
+          Sent automatically from Onifade Sulaiman's Portfolio System • ipesolosulaiman@gmail.com
         </div>
       </div>
     `;
+
+    const clientConfirmationSubject = `PROJECT REQUEST RECEIVED | ONIFADE SULAIMAN`;
+    const clientConfirmationPlain = `Hello ${clientName},
+
+Thank you for reaching out to me.
+I have received your project request and will review the details provided.
+I will get back to you as soon as possible.
+
+Best regards,
+Onifade Sulaiman
+Mr. Clarity
+Digital Marketer and Digital Solutions Specialist
++234 805 178 0168
+ipesolosulaiman@gmail.com`;
 
     const clientConfirmationHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #ffffff; border: 1px solid #E2E8F0; border-radius: 16px;">
         <div style="background-color: #062B63; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px;">
           <h1 style="color: #ffffff; font-size: 20px; font-weight: 800; margin: 0;">ONIFADE SULAIMAN</h1>
-          <p style="color: #60A5FA; font-size: 13px; margin: 4px 0 0 0; font-weight: 600;">Digital Marketer & Meta Ads Specialist (Mr. Clarity)</p>
+          <p style="color: #60A5FA; font-size: 13px; margin: 4px 0 0 0; font-weight: 600;">Digital Marketer and Digital Solutions Specialist (Mr. Clarity)</p>
         </div>
 
-        <h2 style="font-size: 18px; color: #0F172A; font-weight: 800; margin-top: 0;">We received your project request</h2>
-        <p style="font-size: 14px; color: #334155; line-height: 1.6;">
+        <p style="font-size: 15px; color: #334155; line-height: 1.6;">
           Hello ${clientName},<br/><br/>
-          Thank you for reaching out! I have received your request regarding <strong>${projectType}</strong> with an estimated ${budgetCategoryLabel.toLowerCase()} of <strong>${finalBudget}</strong>.
+          Thank you for reaching out to me.<br/>
+          I have received your project request and will review the details provided.<br/>
+          I will get back to you as soon as possible.
         </p>
-
-        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; margin: 20px 0; font-size: 13px; color: #475569;">
-          <strong>What happens next:</strong>
-          <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
-            <li>I personally review your project scope and market context.</li>
-            <li>You will receive a tailored response or schedule invitation within <strong>24 hours</strong>.</li>
-            <li>If your request is urgent, feel free to connect directly on WhatsApp below.</li>
-          </ul>
-        </div>
 
         <div style="margin: 24px 0;">
           <a href="https://wa.me/2348051780169?text=${encodeURIComponent(`Hello Mr. Clarity, I submitted a project request for ${projectType} (${clientName}).`)}" style="display: inline-block; background-color: #25D366; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 13px;">
@@ -158,11 +204,13 @@ app.post('/api/notify-hire', async (req, res) => {
           </a>
         </div>
 
-        <p style="font-size: 13px; color: #64748B; margin-top: 24px; line-height: 1.5;">
+        <p style="font-size: 13px; color: #64748B; margin-top: 24px; line-height: 1.6;">
           Best regards,<br/>
           <strong>Onifade Sulaiman</strong><br/>
-          <em>Meta Ads Specialist | Brand Designer | AI Automation</em><br/>
-          Email: ipesolasulaiman@gmail.com | Phone: +234 805 178 0169
+          Mr. Clarity<br/>
+          Digital Marketer and Digital Solutions Specialist<br/>
+          +234 805 178 0168<br/>
+          ipesolosulaiman@gmail.com
         </p>
       </div>
     `;
@@ -182,8 +230,9 @@ app.post('/api/notify-hire', async (req, res) => {
           },
           body: JSON.stringify({
             from: process.env.SMTP_FROM || 'Onifade Sulaiman <notifications@resend.dev>',
-            to: [ownerEmail],
+            to: recipientEmails,
             subject: emailSubject,
+            text: adminPlainText,
             html: adminHtml,
           }),
         });
@@ -202,7 +251,8 @@ app.post('/api/notify-hire', async (req, res) => {
               body: JSON.stringify({
                 from: process.env.SMTP_FROM || 'Onifade Sulaiman <notifications@resend.dev>',
                 to: [clientEmail],
-                subject: 'We received your project request - Onifade Sulaiman',
+                subject: clientConfirmationSubject,
+                text: clientConfirmationPlain,
                 html: clientConfirmationHtml,
               }),
             }).catch(() => null);
@@ -218,8 +268,9 @@ app.post('/api/notify-hire', async (req, res) => {
       try {
         await transporter.sendMail({
           from: process.env.SMTP_FROM || `"Portfolio Notifications" <${process.env.SMTP_USER}>`,
-          to: ownerEmail,
+          to: recipientEmails.join(', '),
           subject: emailSubject,
+          text: adminPlainText,
           html: adminHtml,
         });
         emailSent = true;
@@ -229,7 +280,8 @@ app.post('/api/notify-hire', async (req, res) => {
           await transporter.sendMail({
             from: process.env.SMTP_FROM || `"Onifade Sulaiman" <${process.env.SMTP_USER}>`,
             to: clientEmail,
-            subject: 'We received your project request - Onifade Sulaiman',
+            subject: clientConfirmationSubject,
+            text: clientConfirmationPlain,
             html: clientConfirmationHtml,
           }).catch(() => null);
         }
@@ -241,7 +293,7 @@ app.post('/api/notify-hire', async (req, res) => {
     // High visibility server audit log for all submissions
     console.log('\n======================================================');
     console.log('📬 NEW HIRE REQUEST RECEIVED AT SERVER:');
-    console.log(`- Recipient Email: ${ownerEmail}`);
+    console.log(`- Recipient Emails: ${recipientEmails.join(', ')}`);
     console.log(`- Client Name: ${clientName}`);
     console.log(`- Client Email: ${clientEmail}`);
     console.log(`- Client Phone: ${clientPhone}`);

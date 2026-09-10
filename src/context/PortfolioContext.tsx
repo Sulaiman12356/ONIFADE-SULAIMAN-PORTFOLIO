@@ -1802,9 +1802,12 @@ ${skills
     const clientName = req.name || req.fullName || req.clientName || 'Direct Client';
     const clientEmail = req.email || req.clientEmail || '';
     const phone = req.phone || '';
-    const adsBudgetNaira = req.adsBudgetNaira || '';
-    const adsBudgetUSD = req.adsBudgetUSD || '';
     const opportunityType = req.opportunityType || 'Meta Ads Management';
+    const budgetCurrency = req.budgetCurrency || (req.adsBudgetNaira ? 'NGN' : (req.adsBudgetUSD ? 'USD' : 'NGN'));
+    const isAdvertising = ['Meta Ads Management', 'Facebook Ads', 'Instagram Ads', 'TikTok Ads'].includes(opportunityType);
+    const budgetType = req.budgetType || (isAdvertising ? 'advertising' : 'project');
+    const budgetRange = req.budgetRange || (budgetCurrency === 'NGN' ? req.adsBudgetNaira : req.adsBudgetUSD) || '';
+    const customBudget = req.customBudget || '';
 
     const newReq: HireMeRequest = {
       ...req,
@@ -1815,9 +1818,13 @@ ${skills
       email: clientEmail,
       clientEmail: clientEmail,
       phone,
-      adsBudgetNaira,
-      adsBudgetUSD,
       opportunityType,
+      budgetCurrency,
+      budgetType,
+      budgetRange,
+      customBudget,
+      adsBudgetNaira: budgetCurrency === 'NGN' ? (customBudget ? `₦${customBudget}` : budgetRange) : '',
+      adsBudgetUSD: budgetCurrency === 'USD' ? (customBudget ? `$${customBudget}` : budgetRange) : '',
       status: 'New',
       dateSubmitted: new Date().toISOString(),
     };
@@ -1825,7 +1832,7 @@ ${skills
     setHireRequests((prev) => [newReq, ...prev]);
 
     try {
-      // Direct Firestore write conforming to security rules & prompt fields
+      // Direct Firestore write conforming to security rules & prompt fields (Section 12)
       await addDoc(collection(db, 'hireRequests'), {
         name: clientName,
         fullName: clientName,
@@ -1833,19 +1840,47 @@ ${skills
         email: clientEmail,
         clientEmail: clientEmail,
         phone: phone,
-        adsBudgetNaira: adsBudgetNaira,
-        adsBudgetUSD: adsBudgetUSD,
         opportunityType: opportunityType,
-        projectDescription: `${opportunityType} project inquiry. Ads Budget: ₦${adsBudgetNaira || 'N/A'} / $${adsBudgetUSD || 'N/A'}`,
+        budgetCurrency: budgetCurrency,
+        budgetType: budgetType,
+        budgetRange: budgetRange,
+        customBudget: customBudget,
+        projectDescription: `${opportunityType} (${budgetType === 'advertising' ? 'Advertising' : 'Project'} Budget: ${budgetRange}${customBudget ? ` - Custom: ${customBudget}` : ''})`,
         status: 'New',
         dateSubmitted: new Date().toISOString(),
         createdAt: serverTimestamp(),
       });
 
+      // Call server-side email notification endpoint
+      try {
+        fetch('/api/notify-hire', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: clientName,
+            name: clientName,
+            email: clientEmail,
+            phone: phone,
+            opportunityType: opportunityType,
+            budgetCurrency: budgetCurrency,
+            budgetType: budgetType,
+            budgetRange: budgetRange,
+            customBudget: customBudget,
+            dateSubmitted: new Date().toISOString(),
+          }),
+        }).catch((err) => {
+          console.warn('Hire notification dispatch notice:', err);
+        });
+      } catch (notifyErr) {
+        console.warn('Hire notification dispatch error:', notifyErr);
+      }
+
       logAnalyticsEvent('hire_request_submitted', {
-        opportunityType: req.opportunityType,
-        adsBudgetNaira,
-        adsBudgetUSD,
+        opportunityType,
+        budgetCurrency,
+        budgetType,
+        budgetRange,
+        customBudget,
       });
 
       return true;
