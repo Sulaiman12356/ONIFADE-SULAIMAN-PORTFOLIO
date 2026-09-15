@@ -15,6 +15,35 @@ import {
   Search
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { BrandIcon } from './BrandIcons';
+
+const getBrandIconForSkill = (skill: string): string | null => {
+  const s = skill.toLowerCase();
+  if (s.includes('meta')) return 'meta';
+  if (s.includes('facebook')) return 'facebook';
+  if (s.includes('instagram')) return 'instagram';
+  if (s.includes('tiktok')) return 'tiktok';
+  if (s.includes('whatsapp')) return 'whatsapp';
+  if (s.includes('linkedin')) return 'linkedin';
+  if (s.includes('canva')) return 'canva';
+  if (s.includes('capcut')) return 'capcut';
+  if (s.includes('youtube')) return 'youtube';
+  if (s.includes('chatgpt') || s.includes('openai')) return 'chatgpt';
+  if (s.includes('claude')) return 'claude';
+  if (s.includes('n8n')) return 'n8n';
+  if (s.includes('firebase')) return 'firebase';
+  if (s.includes('github')) return 'github';
+  if (s.includes('react')) return 'react';
+  if (s.includes('next.js') || s.includes('nextjs')) return 'nextjs';
+  if (s.includes('node')) return 'nodejs';
+  if (s.includes('python')) return 'python';
+  if (s.includes('javascript') || s.includes('js')) return 'javascript';
+  if (s.includes('html')) return 'html5';
+  if (s.includes('css')) return 'css3';
+  if (s.includes('tailwind')) return 'tailwindcss';
+  if (s.includes('figma')) return 'figma';
+  return null;
+};
 
 interface ExpertiseCategory {
   id: string;
@@ -252,15 +281,22 @@ export const SkillsSection: React.FC = () => {
                     Core Skills &amp; Platforms:
                   </div>
                   <div className="flex flex-wrap gap-1.5">
-                    {cat.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] group-hover:border-[#0B5ED7]/25 transition-colors"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0B5ED7]" />
-                        <span>{skill}</span>
-                      </span>
-                    ))}
+                    {cat.skills.map((skill, sIdx) => {
+                      const brandKey = getBrandIconForSkill(skill);
+                      return (
+                        <span
+                          key={sIdx}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] group-hover:border-[#0B5ED7]/25 transition-colors"
+                        >
+                          {brandKey ? (
+                            <BrandIcon name={brandKey} size={14} className="text-[#0B5ED7] flex-shrink-0" />
+                          ) : (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0B5ED7]" />
+                          )}
+                          <span>{skill}</span>
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
 

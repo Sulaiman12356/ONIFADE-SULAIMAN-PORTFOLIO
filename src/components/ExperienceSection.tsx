@@ -71,13 +71,13 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onOpenHire
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#0B5ED7]/25 text-xs font-bold text-[#0B5ED7] uppercase tracking-wider mb-3">
-            <span>TRACK RECORD &amp; CAREER MILESTONES</span>
+            <span>3+ YEARS EXPERIENCE • TRACK RECORD &amp; CAREER MILESTONES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#062B63]">
             Proven Track Record of Measurable Growth
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#64748B] leading-relaxed">
-            A history of driving commercial revenue, mentoring creative talent, and delivering high-stakes digital initiatives.
+            3+ years of driving commercial revenue, scaling lead acquisition funnels, and executing high-impact digital initiatives.
           </p>
         </div>
 

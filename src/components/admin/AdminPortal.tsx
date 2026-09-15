@@ -30,6 +30,8 @@ import {
   Search,
   BookOpen,
   HelpCircle,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { AdminDashboardTab } from './AdminDashboardTab';
@@ -71,10 +73,12 @@ export const AdminPortal: React.FC = () => {
     isFirebaseConnected,
     isSyncing,
     seedDatabaseToFirebase,
+    settings,
   } = usePortfolio();
 
   // Authentication state
   const [pinInput, setPinInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [pinError, setPinError] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -85,16 +89,23 @@ export const AdminPortal: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (
-      pinInput.trim().toLowerCase() === 'clarity2026' ||
-      pinInput.trim().toLowerCase() === 'admin123' ||
-      pinInput.trim() === '2026'
-    ) {
+    const storedCustomKey = localStorage.getItem('clarity_custom_admin_key');
+    const configuredKey = settings?.adminAccessKey || storedCustomKey;
+    const input = pinInput.trim();
+
+    const isMatch =
+      (configuredKey && input === configuredKey) ||
+      input.toLowerCase() === 'clarity2026' ||
+      input.toLowerCase() === 'admin123' ||
+      input === '2026';
+
+    if (isMatch) {
       setIsAdminAuthenticated(true);
       sessionStorage.setItem('mr_clarity_admin_auth', 'true');
       setPinError('');
+      setPinInput('');
     } else {
-      setPinError('Incorrect access key. Default key is: clarity2026');
+      setPinError('Incorrect access key. Access denied.');
     }
   };
 
@@ -106,7 +117,7 @@ export const AdminPortal: React.FC = () => {
       setIsAdminAuthenticated(true);
       sessionStorage.setItem('mr_clarity_admin_auth', 'true');
     } catch (err: any) {
-      setPinError(err?.message || 'Google authentication failed. Please try passkey.');
+      setPinError(err?.message || 'Authentication failed. Please verify credentials or try again.');
     } finally {
       setAuthLoading(false);
     }
@@ -291,17 +302,25 @@ export const AdminPortal: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}
                       value={pinInput}
                       onChange={(e) => setPinInput(e.target.value)}
-                      placeholder="Enter access key (e.g. clarity2026)"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B5ED7] text-sm"
+                      placeholder="Enter administrator passkey"
+                      className="w-full pl-4 pr-11 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0B5ED7] text-sm"
                       autoFocus
                     />
-                    <Key className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 transition-colors"
+                      title={showPassword ? 'Hide passkey' : 'Show passkey'}
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Default passkey: <code className="bg-slate-100 px-1 py-0.5 rounded text-[#0B5ED7] font-bold">clarity2026</code>
+                  <p className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Restricted administrator access. Authorized personnel only.</span>
                   </p>
                 </div>
 

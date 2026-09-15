@@ -18,6 +18,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
     skills,
     setIsAdminOpen,
     setAdminActiveTab,
+    isAdminAuthenticated,
   } = usePortfolio();
 
   const handleRequestCv = () => {
@@ -87,7 +88,7 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
               </div>
               <div className="flex items-center gap-2.5 text-xs sm:text-sm text-[#0F172A]">
                 <CheckCircle2 className="w-4 h-4 text-[#0B5ED7] flex-shrink-0" />
-                <span>Dynamically managed in real-time through Admin Dashboard</span>
+                <span>Verified credentials and certified client milestones</span>
               </div>
             </div>
 
@@ -114,17 +115,19 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
               </button>
             </div>
 
-            {/* Admin shortcut indicator */}
-            <div className="pt-2 flex items-center gap-2 text-[11px] text-[#64748B]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#0B5ED7]" />
-              <span>Admin can upload or switch active CV files anytime.</span>
-              <button
-                onClick={handleOpenAdminCvManager}
-                className="text-[#0B5ED7] font-bold hover:underline ml-1"
-              >
-                CV Manager →
-              </button>
-            </div>
+            {/* Admin shortcut indicator - Only rendered when Admin is Authenticated */}
+            {isAdminAuthenticated && (
+              <div className="pt-2 flex items-center gap-2 text-[11px] text-[#64748B]">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                <span>Admin can upload or switch active CV files anytime.</span>
+                <button
+                  onClick={handleOpenAdminCvManager}
+                  className="text-[#0B5ED7] font-bold hover:underline ml-1 cursor-pointer"
+                >
+                  CV Manager →
+                </button>
+              </div>
+            )}
 
           </div>
 

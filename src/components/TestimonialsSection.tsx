@@ -12,7 +12,7 @@ import {
 import { usePortfolio } from '../context/PortfolioContext';
 
 export const TestimonialsSection: React.FC = () => {
-  const { testimonials, setIsAdminOpen, setAdminActiveTab } = usePortfolio();
+  const { testimonials, setIsAdminOpen, setAdminActiveTab, isAdminAuthenticated, openHireMe } = usePortfolio();
 
   const handleOpenAdminTestimonials = () => {
     setAdminActiveTab('testimonials');
@@ -45,15 +45,17 @@ export const TestimonialsSection: React.FC = () => {
             Real feedback from brand founders, e-commerce managers, and academy alumni who have partnered with Mr. Clarity.
           </p>
 
-          <div className="mt-5 flex items-center justify-center gap-3">
-            <button
-              onClick={handleOpenAdminTestimonials}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] text-xs font-bold text-[#062B63] shadow-xs transition-colors hover:border-[#0B5ED7]"
-            >
-              <Settings className="w-3.5 h-3.5 text-[#0B5ED7]" />
-              <span>Admin Testimonial Hub ({testimonials.length})</span>
-            </button>
-          </div>
+          {isAdminAuthenticated && (
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <button
+                onClick={handleOpenAdminTestimonials}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] text-xs font-bold text-[#062B63] shadow-xs transition-colors hover:border-[#0B5ED7] cursor-pointer"
+              >
+                <Settings className="w-3.5 h-3.5 text-[#0B5ED7]" />
+                <span>Admin Testimonial Hub ({testimonials.length})</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Display Condition */}
@@ -71,7 +73,7 @@ export const TestimonialsSection: React.FC = () => {
             </h3>
 
             <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed max-w-lg mx-auto mb-6">
-              In accordance with our strict transparency policy, all client testimonials are verified, permissioned, and managed directly through the Admin Dashboard.
+              In accordance with our strict transparency policy, all client reviews and performance milestones are authenticated before publication.
             </p>
 
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] text-xs font-semibold text-[#062B63] mb-6">
@@ -80,13 +82,22 @@ export const TestimonialsSection: React.FC = () => {
             </div>
 
             <div>
-              <button
-                onClick={handleOpenAdminTestimonials}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-md shadow-[#0B5ED7]/25 transition-all"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Add First Verified Testimonial (Admin)</span>
-              </button>
+              {isAdminAuthenticated ? (
+                <button
+                  onClick={handleOpenAdminTestimonials}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-md shadow-[#0B5ED7]/25 transition-all cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add First Verified Testimonial (Admin)</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => openHireMe(undefined, 'Client Review & Project Inquiry')}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold shadow-md shadow-[#0B5ED7]/25 transition-all cursor-pointer"
+                >
+                  <span>Submit Client Feedback &amp; Review</span>
+                </button>
+              )}
             </div>
           </div>
         ) : (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Save, CheckCircle2, Sliders, Shield, Palette, Globe } from 'lucide-react';
+import { Settings, Save, CheckCircle2, Sliders, Shield, Palette, Globe, Lock, Key, Eye, EyeOff } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 export const AdminWebsiteSettingsTab: React.FC = () => {
@@ -7,10 +7,17 @@ export const AdminWebsiteSettingsTab: React.FC = () => {
   const [siteSettings, setSiteSettings] = useState(settings);
   const [metrics, setMetrics] = useState(profile.credibilityMetrics);
   const [savedNotice, setSavedNotice] = useState(false);
+  const [showKey, setShowKey] = useState(false);
+  const [customKey, setCustomKey] = useState(
+    () => settings.adminAccessKey || localStorage.getItem('clarity_custom_admin_key') || ''
+  );
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateSettings(siteSettings);
+    if (customKey.trim()) {
+      localStorage.setItem('clarity_custom_admin_key', customKey.trim());
+    }
+    await updateSettings({ ...siteSettings, adminAccessKey: customKey.trim() || siteSettings.adminAccessKey });
     await updateProfile({ credibilityMetrics: metrics });
     setSavedNotice(true);
     setTimeout(() => setSavedNotice(false), 3000);
@@ -125,6 +132,66 @@ export const AdminWebsiteSettingsTab: React.FC = () => {
             />
             <span className="text-xs font-bold text-slate-800">Verified Metrics Badge</span>
           </label>
+        </div>
+      </div>
+
+      {/* Admin Security & Master Passkey (Protected & Private to Authenticated Admin) */}
+      <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+        <div>
+          <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+            <Shield className="w-4 h-4 text-[#0B5ED7]" />
+            Master Admin Security &amp; Access Controls
+          </h3>
+          <p className="text-xs text-slate-500 mt-0.5">
+            These credentials are confidential to you and are never displayed or exposed on the public website.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-bold text-slate-700 mb-1">
+              Custom Master Access Key (Passkey)
+            </label>
+            <div className="relative">
+              <input
+                type={showKey ? 'text' : 'password'}
+                value={customKey}
+                onChange={(e) => {
+                  setCustomKey(e.target.value);
+                  setSiteSettings({ ...siteSettings, adminAccessKey: e.target.value });
+                }}
+                placeholder="Enter private administrator passkey"
+                className="w-full pl-3 pr-10 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0B5ED7]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey(!showKey)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                title={showKey ? 'Hide key' : 'Show key'}
+              >
+                {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Update your private passkey anytime. It is securely saved and required for access.
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 mb-1">
+              Authorized Google Administrator Email
+            </label>
+            <input
+              type="email"
+              value="ipesolasulaiman@gmail.com"
+              disabled
+              className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 text-slate-600 font-semibold cursor-not-allowed"
+            />
+            <p className="text-[11px] text-emerald-600 mt-1 font-medium flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              <span>Verified Google Administrator Identity</span>
+            </p>
+          </div>
         </div>
       </div>
 

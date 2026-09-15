@@ -16,6 +16,7 @@ import {
   Target,
   Sparkles
 } from 'lucide-react';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export interface EditableMetric {
   id: string;
@@ -82,6 +83,7 @@ export const MetricStats: React.FC = () => {
     return DEFAULT_METRICS;
   });
 
+  const { isAdminAuthenticated } = usePortfolio();
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [draftMetrics, setDraftMetrics] = useState<EditableMetric[]>(metrics);
   const [savedSuccess, setSavedSuccess] = useState(false);
@@ -154,14 +156,16 @@ export const MetricStats: React.FC = () => {
             </h2>
           </div>
 
-          <button
-            onClick={handleOpenAdmin}
-            className="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white border border-white/15 transition-all flex items-center gap-1.5"
-            title="Configure verified metrics"
-          >
-            <Settings2 className="w-3.5 h-3.5" />
-            <span>Manage Metrics</span>
-          </button>
+          {isAdminAuthenticated && (
+            <button
+              onClick={handleOpenAdmin}
+              className="self-start sm:self-auto text-xs font-bold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white border border-white/15 transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Configure verified metrics"
+            >
+              <Settings2 className="w-3.5 h-3.5" />
+              <span>Manage Metrics</span>
+            </button>
+          )}
         </div>
 
         {/* 6 Metric Cards Grid matching the clean rounded visual reference */}

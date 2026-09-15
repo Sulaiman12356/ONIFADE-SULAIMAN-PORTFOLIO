@@ -417,6 +417,7 @@ export interface WebsiteSettings {
   primaryColor: string;
   availabilityStatus: string;
   allowPublicHireRequests: boolean;
+  adminAccessKey?: string;
 }
 
 export interface SEOSettings {

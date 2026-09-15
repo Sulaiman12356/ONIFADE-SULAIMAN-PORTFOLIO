@@ -90,6 +90,14 @@ export const CredibilitySection: React.FC = () => {
       brandColor: 'text-[#FF0000]',
       accentBg: 'group-hover:bg-[#FF0000]/10',
     },
+    {
+      name: 'Figma',
+      brandKey: 'figma',
+      purpose: 'UI/UX wireframes & design mockups',
+      category: 'Creative & Video',
+      brandColor: 'text-[#F24E1E]',
+      accentBg: 'group-hover:bg-[#F24E1E]/10',
+    },
 
     // AI & Automation
     {
@@ -205,6 +213,14 @@ export const CredibilitySection: React.FC = () => {
       category: 'Web & Tech',
       brandColor: 'text-[#1572B6]',
       accentBg: 'group-hover:bg-[#1572B6]/10',
+    },
+    {
+      name: 'Tailwind CSS',
+      brandKey: 'tailwindcss',
+      purpose: 'Utility-first modern frontend design systems',
+      category: 'Web & Tech',
+      brandColor: 'text-[#06B6D4]',
+      accentBg: 'group-hover:bg-[#06B6D4]/10',
     },
   ];
 

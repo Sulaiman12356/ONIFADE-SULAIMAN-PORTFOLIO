@@ -4,7 +4,7 @@ import { usePortfolio } from '../context/PortfolioContext';
 import { BrandIcon } from './BrandIcons';
 
 export const Footer: React.FC = () => {
-  const { profile, settings, setIsAdminOpen, setAdminActiveTab } = usePortfolio();
+  const { profile, settings, setIsAdminOpen, setAdminActiveTab, isAdminAuthenticated } = usePortfolio();
   const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
 
   const scrollToTop = () => {
@@ -170,15 +170,27 @@ export const Footer: React.FC = () => {
 
           <div className="flex items-center gap-3">
             {/* Direct Admin Dashboard Trigger */}
-            <button
-              id="footer-admin-portal-btn"
-              onClick={handleOpenAdmin}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white border border-white/15 transition-colors text-[11px] font-semibold"
-              title="Open Secure Admin Dashboard"
-            >
-              <Lock className="w-3 h-3 text-[#0B5ED7]" />
-              <span>Admin Portal</span>
-            </button>
+            {isAdminAuthenticated ? (
+              <button
+                id="footer-admin-portal-btn"
+                onClick={handleOpenAdmin}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/30 transition-colors text-[11px] font-semibold"
+                title="Open Admin Dashboard"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Admin Active</span>
+              </button>
+            ) : (
+              <button
+                id="footer-admin-portal-btn"
+                onClick={handleOpenAdmin}
+                className="p-1.5 rounded-md text-slate-500 hover:text-slate-300 transition-colors opacity-40 hover:opacity-90"
+                title="Restricted Staff Access"
+                aria-label="Restricted Staff Access"
+              >
+                <Lock className="w-3.5 h-3.5" />
+              </button>
+            )}
 
             <button
               onClick={scrollToTop}

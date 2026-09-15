@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Lock, Sparkles, Download } from 'lucide-react';
+import { Menu, X, ArrowRight, Lock, Sparkles, Download, ShieldCheck } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 interface NavbarProps {
@@ -8,7 +8,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
-  const { setIsAdminOpen, profile } = usePortfolio();
+  const { setIsAdminOpen, profile, isAdminAuthenticated } = usePortfolio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -71,15 +71,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
               <span>CLAIM FREE AUDIT</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </button>
-            <span className="text-slate-600">|</span>
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="text-slate-300 hover:text-white flex items-center gap-1 text-[11px] transition-colors"
-              title="Admin Portal"
-            >
-              <Lock className="w-3 h-3 text-[#0B5ED7]" />
-              <span>Admin</span>
-            </button>
+            {isAdminAuthenticated && (
+              <>
+                <span className="text-slate-600">|</span>
+                <button
+                  onClick={() => setIsAdminOpen(true)}
+                  className="text-emerald-400 hover:text-white flex items-center gap-1 text-[11px] font-bold transition-colors cursor-pointer"
+                  title="Admin Dashboard (Active)"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Admin Mode Active</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -163,16 +167,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                {/* Admin Access Portal Trigger */}
-                <button
-                  id="nav-admin-btn"
-                  onClick={() => setIsAdminOpen(true)}
-                  className="p-2 rounded-xl text-[#64748B] hover:text-[#062B63] hover:bg-[#EFF6FF] transition-colors cursor-pointer"
-                  title="Admin Control Center"
-                  aria-label="Admin Control Center"
-                >
-                  <Lock className="w-4 h-4" />
-                </button>
+                {/* Admin Access Portal Trigger - Only rendered for Authenticated Admin */}
+                {isAdminAuthenticated && (
+                  <button
+                    id="nav-admin-btn"
+                    onClick={() => setIsAdminOpen(true)}
+                    className="p-2 rounded-xl text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+                    title="Open Admin Dashboard"
+                    aria-label="Admin Dashboard"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span className="hidden xl:inline">Dashboard</span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -246,16 +253,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenHireMe, onOpenCv }) => {
                   <span>View / Download CV</span>
                 </button>
 
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setIsAdminOpen(true);
-                  }}
-                  className="text-xs font-bold text-[#64748B] hover:text-[#062B63] flex items-center gap-1"
-                >
-                  <Lock className="w-3.5 h-3.5" />
-                  <span>Admin Login</span>
-                </button>
+                {isAdminAuthenticated && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setIsAdminOpen(true);
+                    }}
+                    className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Admin Dashboard</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
