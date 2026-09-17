@@ -14,7 +14,6 @@ import {
   Edit3,
   Save,
   RotateCcw,
-  Image as ImageIcon,
   Loader2,
   User,
   Award,
@@ -54,7 +53,7 @@ export const AdminCvManagerTab: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<'editor' | 'versions' | 'upload'>('editor');
   const [showPreview, setShowPreview] = useState(false);
   const [savingStatus, setSavingStatus] = useState<string | null>(null);
-  const [downloadingFormat, setDownloadingFormat] = useState<'pdf' | 'image' | 'txt' | null>(null);
+  const [downloadingFormat, setDownloadingFormat] = useState<'pdf' | null>(null);
 
   // New Version State
   const [newTitle, setNewTitle] = useState('');
@@ -317,11 +316,11 @@ export const AdminCvManagerTab: React.FC = () => {
     setContent({ ...content, certifications: list });
   };
 
-  // Test Download handler
-  const handleTestDownload = async (format: 'pdf' | 'image' | 'txt') => {
+  // Test Download handler (PDF only)
+  const handleTestDownload = async () => {
     try {
-      setDownloadingFormat(format);
-      await downloadActiveCv(format);
+      setDownloadingFormat('pdf');
+      await downloadActiveCv('pdf');
     } catch (err) {
       console.error('Test download error:', err);
     } finally {
@@ -340,7 +339,7 @@ export const AdminCvManagerTab: React.FC = () => {
           </div>
           <h2 className="text-xl sm:text-2xl font-black">CV Editor &amp; Downloads</h2>
           <p className="text-xs text-slate-200 mt-1 max-w-xl">
-            Edit full CV contents in real-time, preview changes instantly, and manage downloadable PDF and Image formats for clients.
+            Edit full CV contents in real-time, preview changes instantly, and manage downloadable PDF format for clients.
           </p>
         </div>
 
@@ -414,9 +413,9 @@ export const AdminCvManagerTab: React.FC = () => {
           {/* Test Download Options */}
           <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => handleTestDownload('pdf')}
+              onClick={handleTestDownload}
               disabled={downloadingFormat !== null}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0B5ED7] hover:bg-[#1D4ED8] text-white text-xs font-bold transition-colors cursor-pointer shadow-xs disabled:opacity-50"
               title="Test PDF Download"
             >
               {downloadingFormat === 'pdf' ? (
@@ -424,21 +423,7 @@ export const AdminCvManagerTab: React.FC = () => {
               ) : (
                 <FileText className="w-3.5 h-3.5" />
               )}
-              <span>Test PDF</span>
-            </button>
-
-            <button
-              onClick={() => handleTestDownload('image')}
-              disabled={downloadingFormat !== null}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors cursor-pointer shadow-xs disabled:opacity-50"
-              title="Test Image Download"
-            >
-              {downloadingFormat === 'image' ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
-                <ImageIcon className="w-3.5 h-3.5 text-blue-300" />
-              )}
-              <span>Test Image (PNG)</span>
+              <span>Test PDF Download</span>
             </button>
 
             <button
@@ -1084,7 +1069,7 @@ export const AdminCvManagerTab: React.FC = () => {
               </label>
               <input
                 type="file"
-                accept=".pdf,.doc,.docx,.txt"
+                accept=".pdf"
                 onChange={handleFileUpload}
                 className="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#0B5ED7] file:text-white hover:file:bg-blue-700 cursor-pointer"
               />
@@ -1102,9 +1087,7 @@ export const AdminCvManagerTab: React.FC = () => {
                 onChange={(e) => setNewFileType(e.target.value as any)}
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
               >
-                <option value="pdf">PDF Document (Recommended)</option>
-                <option value="docx">Microsoft Word (DOCX)</option>
-                <option value="txt">Formatted Text (TXT)</option>
+                <option value="pdf">PDF Document (.pdf)</option>
               </select>
             </div>
           </div>

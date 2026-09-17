@@ -150,7 +150,7 @@ export default function App() {
         }}
       />
 
-      {/* Offscreen CV Document Renderer for instant high-def PDF & Image exports */}
+      {/* Offscreen CV Document Renderer for instant high-def PDF exports */}
       <div
         className="fixed -left-[9999px] top-0 pointer-events-none opacity-0 select-none overflow-hidden"
         style={{ width: '1000px' }}

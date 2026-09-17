@@ -65,7 +65,7 @@ import {
   DEFAULT_ABOUT_SECTIONS,
   DEFAULT_FAQS,
 } from '../data/portfolioData';
-import { exportCvAsPdf, exportCvAsImage, downloadCvFile } from '../utils/downloadCv';
+import { exportCvAsPdf } from '../utils/downloadCv';
 
 export interface PortfolioContextType {
   profile: ProfileData;
@@ -140,7 +140,7 @@ export interface PortfolioContextType {
   updateCv: (id: string, updates: Partial<CVRecord>) => Promise<void>;
   setActiveCv: (id: string) => Promise<void>;
   deleteCv: (id: string) => Promise<void>;
-  downloadActiveCv: (format?: 'pdf' | 'image' | 'txt') => Promise<void>;
+  downloadActiveCv: (format?: 'pdf') => Promise<void>;
   updateActiveCvContent: (customContent: CvCustomContent) => Promise<void>;
   hireRequests: HireMeRequest[];
   submitHireRequest: (req: Omit<HireMeRequest, 'id' | 'status' | 'dateSubmitted'>) => Promise<boolean>;
@@ -1680,7 +1680,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
-  const downloadActiveCv = async (format: 'pdf' | 'image' | 'txt' = 'pdf') => {
+  const downloadActiveCv = async (format: 'pdf' = 'pdf') => {
     if (!activeCv) return;
 
     // Increment download count locally & Firestore
@@ -1695,11 +1695,11 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     logAnalyticsEvent('cv_download', {
       version: activeCv.version,
       fileName: activeCv.fileName,
-      format,
+      format: 'pdf',
     });
 
     // If client requested PDF and there's a custom uploaded external fileUrl, download that
-    if (format === 'pdf' && activeCv.fileUrl && !activeCv.fileUrl.startsWith('data:text')) {
+    if (activeCv.fileUrl && !activeCv.fileUrl.startsWith('data:text')) {
       const link = document.createElement('a');
       link.href = activeCv.fileUrl;
       link.target = '_blank';
@@ -1711,17 +1711,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return;
     }
 
-    if (format === 'image') {
-      await exportCvAsImage('cv-document-modal-render', `Onifade_Sulaiman_CV_${activeCv.version}.png`);
-      return;
-    }
-
-    if (format === 'txt') {
-      downloadCvFile(activeCv.customContent, `Onifade_Sulaiman_CV_${activeCv.version}.txt`);
-      return;
-    }
-
-    // Default to PDF export
+    // Exclusively export as high-definition PDF
     await exportCvAsPdf('cv-document-modal-render', `Onifade_Sulaiman_CV_${activeCv.version}.pdf`);
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Download, Printer, FileText, Image as ImageIcon, CheckCircle2, Loader2 } from 'lucide-react';
+import { X, Printer, FileText, CheckCircle2, Loader2 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { CvDocumentView } from './CvDocumentView';
 
@@ -11,7 +11,7 @@ interface CvModalProps {
 
 export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
   const { profile, activeCv, downloadActiveCv } = usePortfolio();
-  const [downloadingFormat, setDownloadingFormat] = useState<'pdf' | 'image' | 'txt' | null>(null);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -20,22 +20,16 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
     window.print();
   };
 
-  const handleDownload = async (format: 'pdf' | 'image' | 'txt') => {
+  const handleDownloadPdf = async () => {
     try {
-      setDownloadingFormat(format);
-      await downloadActiveCv(format);
-      setDownloadSuccess(
-        format === 'pdf'
-          ? 'PDF downloaded successfully!'
-          : format === 'image'
-          ? 'High-res image downloaded successfully!'
-          : 'Text CV downloaded successfully!'
-      );
+      setIsDownloadingPdf(true);
+      await downloadActiveCv('pdf');
+      setDownloadSuccess('PDF document downloaded successfully!');
       setTimeout(() => setDownloadSuccess(null), 3500);
     } catch (err) {
       console.error('Download error:', err);
     } finally {
-      setDownloadingFormat(null);
+      setIsDownloadingPdf(false);
     }
   };
 
@@ -69,12 +63,12 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
             {/* Download as PDF */}
             <button
               id="btn-modal-download-pdf"
-              onClick={() => handleDownload('pdf')}
-              disabled={downloadingFormat !== null}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0B5ED7] text-white text-xs font-bold hover:bg-[#1D4ED8] transition-colors shadow-xs cursor-pointer disabled:opacity-50"
-              title="Download CV as high-definition PDF document"
+              onClick={handleDownloadPdf}
+              disabled={isDownloadingPdf}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0B5ED7] text-white text-xs font-bold hover:bg-[#1D4ED8] transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+              title="Download CV in PDF format"
             >
-              {downloadingFormat === 'pdf' ? (
+              {isDownloadingPdf ? (
                 <>
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   <span>Generating PDF...</span>
@@ -82,28 +76,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
               ) : (
                 <>
                   <FileText className="w-3.5 h-3.5" />
-                  <span>Download PDF</span>
-                </>
-              )}
-            </button>
-
-            {/* Download as Image */}
-            <button
-              id="btn-modal-download-image"
-              onClick={() => handleDownload('image')}
-              disabled={downloadingFormat !== null}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-xs cursor-pointer disabled:opacity-50"
-              title="Download CV as high-resolution PNG image"
-            >
-              {downloadingFormat === 'image' ? (
-                <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Generating Image...</span>
-                </>
-              ) : (
-                <>
-                  <ImageIcon className="w-3.5 h-3.5 text-blue-300" />
-                  <span>Download Image (PNG)</span>
+                  <span>Download CV (PDF)</span>
                 </>
               )}
             </button>
@@ -159,22 +132,18 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
         {/* Bottom Quick Bar */}
         <div className="bg-white px-6 py-3 border-t border-[#E5EAF1] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 flex-shrink-0">
-          <span className="font-semibold text-slate-600">
-            Available formats for recruiters and clients: PDF, PNG Image, and Print
+          <span className="font-semibold text-slate-600 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Document Format: Verified PDF</span>
           </span>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => handleDownload('txt')}
-              className="text-[#0B5ED7] hover:underline font-bold cursor-pointer"
+              onClick={handleDownloadPdf}
+              disabled={isDownloadingPdf}
+              className="inline-flex items-center gap-1.5 text-[#0B5ED7] hover:underline font-bold cursor-pointer disabled:opacity-50"
             >
-              Plain Text (ATS)
-            </button>
-            <span>•</span>
-            <button
-              onClick={() => handleDownload('pdf')}
-              className="text-[#0B5ED7] hover:underline font-bold cursor-pointer"
-            >
-              Direct PDF Download
+              <FileText className="w-3.5 h-3.5" />
+              <span>Download PDF File</span>
             </button>
           </div>
         </div>
