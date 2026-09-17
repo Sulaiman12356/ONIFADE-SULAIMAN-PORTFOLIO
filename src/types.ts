@@ -217,6 +217,55 @@ export interface ToolItem {
   tag: string;
 }
 
+export interface CvMetricItem {
+  label: string;
+  value: string;
+}
+
+export interface CvExperienceEntry {
+  id?: string;
+  role: string;
+  organization: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  achievements?: string[];
+  skills?: string[];
+}
+
+export interface CvEducationEntry {
+  id?: string;
+  degree: string;
+  institution: string;
+  period: string;
+  details: string;
+}
+
+export interface CvCertificationEntry {
+  id?: string;
+  title: string;
+  issuer: string;
+  date: string;
+  credentialUrl?: string;
+}
+
+export interface CvCustomContent {
+  fullName?: string;
+  brandName?: string;
+  professionalTitle?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  availability?: string;
+  summary?: string;
+  verifiedMetrics?: CvMetricItem[];
+  skills?: string[];
+  experience?: CvExperienceEntry[];
+  education?: CvEducationEntry[];
+  certifications?: CvCertificationEntry[];
+  philosophy?: string;
+}
+
 export interface CVRecord {
   id: string;
   title: string;
@@ -230,8 +279,9 @@ export interface CVRecord {
   isPublished: boolean;
   downloadCount: number;
   createdAt: string;
-  fileType?: 'pdf' | 'docx' | 'txt';
+  fileType?: 'pdf' | 'docx' | 'txt' | 'image';
   textContent?: string;
+  customContent?: CvCustomContent;
 }
 
 export type OpportunityType =

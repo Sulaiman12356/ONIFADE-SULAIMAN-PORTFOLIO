@@ -1,5 +1,5 @@
-import React from 'react';
-import { Download, Eye, Send, ArrowUpRight, ShieldCheck, Clock, Tag, Sparkles, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Download, Eye, Send, ArrowUpRight, ShieldCheck, Clock, Tag, Sparkles, CheckCircle2, FileText, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 interface ResumeSectionProps {
@@ -20,6 +20,19 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
     setAdminActiveTab,
     isAdminAuthenticated,
   } = usePortfolio();
+
+  const [downloadingFormat, setDownloadingFormat] = useState<'pdf' | 'image' | null>(null);
+
+  const handleDownload = async (format: 'pdf' | 'image') => {
+    try {
+      setDownloadingFormat(format);
+      await downloadActiveCv(format);
+    } catch (err) {
+      console.error('Download error:', err);
+    } finally {
+      setDownloadingFormat(null);
+    }
+  };
 
   const handleRequestCv = () => {
     openHireMe('Collaboration', 'Formal CV & Professional Dossier Request');
@@ -92,25 +105,58 @@ export const ResumeSection: React.FC<ResumeSectionProps> = ({ onOpenCv, onDownlo
               </div>
             </div>
 
-            {/* Two Main Action Buttons:
-                [ DOWNLOAD CV ↓ ]
+            {/* Download and View Action Buttons:
+                [ DOWNLOAD PDF ↓ ]
+                [ DOWNLOAD IMAGE ↓ ]
                 [ VIEW CV ONLINE ]
             */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                id="btn-download-latest-cv"
-                onClick={downloadActiveCv}
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-xl font-black text-white bg-[#0B5ED7] hover:bg-[#1D4ED8] shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all text-sm active:scale-[0.98] cursor-pointer"
+                id="btn-download-cv-pdf"
+                onClick={() => handleDownload('pdf')}
+                disabled={downloadingFormat !== null}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-black text-white bg-[#0B5ED7] hover:bg-[#1D4ED8] shadow-md shadow-[#0B5ED7]/25 hover:shadow-lg transition-all text-xs sm:text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
+                title="Download verified CV as PDF"
               >
-                <span>DOWNLOAD CV ↓</span>
+                {downloadingFormat === 'pdf' ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>GENERATING PDF...</span>
+                  </>
+                ) : (
+                  <>
+                    <FileText className="w-4 h-4" />
+                    <span>DOWNLOAD PDF ↓</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                id="btn-download-cv-image"
+                onClick={() => handleDownload('image')}
+                disabled={downloadingFormat !== null}
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-all text-xs sm:text-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
+                title="Download CV as high-res PNG image"
+              >
+                {downloadingFormat === 'image' ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>GENERATING IMAGE...</span>
+                  </>
+                ) : (
+                  <>
+                    <ImageIcon className="w-4 h-4 text-[#0B5ED7]" />
+                    <span>DOWNLOAD IMAGE ↓</span>
+                  </>
+                )}
               </button>
 
               <button
                 id="btn-view-cv-online"
                 onClick={onOpenCv}
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-xl font-bold text-[#062B63] bg-white hover:bg-[#EFF6FF] border border-[#E2E8F0] shadow-xs transition-all text-sm hover:border-[#0B5ED7] cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-[#062B63] bg-white hover:bg-[#EFF6FF] border border-[#E2E8F0] shadow-xs transition-all text-xs sm:text-sm hover:border-[#0B5ED7] cursor-pointer"
               >
-                <span>VIEW CV ONLINE</span>
+                <span>VIEW ONLINE</span>
                 <Eye className="w-4 h-4 text-[#0B5ED7]" />
               </button>
             </div>

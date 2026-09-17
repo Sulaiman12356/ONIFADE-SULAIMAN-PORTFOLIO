@@ -18,6 +18,7 @@ import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
 import { HireMeModal } from './components/HireMeModal';
 import { CvModal } from './components/CvModal';
+import { CvDocumentView } from './components/CvDocumentView';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { AdminPortal } from './components/admin/AdminPortal';
 import { usePortfolio } from './context/PortfolioContext';
@@ -148,6 +149,15 @@ export default function App() {
           handleOpenHireMe();
         }}
       />
+
+      {/* Offscreen CV Document Renderer for instant high-def PDF & Image exports */}
+      <div
+        className="fixed -left-[9999px] top-0 pointer-events-none opacity-0 select-none overflow-hidden"
+        style={{ width: '1000px' }}
+        aria-hidden="true"
+      >
+        <CvDocumentView id="cv-document-render-offscreen" />
+      </div>
 
       {/* Admin Management Portal */}
       <AdminPortal />

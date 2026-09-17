@@ -33,6 +33,7 @@ import {
   Testimonial,
   SkillItem,
   CVRecord,
+  CvCustomContent,
   HireMeRequest,
   ContactMessage,
   ProfileData,
@@ -64,6 +65,7 @@ import {
   DEFAULT_ABOUT_SECTIONS,
   DEFAULT_FAQS,
 } from '../data/portfolioData';
+import { exportCvAsPdf, exportCvAsImage, downloadCvFile } from '../utils/downloadCv';
 
 export interface PortfolioContextType {
   profile: ProfileData;
@@ -138,7 +140,8 @@ export interface PortfolioContextType {
   updateCv: (id: string, updates: Partial<CVRecord>) => Promise<void>;
   setActiveCv: (id: string) => Promise<void>;
   deleteCv: (id: string) => Promise<void>;
-  downloadActiveCv: () => void;
+  downloadActiveCv: (format?: 'pdf' | 'image' | 'txt') => Promise<void>;
+  updateActiveCvContent: (customContent: CvCustomContent) => Promise<void>;
   hireRequests: HireMeRequest[];
   submitHireRequest: (req: Omit<HireMeRequest, 'id' | 'status' | 'dateSubmitted'>) => Promise<boolean>;
   updateHireRequestStatus: (id: string, status: HireRequestStatus) => Promise<void>;
@@ -1677,7 +1680,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
-  const downloadActiveCv = () => {
+  const downloadActiveCv = async (format: 'pdf' | 'image' | 'txt' = 'pdf') => {
     if (!activeCv) return;
 
     // Increment download count locally & Firestore
@@ -1692,10 +1695,11 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     logAnalyticsEvent('cv_download', {
       version: activeCv.version,
       fileName: activeCv.fileName,
+      format,
     });
 
-    // If active CV has a real uploaded fileUrl (Firebase Storage or link), download that
-    if (activeCv.fileUrl) {
+    // If client requested PDF and there's a custom uploaded external fileUrl, download that
+    if (format === 'pdf' && activeCv.fileUrl && !activeCv.fileUrl.startsWith('data:text')) {
       const link = document.createElement('a');
       link.href = activeCv.fileUrl;
       link.target = '_blank';
@@ -1707,91 +1711,23 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return;
     }
 
-    // Dynamic generation from current profile, experience, skills, education, and active CV data
-    const cvText = `================================================================================
-${profile.name.toUpperCase()} (${profile.brandName.toUpperCase()}) - CURRICULUM VITAE
-================================================================================
-Version: ${activeCv.version} | Generated: ${new Date().toLocaleDateString()}
-Title: ${profile.title}
-Availability: ${profile.availability}
-Location: ${profile.location}
-Email: ${profile.email}
-Phone: ${profile.phone}
-Portfolio: ${profile.socialLinks.portfolio}
-LinkedIn: ${profile.socialLinks.linkedin}
-GitHub: ${profile.socialLinks.github}
+    if (format === 'image') {
+      await exportCvAsImage('cv-document-modal-render', `Onifade_Sulaiman_CV_${activeCv.version}.png`);
+      return;
+    }
 
---------------------------------------------------------------------------------
-PROFESSIONAL SUMMARY
---------------------------------------------------------------------------------
-${profile.bio}
+    if (format === 'txt') {
+      downloadCvFile(activeCv.customContent, `Onifade_Sulaiman_CV_${activeCv.version}.txt`);
+      return;
+    }
 
---------------------------------------------------------------------------------
-CORE METRICS & CREDIBILITY
---------------------------------------------------------------------------------
-- Projects Completed: ${profile.credibilityMetrics.projectsCompleted.value} (${profile.credibilityMetrics.projectsCompleted.sublabel})
-- Clients & Collaborations: ${profile.credibilityMetrics.clientsCollaborations.value} (${profile.credibilityMetrics.clientsCollaborations.sublabel})
-- Ad Budget Managed: ${profile.credibilityMetrics.advertisingBudgetManaged.value} (${profile.credibilityMetrics.advertisingBudgetManaged.sublabel})
-- Participants Mentored: ${profile.credibilityMetrics.trainingParticipants.value} (${profile.credibilityMetrics.trainingParticipants.sublabel})
+    // Default to PDF export
+    await exportCvAsPdf('cv-document-modal-render', `Onifade_Sulaiman_CV_${activeCv.version}.pdf`);
+  };
 
---------------------------------------------------------------------------------
-EXPERIENCE & POSITIONS
---------------------------------------------------------------------------------
-${experience
-  .map(
-    (exp) => `
-${exp.role.toUpperCase()}
-${exp.organization} (${exp.startDate} - ${exp.endDate})
-Summary: ${exp.description}
-Key Achievements:
-${exp.achievements.map((ach) => `  * ${ach}`).join('\n')}
-Tools: ${exp.skills.join(', ')}
-`
-  )
-  .join('\n')}
-
---------------------------------------------------------------------------------
-EDUCATION & ACADEMICS
---------------------------------------------------------------------------------
-${education
-  .map(
-    (edu) => `
-${edu.degree}
-${edu.institution} (${edu.period})
-${edu.details}
-`
-  )
-  .join('\n')}
-
---------------------------------------------------------------------------------
-CERTIFICATIONS & CREDENTIALS
---------------------------------------------------------------------------------
-${certifications
-  .map(
-    (c) => `* ${c.title} - ${c.issuer} (${c.date}) ${c.credentialUrl ? `[Verify: ${c.credentialUrl}]` : ''}`
-  )
-  .join('\n')}
-
---------------------------------------------------------------------------------
-TECHNICAL SKILLS & PROFICIENCY
---------------------------------------------------------------------------------
-${skills
-  .map((s) => `* ${s.skill} [${s.category}]: ${s.level}% proficiency (${s.yearsExperience} yrs) - Tools: ${s.tools}`)
-  .join('\n')}
-
-================================================================================
-© ${new Date().getFullYear()} Onifade Sulaiman (Mr. Clarity). All Rights Reserved.
-`;
-
-    const blob = new Blob([cvText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = activeCv.fileName || `Onifade_Sulaiman_Mr_Clarity_CV_${activeCv.version}.txt`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+  const updateActiveCvContent = async (customContent: CvCustomContent) => {
+    if (!activeCv) return;
+    await updateCv(activeCv.id, { customContent });
   };
 
   // Hire Requests
@@ -2660,6 +2596,7 @@ ${skills
         setActiveCv,
         deleteCv,
         downloadActiveCv,
+        updateActiveCvContent,
         hireRequests,
         submitHireRequest,
         updateHireRequestStatus,
